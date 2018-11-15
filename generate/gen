@@ -1,0 +1,6 @@
+#!/bin/bash
+function gen() {
+./vt/bin/$1 --help |& tail -n +2 | ruby normalize.rb | sort | ruby make.rb $1
+}
+
+gen $1 > "$1.rb"
