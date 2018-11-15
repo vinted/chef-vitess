@@ -1,9 +1,9 @@
-name 'vinted-vitess'
-maintainer 'The Authors'
+name 'vitess'
+maintainer 'SRE @ Vinted'
 maintainer_email 'you@example.com'
 license 'All Rights Reserved'
-description 'Installs/Configures vinted-vitess'
-long_description 'Installs/Configures vinted-vitess'
+description 'Installs/Configures Vitess database clustering system.'
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '0.1.0'
 chef_version '>= 13.0'
 
