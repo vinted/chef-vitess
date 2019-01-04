@@ -34,42 +34,6 @@ default['vinted-vitess']['mysqlctld']['dba']['pool']['size'] = 20
 # string Character set. Only utf8 or latin1 based character sets are supported. (default "utf8")
 default['vinted-vitess']['mysqlctld']['db']['charset'] = 'utf8'
 
-# string deprecated: use db_charset (default "utf8")
-default['vinted-vitess']['mysqlctld']['db']['config']['dba']['charset'] = 'utf8'
-
-# string deprecated: dbname does not need to be explicitly configured
-# default['vinted-vitess']['mysqlctld']['db']['config']['dba']['dbname'] =
-
-# uint deprecated: use db_flags
-# default['vinted-vitess']['mysqlctld']['db']['config']['dba']['flags'] =
-
-# string deprecated: use db_host
-# default['vinted-vitess']['mysqlctld']['db']['config']['dba']['host'] =
-
-# string db dba deprecated: use db_dba_password
-# default['vinted-vitess']['mysqlctld']['db']['config']['dba']['pass'] =
-
-# int deprecated: use db_port
-# default['vinted-vitess']['mysqlctld']['db']['config']['dba']['port'] =
-
-# string deprecated: use db_ssl_ca_path
-# default['vinted-vitess']['mysqlctld']['db']['config']['dba']['ssl']['ca']['path'] =
-
-# string deprecated: use db_ssl_ca
-# default['vinted-vitess']['mysqlctld']['db']['config']['dba']['ssl']['ca'] =
-
-# string deprecated: use db_ssl_cert
-# default['vinted-vitess']['mysqlctld']['db']['config']['dba']['ssl']['cert'] =
-
-# string deprecated: use db_ssl_key
-# default['vinted-vitess']['mysqlctld']['db']['config']['dba']['ssl']['key'] =
-
-# string deprecated: use db_dba_user (default "vt_dba")
-default['vinted-vitess']['mysqlctld']['db']['config']['dba']['uname'] = 'vt_dba'
-
-# string deprecated: use db_socket
-# default['vinted-vitess']['mysqlctld']['db']['config']['dba']['unixsocket'] =
-
 # string db credentials file
 # default['vinted-vitess']['mysqlctld']['db']['credentials']['file'] =
 
