@@ -24,7 +24,7 @@ def derive_value(comment)
     %{'#{match}'}
   when 'string'
     match.gsub('"', "'")
-  when 'int'
+  when 'int', 'uint'
     match.to_i
   when 'float'
     match.to_f
