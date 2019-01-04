@@ -1,0 +1,7 @@
+docker run -it vitess/lite:v3.0
+
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+f0580d050ad3        vitess/lite:v3.0    "bash"              About a minute ago   Up About a minute                       happy_ellis
+
+$ docker cp f0580d050ad3:/vt .
