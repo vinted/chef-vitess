@@ -11,17 +11,7 @@ f0580d050ad3        vitess/lite:v3.0    "bash"              About a minute ago  
 4. Copy vt config from container
 $ docker cp f0580d050ad3:/vt .
 
-5. Check vitess binaries in
-$ ls -la vt/bin/
-total 140M
--rwxr-xr-x. 1 ow ow 24M Dec  9 21:23 vtworker
--rwxr-xr-x. 1 ow ow 33M Dec  9 21:23 vttablet
--rwxr-xr-x. 1 ow ow 24M Dec  9 21:23 vtgate
--rwxr-xr-x. 1 ow ow 32M Dec  9 21:23 vtctld
--rwxr-xr-x. 1 ow ow 12M Dec  9 21:23 vtctlclient
--rwxr-xr-x. 1 ow ow 18M Dec  9 21:23 mysqlctld
+5. Generate config
+./gen
 
-6. Generate config
-./gen vtworker
-./gen vtgate
-# etc.
+6. Find generated config in diff folder
