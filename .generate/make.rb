@@ -37,7 +37,7 @@ end
 
 def print_attribute(attribute, val = nil, with_comment: false)
   if with_comment
-    puts "# default#{prefix}#{attribute} ="
+    puts "default#{prefix}#{attribute} = nil"
   else
     if val.nil?
       val = "'TODO'"
