@@ -10,6 +10,8 @@ end
 def derive_value(comment)
   type, rest = comment.split(' ', 2)
 
+  return 1 if rest =~ /\(default 1\)/
+
   match = rest.match(DEFAULT_VALUE_REGEXP)
   return unless match
 
