@@ -1,5 +1,5 @@
 # log to standard error as well as files
-# default['vinted-vitess']['vttablet']['alsologtostderr'] =
+default['vinted-vitess']['vttablet']['alsologtostderr'] = nil
 
 # duration Idle timeout for app connections (default 1m0s)
 default['vinted-vitess']['vttablet']['app']['idle']['timeout'] = '1m0s'
@@ -14,25 +14,25 @@ default['vinted-vitess']['vttablet']['backup']['storage']['block']['size'] = 250
 default['vinted-vitess']['vttablet']['backup']['storage']['compress'] = true
 
 # string if set, we send the contents of the backup files through this hook.
-# default['vinted-vitess']['vttablet']['backup']['storage']['hook'] =
+default['vinted-vitess']['vttablet']['backup']['storage']['hook'] = nil
 
 # string which implementation to use for the backup storage feature
-# default['vinted-vitess']['vttablet']['backup']['storage']['implementation'] =
+default['vinted-vitess']['vttablet']['backup']['storage']['implementation'] = nil
 
 # int if backup_storage_compress is true, backup_storage_number_blocks sets the number of blocks that can be processed, at once, before the writer blocks, during compression (default is 2). It should be equal to the number of CPUs available for compression (default 2)
 default['vinted-vitess']['vttablet']['backup']['storage']['number']['blocks'] = 2
 
 # string the server ca to use to validate servers when connecting
-# default['vinted-vitess']['vttablet']['binlog']['player']['grpc']['ca'] =
+default['vinted-vitess']['vttablet']['binlog']['player']['grpc']['ca'] = nil
 
 # string the cert to use to connect
-# default['vinted-vitess']['vttablet']['binlog']['player']['grpc']['cert'] =
+default['vinted-vitess']['vttablet']['binlog']['player']['grpc']['cert'] = nil
 
 # string the key to use to connect
-# default['vinted-vitess']['vttablet']['binlog']['player']['grpc']['key'] =
+default['vinted-vitess']['vttablet']['binlog']['player']['grpc']['key'] = nil
 
 # string the server name to use to validate server certificate
-# default['vinted-vitess']['vttablet']['binlog']['player']['grpc']['server']['name'] =
+default['vinted-vitess']['vttablet']['binlog']['player']['grpc']['server']['name'] = nil
 
 # string the protocol to download binlogs from a vttablet (default "grpc")
 default['vinted-vitess']['vttablet']['binlog']['player']['protocol'] = 'grpc'
@@ -47,16 +47,16 @@ default['vinted-vitess']['vttablet']['ceph']['backup']['storage']['config'] = 'c
 default['vinted-vitess']['vttablet']['client']['found']['rows']['pool']['size'] = 20
 
 # string JSON File to read the topos/tokens from.
-# default['vinted-vitess']['vttablet']['consul']['auth']['static']['file'] =
+default['vinted-vitess']['vttablet']['consul']['auth']['static']['file'] = nil
 
 # string write cpu profile to file
-# default['vinted-vitess']['vttablet']['cpu']['profile'] =
+default['vinted-vitess']['vttablet']['cpu']['profile'] = nil
 
 # duration Idle timeout for dba connections (default 1m0s)
 default['vinted-vitess']['vttablet']['dba']['idle']['timeout'] = '1m0s'
 
 # string db allprivs password
-# default['vinted-vitess']['vttablet']['db']['allprivs']['password'] =
+default['vinted-vitess']['vttablet']['db']['allprivs']['password'] = nil
 
 # string db allprivs user userKey (default "vt_allprivs")
 default['vinted-vitess']['vttablet']['db']['allprivs']['user'] = 'vt_allprivs'
@@ -68,7 +68,7 @@ default['vinted-vitess']['vttablet']['db']['allprivs']['use']['ssl'] = true
 default['vinted-vitess']['vttablet']['dba']['pool']['size'] = 20
 
 # string db appdebug password
-# default['vinted-vitess']['vttablet']['db']['appdebug']['password'] =
+default['vinted-vitess']['vttablet']['db']['appdebug']['password'] = nil
 
 # string db appdebug user userKey (default "vt_appdebug")
 default['vinted-vitess']['vttablet']['db']['appdebug']['user'] = 'vt_appdebug'
@@ -77,7 +77,7 @@ default['vinted-vitess']['vttablet']['db']['appdebug']['user'] = 'vt_appdebug'
 default['vinted-vitess']['vttablet']['db']['appdebug']['use']['ssl'] = true
 
 # string db app password
-# default['vinted-vitess']['vttablet']['db']['app']['password'] =
+default['vinted-vitess']['vttablet']['db']['app']['password'] = nil
 
 # string db app user userKey (default "vt_app")
 default['vinted-vitess']['vttablet']['db']['app']['user'] = 'vt_app'
@@ -89,13 +89,13 @@ default['vinted-vitess']['vttablet']['db']['app']['use']['ssl'] = true
 default['vinted-vitess']['vttablet']['db']['charset'] = 'utf8'
 
 # string db credentials file
-# default['vinted-vitess']['vttablet']['db']['credentials']['file'] =
+default['vinted-vitess']['vttablet']['db']['credentials']['file'] = nil
 
 # string db credentials server type (use 'file' for the file implementation) (default "file")
 default['vinted-vitess']['vttablet']['db']['credentials']['server'] = 'file'
 
 # string db dba password
-# default['vinted-vitess']['vttablet']['db']['dba']['password'] =
+default['vinted-vitess']['vttablet']['db']['dba']['password'] = nil
 
 # string db dba user userKey (default "vt_dba")
 default['vinted-vitess']['vttablet']['db']['dba']['user'] = 'vt_dba'
@@ -104,7 +104,7 @@ default['vinted-vitess']['vttablet']['db']['dba']['user'] = 'vt_dba'
 default['vinted-vitess']['vttablet']['db']['dba']['use']['ssl'] = true
 
 # string db filtered password
-# default['vinted-vitess']['vttablet']['db']['filtered']['password'] =
+default['vinted-vitess']['vttablet']['db']['filtered']['password'] = nil
 
 # string db filtered user userKey (default "vt_filtered")
 default['vinted-vitess']['vttablet']['db']['filtered']['user'] = 'vt_filtered'
@@ -113,16 +113,16 @@ default['vinted-vitess']['vttablet']['db']['filtered']['user'] = 'vt_filtered'
 default['vinted-vitess']['vttablet']['db']['filtered']['use']['ssl'] = true
 
 # uint Flag values as defined by MySQL.
-# default['vinted-vitess']['vttablet']['db']['flags'] =
+default['vinted-vitess']['vttablet']['db']['flags'] = nil
 
 # string The host name for the tcp connection.
-# default['vinted-vitess']['vttablet']['db']['host'] =
+default['vinted-vitess']['vttablet']['db']['host'] = nil
 
 # int tcp port
-# default['vinted-vitess']['vttablet']['db']['port'] =
+default['vinted-vitess']['vttablet']['db']['port'] = nil
 
 # string db repl password
-# default['vinted-vitess']['vttablet']['db']['repl']['password'] =
+default['vinted-vitess']['vttablet']['db']['repl']['password'] = nil
 
 # string db repl user userKey (default "vt_repl")
 default['vinted-vitess']['vttablet']['db']['repl']['user'] = 'vt_repl'
@@ -131,25 +131,25 @@ default['vinted-vitess']['vttablet']['db']['repl']['user'] = 'vt_repl'
 default['vinted-vitess']['vttablet']['db']['repl']['use']['ssl'] = true
 
 # string The unix socket to connect on. If this is specifed, host and port will not be used.
-# default['vinted-vitess']['vttablet']['db']['socket'] =
+default['vinted-vitess']['vttablet']['db']['socket'] = nil
 
 # string connection ssl ca path
-# default['vinted-vitess']['vttablet']['db']['ssl']['ca']['path'] =
+default['vinted-vitess']['vttablet']['db']['ssl']['ca']['path'] = nil
 
 # string connection ssl ca
-# default['vinted-vitess']['vttablet']['db']['ssl']['ca'] =
+default['vinted-vitess']['vttablet']['db']['ssl']['ca'] = nil
 
 # string connection ssl certificate
-# default['vinted-vitess']['vttablet']['db']['ssl']['cert'] =
+default['vinted-vitess']['vttablet']['db']['ssl']['cert'] = nil
 
 # string connection ssl key
-# default['vinted-vitess']['vttablet']['db']['ssl']['key'] =
+default['vinted-vitess']['vttablet']['db']['ssl']['key'] = nil
 
 # duration replication lag after which a replica is considered degraded (only used in status UI) (default 30s)
 default['vinted-vitess']['vttablet']['degraded']['threshold'] = '30s'
 
 # if set, do not allow active reparents. Use this to protect a cluster using external reparents.
-# default['vinted-vitess']['vttablet']['disable']['active']['reparents'] =
+default['vinted-vitess']['vttablet']['disable']['active']['reparents'] = nil
 
 # duration the replication lag that is considered too high when selecting the minimum num vttablets for serving (default 2h0m0s)
 default['vinted-vitess']['vttablet']['discovery']['high']['replication']['lag']['minimum']['serving'] = '2h0m0s'
@@ -158,94 +158,94 @@ default['vinted-vitess']['vttablet']['discovery']['high']['replication']['lag'][
 default['vinted-vitess']['vttablet']['discovery']['low']['replication']['lag'] = '30s'
 
 # true iff we should emit stats to push-based monitoring/stats backends
-# default['vinted-vitess']['vttablet']['emit']['stats'] =
+default['vinted-vitess']['vttablet']['emit']['stats'] = nil
 
 # if the flag is on, a DML outsides a transaction will be auto committed. This flag is deprecated and is unsafe. Instead, use the VTGate provided autocommit feature.
-# default['vinted-vitess']['vttablet']['enable']['autocommit'] =
+default['vinted-vitess']['vttablet']['enable']['autocommit'] = nil
 
 # This option enables the query consolidator. (default true)
 default['vinted-vitess']['vttablet']['enable']['consolidator'] = true
 
 # If true, hot row protection is not enforced but logs if transactions would have been queued.
-# default['vinted-vitess']['vttablet']['enable']['hot']['row']['protection']['dry']['run'] =
+default['vinted-vitess']['vttablet']['enable']['hot']['row']['protection']['dry']['run'] = nil
 
 # If true, incoming transactions for the same row (range) will be queued and cannot consume all txpool slots.
-# default['vinted-vitess']['vttablet']['enable']['hot']['row']['protection'] =
+default['vinted-vitess']['vttablet']['enable']['hot']['row']['protection'] = nil
 
 # Register the health check module that monitors MySQL replication
-# default['vinted-vitess']['vttablet']['enable']['replication']['reporter'] =
+default['vinted-vitess']['vttablet']['enable']['replication']['reporter'] = nil
 
 # Enable semi-sync when configuring replication, on master and replica tablets only (rdonly tablets will not ack).
-# default['vinted-vitess']['vttablet']['enable']['semi']['sync'] =
+default['vinted-vitess']['vttablet']['enable']['semi']['sync'] = nil
 
 # If true, limit on number of transactions open at the same time will be tracked for all users, but not enforced.
-# default['vinted-vitess']['vttablet']['enable']['transaction']['limit']['dry']['run'] =
+default['vinted-vitess']['vttablet']['enable']['transaction']['limit']['dry']['run'] = nil
 
 # If true, limit on number of transactions open at the same time will be enforced for all users. User trying to open a new transaction after exhausting their limit will receive an error immediately, regardless of whether there are available slots or not.
-# default['vinted-vitess']['vttablet']['enable']['transaction']['limit'] =
+default['vinted-vitess']['vttablet']['enable']['transaction']['limit'] = nil
 
 # If true replication-lag-based throttling on transactions will be enabled.
-# default['vinted-vitess']['vttablet']['enable']['tx']['throttler'] =
+default['vinted-vitess']['vttablet']['enable']['tx']['throttler'] = nil
 
 # If true, vttablet requires MySQL to run with STRICT_TRANS_TABLES on. It is recommended to not turn this flag off. Otherwise MySQL may alter your supplied values before saving them to the database. (default true)
 default['vinted-vitess']['vttablet']['enforce']['strict']['trans']['tables'] = true
 
 # if this flag is true, vttablet will fail to start if a valid tableacl config does not exist
-# default['vinted-vitess']['vttablet']['enforce']['tableacl']['config'] =
+default['vinted-vitess']['vttablet']['enforce']['tableacl']['config'] = nil
 
 # string root directory for the file backup storage
-# default['vinted-vitess']['vttablet']['file']['backup']['storage']['root'] =
+default['vinted-vitess']['vttablet']['file']['backup']['storage']['root'] = nil
 
 # string file based custom rule path
-# default['vinted-vitess']['vttablet']['filecustomrules'] =
+default['vinted-vitess']['vttablet']['filecustomrules'] = nil
 
 # duration Timeout for the finalize stage of a fast external reparent reconciliation. (default 30s)
 default['vinted-vitess']['vttablet']['finalize']['external']['reparent']['timeout'] = '30s'
 
 # string Google Cloud Storage bucket to use for backups
-# default['vinted-vitess']['vttablet']['gcs']['backup']['storage']['bucket'] =
+default['vinted-vitess']['vttablet']['gcs']['backup']['storage']['bucket'] = nil
 
 # string This flag is unused and deprecated. It will be removed entirely in a future release.
-# default['vinted-vitess']['vttablet']['gcs']['backup']['storage']['project'] =
+default['vinted-vitess']['vttablet']['gcs']['backup']['storage']['project'] = nil
 
 # string root prefix for all backup-related object names
-# default['vinted-vitess']['vttablet']['gcs']['backup']['storage']['root'] =
+default['vinted-vitess']['vttablet']['gcs']['backup']['storage']['root'] = nil
 
 # string Which auth plugin implementation to use (eg: static)
-# default['vinted-vitess']['vttablet']['grpc']['auth']['mode'] =
+default['vinted-vitess']['vttablet']['grpc']['auth']['mode'] = nil
 
 # string when using grpc_static_auth in the server, this file provides the credentials to use to authenticate with server
-# default['vinted-vitess']['vttablet']['grpc']['auth']['static']['client']['creds'] =
+default['vinted-vitess']['vttablet']['grpc']['auth']['static']['client']['creds'] = nil
 
 # string JSON File to read the users/passwords from.
-# default['vinted-vitess']['vttablet']['grpc']['auth']['static']['password']['file'] =
+default['vinted-vitess']['vttablet']['grpc']['auth']['static']['password']['file'] = nil
 
 # string ca to use, requires TLS, and enforces client cert check
-# default['vinted-vitess']['vttablet']['grpc']['ca'] =
+default['vinted-vitess']['vttablet']['grpc']['ca'] = nil
 
 # string certificate to use, requires grpc_key, enables TLS
-# default['vinted-vitess']['vttablet']['grpc']['cert'] =
+default['vinted-vitess']['vttablet']['grpc']['cert'] = nil
 
 # string how to compress gRPC, default: nothing, supported: snappy
-# default['vinted-vitess']['vttablet']['grpc']['compression'] =
+default['vinted-vitess']['vttablet']['grpc']['compression'] = nil
 
 # Enable GRPC tracing
-# default['vinted-vitess']['vttablet']['grpc']['enable']['tracing'] =
+default['vinted-vitess']['vttablet']['grpc']['enable']['tracing'] = nil
 
 # int grpc initial connection window size
-# default['vinted-vitess']['vttablet']['grpc']['initial']['conn']['window']['size'] =
+default['vinted-vitess']['vttablet']['grpc']['initial']['conn']['window']['size'] = nil
 
 # int grpc initial window size
-# default['vinted-vitess']['vttablet']['grpc']['initial']['window']['size'] =
+default['vinted-vitess']['vttablet']['grpc']['initial']['window']['size'] = nil
 
 # duration After a duration of this time if the client doesn't see any activity it pings the server to see if the transport is still alive.
-# default['vinted-vitess']['vttablet']['grpc']['keepalive']['time'] =
+default['vinted-vitess']['vttablet']['grpc']['keepalive']['time'] = nil
 
 # duration After having pinged for keepalive check, the client waits for a duration of Timeout and if no activity is seen even after that the connection is closed.
-# default['vinted-vitess']['vttablet']['grpc']['keepalive']['timeout'] =
+default['vinted-vitess']['vttablet']['grpc']['keepalive']['timeout'] = nil
 
 # string key to use, requires grpc_cert, enables TLS
-# default['vinted-vitess']['vttablet']['grpc']['key'] =
+default['vinted-vitess']['vttablet']['grpc']['key'] = nil
 
 # duration Maximum age of a client connection before GoAway is sent. (default 2562047h47m16.854775807s)
 default['vinted-vitess']['vttablet']['grpc']['max']['connection']['age'] = '2562047h47m16.854775807s'
@@ -257,16 +257,16 @@ default['vinted-vitess']['vttablet']['grpc']['max']['connection']['age']['grace'
 default['vinted-vitess']['vttablet']['grpc']['max']['message']['size'] = 16777216
 
 # int Port to listen on for gRPC calls
-# default['vinted-vitess']['vttablet']['grpc']['port'] =
+default['vinted-vitess']['vttablet']['grpc']['port'] = nil
 
 # Enable gRPC monitoring with Prometheus
-# default['vinted-vitess']['vttablet']['grpc']['prometheus'] =
+default['vinted-vitess']['vttablet']['grpc']['prometheus'] = nil
 
 # int grpc server initial connection window size
-# default['vinted-vitess']['vttablet']['grpc']['server']['initial']['conn']['window']['size'] =
+default['vinted-vitess']['vttablet']['grpc']['server']['initial']['conn']['window']['size'] = nil
 
 # int grpc server initial window size
-# default['vinted-vitess']['vttablet']['grpc']['server']['initial']['window']['size'] =
+default['vinted-vitess']['vttablet']['grpc']['server']['initial']['window']['size'] = nil
 
 # duration grpc server minimum keepalive time (default 5m0s)
 default['vinted-vitess']['vttablet']['grpc']['server']['keepalive']['enforcement']['policy']['min']['time'] = '5m0s'
@@ -275,7 +275,7 @@ default['vinted-vitess']['vttablet']['grpc']['server']['keepalive']['enforcement
 default['vinted-vitess']['vttablet']['health']['check']['interval'] = '20s'
 
 # If true, vttablet records (if master) or checks (if replica) the current time of a replication heartbeat in the table _vt.heartbeat. The result is used to inform the serving state of the vttablet via healthchecks.
-# default['vinted-vitess']['vttablet']['heartbeat']['enable'] =
+default['vinted-vitess']['vttablet']['heartbeat']['enable'] = nil
 
 # duration How frequently to read and write replication heartbeat. (default 1s)
 default['vinted-vitess']['vttablet']['heartbeat']['interval'] = '1s'
@@ -302,25 +302,25 @@ default['vinted-vitess']['vttablet']['influxdb']['password'] = 'root'
 default['vinted-vitess']['vttablet']['influxdb']['username'] = 'root'
 
 # string (init parameter) override the name of the db used by vttablet
-# default['vinted-vitess']['vttablet']['init']['db']['name']['override'] =
+default['vinted-vitess']['vttablet']['init']['db']['name']['override'] = nil
 
 # string (init parameter) keyspace to use for this tablet
-# default['vinted-vitess']['vttablet']['init']['keyspace'] =
+default['vinted-vitess']['vttablet']['init']['keyspace'] = nil
 
 # string (init parameter) shard to use for this tablet
-# default['vinted-vitess']['vttablet']['init']['shard'] =
+default['vinted-vitess']['vttablet']['init']['shard'] = nil
 
 # string (init parameter) the tablet type to use for this tablet.
-# default['vinted-vitess']['vttablet']['init']['tablet']['type'] =
+default['vinted-vitess']['vttablet']['init']['tablet']['type'] = nil
 
 # value (init parameter) comma separated list of key:value pairs used to tag the tablet
-# default['vinted-vitess']['vttablet']['init']['tags'] =
+default['vinted-vitess']['vttablet']['init']['tags'] = nil
 
 # duration (init parameter) timeout to use for the init phase. (default 1m0s)
 default['vinted-vitess']['vttablet']['init']['timeout'] = '1m0s'
 
 # duration keep logs for this long (zero to keep forever)
-# default['vinted-vitess']['vttablet']['keep']['logs'] =
+default['vinted-vitess']['vttablet']['keep']['logs'] = nil
 
 # duration keep running at least this long after SIGTERM before stopping (default 50ms)
 default['vinted-vitess']['vttablet']['lameduck']['period'] = '50ms'
@@ -329,19 +329,19 @@ default['vinted-vitess']['vttablet']['lameduck']['period'] = '50ms'
 default['vinted-vitess']['vttablet']['lock']['timeout'] = '30s'
 
 # value when logging hits line file:N, emit a stack trace
-# default['vinted-vitess']['vttablet']['log']['backtrace']['at'] =
+default['vinted-vitess']['vttablet']['log']['backtrace']['at'] = nil
 
 # string If non-empty, write log files in this directory
-# default['vinted-vitess']['vttablet']['log']['dir'] =
+default['vinted-vitess']['vttablet']['log']['dir'] = nil
 
 # Enable query logging to syslog.
-# default['vinted-vitess']['vttablet']['log']['queries'] =
+default['vinted-vitess']['vttablet']['log']['queries'] = nil
 
 # string Enable query logging to the specified file
-# default['vinted-vitess']['vttablet']['log']['queries']['to']['file'] =
+default['vinted-vitess']['vttablet']['log']['queries']['to']['file'] = nil
 
 # log to standard error instead of files
-# default['vinted-vitess']['vttablet']['logtostderr'] =
+default['vinted-vitess']['vttablet']['logtostderr'] = nil
 
 # duration how long to wait in between slave -> connection attempts. Only precise to the second. (default 10s)
 default['vinted-vitess']['vttablet']['master']['connect']['retry'] = '10s'
@@ -353,100 +353,100 @@ default['vinted-vitess']['vttablet']['mem']['profile']['rate'] = 524288
 default['vinted-vitess']['vttablet']['min']['number']['serving']['vttablets'] = 2
 
 # int profile every n mutex contention events (see runtime.SetMutexProfileFraction)
-# default['vinted-vitess']['vttablet']['mutex']['profile']['fraction'] =
+default['vinted-vitess']['vttablet']['mutex']['profile']['fraction'] = nil
 
 # string mysql binlog path
-# default['vinted-vitess']['vttablet']['mycnf']['bin']['log']['path'] =
+default['vinted-vitess']['vttablet']['mycnf']['bin']['log']['path'] = nil
 
 # string data directory for mysql
-# default['vinted-vitess']['vttablet']['mycnf']['data']['dir'] =
+default['vinted-vitess']['vttablet']['mycnf']['data']['dir'] = nil
 
 # string mysql error log path
-# default['vinted-vitess']['vttablet']['mycnf']['error']['log']['path'] =
+default['vinted-vitess']['vttablet']['mycnf']['error']['log']['path'] = nil
 
 # string path to my.cnf, if reading all config params from there
-# default['vinted-vitess']['vttablet']['mycnf']['file'] =
+default['vinted-vitess']['vttablet']['mycnf']['file'] = nil
 
 # string mysql general log path
-# default['vinted-vitess']['vttablet']['mycnf']['general']['log']['path'] =
+default['vinted-vitess']['vttablet']['mycnf']['general']['log']['path'] = nil
 
 # string Innodb data home directory
-# default['vinted-vitess']['vttablet']['mycnf']['innodb']['data']['home']['dir'] =
+default['vinted-vitess']['vttablet']['mycnf']['innodb']['data']['home']['dir'] = nil
 
 # string Innodb log group home directory
-# default['vinted-vitess']['vttablet']['mycnf']['innodb']['log']['group']['home']['dir'] =
+default['vinted-vitess']['vttablet']['mycnf']['innodb']['log']['group']['home']['dir'] = nil
 
 # string mysql master.info file
-# default['vinted-vitess']['vttablet']['mycnf']['master']['info']['file'] =
+default['vinted-vitess']['vttablet']['mycnf']['master']['info']['file'] = nil
 
 # int port mysql is listening on
-# default['vinted-vitess']['vttablet']['mycnf']['mysql']['port'] =
+default['vinted-vitess']['vttablet']['mycnf']['mysql']['port'] = nil
 
 # string mysql pid file
-# default['vinted-vitess']['vttablet']['mycnf']['pid']['file'] =
+default['vinted-vitess']['vttablet']['mycnf']['pid']['file'] = nil
 
 # string mysql relay log index path
-# default['vinted-vitess']['vttablet']['mycnf']['relay']['log']['index']['path'] =
+default['vinted-vitess']['vttablet']['mycnf']['relay']['log']['index']['path'] = nil
 
 # string mysql relay log info path
-# default['vinted-vitess']['vttablet']['mycnf']['relay']['log']['info']['path'] =
+default['vinted-vitess']['vttablet']['mycnf']['relay']['log']['info']['path'] = nil
 
 # string mysql relay log path
-# default['vinted-vitess']['vttablet']['mycnf']['relay']['log']['path'] =
+default['vinted-vitess']['vttablet']['mycnf']['relay']['log']['path'] = nil
 
 # int mysql server id of the server (if specified, mycnf-file will be ignored)
-# default['vinted-vitess']['vttablet']['mycnf']['server']['id'] =
+default['vinted-vitess']['vttablet']['mycnf']['server']['id'] = nil
 
 # string slave load tmp directory
-# default['vinted-vitess']['vttablet']['mycnf']['slave']['load']['tmp']['dir'] =
+default['vinted-vitess']['vttablet']['mycnf']['slave']['load']['tmp']['dir'] = nil
 
 # string mysql slow query log path
-# default['vinted-vitess']['vttablet']['mycnf']['slow']['log']['path'] =
+default['vinted-vitess']['vttablet']['mycnf']['slow']['log']['path'] = nil
 
 # string mysql socket file
-# default['vinted-vitess']['vttablet']['mycnf']['socket']['file'] =
+default['vinted-vitess']['vttablet']['mycnf']['socket']['file'] = nil
 
 # string mysql tmp directory
-# default['vinted-vitess']['vttablet']['mycnf']['tmp']['dir'] =
+default['vinted-vitess']['vttablet']['mycnf']['tmp']['dir'] = nil
 
 # string JSON File to read the users/passwords from.
-# default['vinted-vitess']['vttablet']['mysql']['auth']['server']['static']['file'] =
+default['vinted-vitess']['vttablet']['mysql']['auth']['server']['static']['file'] = nil
 
 # string JSON representation of the users/passwords config.
-# default['vinted-vitess']['vttablet']['mysql']['auth']['server']['static']['string'] =
+default['vinted-vitess']['vttablet']['mysql']['auth']['server']['static']['string'] = nil
 
 # string the protocol to use to talk to the mysqlctl server (default "grpc")
 default['vinted-vitess']['vttablet']['mysqlctl']['client']['protocol'] = 'grpc'
 
 # string template file to use for generating the my.cnf file during server init
-# default['vinted-vitess']['vttablet']['mysqlctl']['mycnf']['template'] =
+default['vinted-vitess']['vttablet']['mysqlctl']['mycnf']['template'] = nil
 
 # string socket file to use for remote mysqlctl actions (empty for local actions)
-# default['vinted-vitess']['vttablet']['mysqlctl']['socket'] =
+default['vinted-vitess']['vttablet']['mysqlctl']['socket'] = nil
 
 # duration wait no more than this for OnTermSync handlers before stopping (default 10s)
 default['vinted-vitess']['vttablet']['onterm']['timeout'] = '10s'
 
 # string URI of opentsdb /api/put method
-# default['vinted-vitess']['vttablet']['opentsdb']['uri'] =
+default['vinted-vitess']['vttablet']['opentsdb']['uri'] = nil
 
 # string Address of Orchestrator's HTTP API (e.g. http://host:port/api/). Leave empty to disable Orchestrator integration.
-# default['vinted-vitess']['vttablet']['orc']['api']['url'] =
+default['vinted-vitess']['vttablet']['orc']['api']['url'] = nil
 
 # duration How often to ping Orchestrator's HTTP API endpoint to tell it we exist. 0 means never.
-# default['vinted-vitess']['vttablet']['orc']['discover']['interval'] =
+default['vinted-vitess']['vttablet']['orc']['discover']['interval'] = nil
 
 # duration Timeout for calls to Orchestrator's HTTP API (default 30s)
 default['vinted-vitess']['vttablet']['orc']['timeout'] = '30s'
 
 # string If set, the process will write its pid to the named file, and delete it on graceful shutdown.
-# default['vinted-vitess']['vttablet']['pid']['file'] =
+default['vinted-vitess']['vttablet']['pid']['file'] = nil
 
 # string pool name prefix, vttablet has several pools and each of them has a name. This config specifies the prefix of these pool names
-# default['vinted-vitess']['vttablet']['pool']['name']['prefix'] =
+default['vinted-vitess']['vttablet']['pool']['name']['prefix'] = nil
 
 # int port for the server
-# default['vinted-vitess']['vttablet']['port'] =
+default['vinted-vitess']['vttablet']['port'] = nil
 
 # duration how often try to remove old logs (default 1h0m0s)
 default['vinted-vitess']['vttablet']['purge']['logs']['interval'] = '1h0m0s'
@@ -458,13 +458,13 @@ default['vinted-vitess']['vttablet']['querylog']['format'] = 'text'
 default['vinted-vitess']['vttablet']['query']['log']['stream']['handler'] = '/debug/querylog'
 
 # string an acl that exempt from table acl checking (this acl is free to access any vitess tables).
-# default['vinted-vitess']['vttablet']['queryserver']['config']['acl']['exempt']['acl'] =
+default['vinted-vitess']['vttablet']['queryserver']['config']['acl']['exempt']['acl'] = nil
 
 # query server allow unsafe dml statements
-# default['vinted-vitess']['vttablet']['queryserver']['config']['allowunsafe']['dmls'] =
+default['vinted-vitess']['vttablet']['queryserver']['config']['allowunsafe']['dmls'] = nil
 
 # If this flag is enabled, tabletserver will emit monitoring metrics and let the request pass regardless of table acl check results
-# default['vinted-vitess']['vttablet']['queryserver']['config']['enable']['table']['acl']['dry']['run'] =
+default['vinted-vitess']['vttablet']['queryserver']['config']['enable']['table']['acl']['dry']['run'] = nil
 
 # float query server idle timeout (in seconds), vttablet manages various mysql connection pools. This config means if a connection has not been used in given idle timeout, this connection will be removed from pool. This effectively manages number of connection objects and optimize the pool performance. (default 1800)
 default['vinted-vitess']['vttablet']['queryserver']['config']['idle']['timeout'] = 1800.0
@@ -482,7 +482,7 @@ default['vinted-vitess']['vttablet']['queryserver']['config']['message']['conn']
 default['vinted-vitess']['vttablet']['queryserver']['config']['message']['postpone']['cap'] = 4
 
 # query server pass through all dml statements without rewriting
-# default['vinted-vitess']['vttablet']['queryserver']['config']['passthrough']['dmls'] =
+default['vinted-vitess']['vttablet']['queryserver']['config']['passthrough']['dmls'] = nil
 
 # int query server connection pool size, connection pool is used by regular queries (non streaming, not in a transaction) (default 16)
 default['vinted-vitess']['vttablet']['queryserver']['config']['pool']['size'] = 16
@@ -491,7 +491,7 @@ default['vinted-vitess']['vttablet']['queryserver']['config']['pool']['size'] = 
 default['vinted-vitess']['vttablet']['queryserver']['config']['query']['cache']['size'] = 5000
 
 # float query server query pool timeout (in seconds), it is how long vttablet waits for a connection from the query pool. If set to 0 (default) then the overall query timeout is used instead.
-# default['vinted-vitess']['vttablet']['queryserver']['config']['query']['pool']['timeout'] =
+default['vinted-vitess']['vttablet']['queryserver']['config']['query']['pool']['timeout'] = nil
 
 # int query server query pool waiter limit, this is the maximum number of queries that can be queued waiting to get a connection (default 50000)
 default['vinted-vitess']['vttablet']['queryserver']['config']['query']['pool']['waiter']['cap'] = 50000
@@ -509,10 +509,10 @@ default['vinted-vitess']['vttablet']['queryserver']['config']['stream']['buffer'
 default['vinted-vitess']['vttablet']['queryserver']['config']['stream']['pool']['size'] = 200
 
 # only allow queries that pass table acl checks
-# default['vinted-vitess']['vttablet']['queryserver']['config']['strict']['table']['acl'] =
+default['vinted-vitess']['vttablet']['queryserver']['config']['strict']['table']['acl'] = nil
 
 # prevent bind vars from escaping in returned errors
-# default['vinted-vitess']['vttablet']['queryserver']['config']['terse']['errors'] =
+default['vinted-vitess']['vttablet']['queryserver']['config']['terse']['errors'] = nil
 
 # int query server transaction cap is the maximum number of transactions allowed to happen at any given point of a time for a single vttablet. E.g. by setting transaction cap to 100, there are at most 100 transactions will be processed by a vttablet and the 101th transaction will be blocked (and fail if it cannot get connection within specified timeout) (default 20)
 default['vinted-vitess']['vttablet']['queryserver']['config']['transaction']['cap'] = 20
@@ -521,55 +521,55 @@ default['vinted-vitess']['vttablet']['queryserver']['config']['transaction']['ca
 default['vinted-vitess']['vttablet']['queryserver']['config']['transaction']['timeout'] = 30.0
 
 # float query server transaction pool timeout, it is how long vttablet waits if tx pool is full (default 1)
-default['vinted-vitess']['vttablet']['queryserver']['config']['txpool']['timeout'] = 1.0
+default['vinted-vitess']['vttablet']['queryserver']['config']['txpool']['timeout'] = 1
 
 # int query server transaction pool waiter limit, this is the maximum number of transactions that can be queued waiting to get a connection (default 50000)
 default['vinted-vitess']['vttablet']['queryserver']['config']['txpool']['waiter']['cap'] = 50000
 
 # int query server result size warning threshold, warn if number of rows returned from vttablet for non-streaming queries exceeds this
-# default['vinted-vitess']['vttablet']['queryserver']['config']['warn']['result']['size'] =
+default['vinted-vitess']['vttablet']['queryserver']['config']['warn']['result']['size'] = nil
 
 # redact full queries and bind variables from debug UI
-# default['vinted-vitess']['vttablet']['redact']['debug']['ui']['queries'] =
+default['vinted-vitess']['vttablet']['redact']['debug']['ui']['queries'] = nil
 
 # int (init restore parameter) how many concurrent files to restore at once (default 4)
 default['vinted-vitess']['vttablet']['restore']['concurrency'] = 4
 
 # (init restore parameter) will check BackupStorage for a recent backup at startup and start there
-# default['vinted-vitess']['vttablet']['restore']['from']['backup'] =
+default['vinted-vitess']['vttablet']['restore']['from']['backup'] = nil
 
 # string endpoint of the S3 backend (region must be provided)
-# default['vinted-vitess']['vttablet']['s3']['backup']['aws']['endpoint'] =
+default['vinted-vitess']['vttablet']['s3']['backup']['aws']['endpoint'] = nil
 
 # string AWS region to use (default "us-east-1")
 default['vinted-vitess']['vttablet']['s3']['backup']['aws']['region'] = 'us-east-1'
 
 # force the s3 path style
-# default['vinted-vitess']['vttablet']['s3']['backup']['force']['path']['style'] =
+default['vinted-vitess']['vttablet']['s3']['backup']['force']['path']['style'] = nil
 
 # string determine the S3 loglevel to use from LogOff, LogDebug, LogDebugWithSigning, LogDebugWithHTTPBody, LogDebugWithRequestRetries, LogDebugWithRequestErrors (default "LogOff")
 default['vinted-vitess']['vttablet']['s3']['backup']['log']['level'] = 'LogOff'
 
 # string server-side encryption algorithm (e.g., AES256, aws:kms)
-# default['vinted-vitess']['vttablet']['s3']['backup']['server']['side']['encryption'] =
+default['vinted-vitess']['vttablet']['s3']['backup']['server']['side']['encryption'] = nil
 
 # string S3 bucket to use for backups
-# default['vinted-vitess']['vttablet']['s3']['backup']['storage']['bucket'] =
+default['vinted-vitess']['vttablet']['s3']['backup']['storage']['bucket'] = nil
 
 # string root prefix for all backup-related object names
-# default['vinted-vitess']['vttablet']['s3']['backup']['storage']['root'] =
+default['vinted-vitess']['vttablet']['s3']['backup']['storage']['root'] = nil
 
 # skip the 'certificate is valid' check for SSL connections
-# default['vinted-vitess']['vttablet']['s3']['backup']['tls']['skip']['verify']['cert'] =
+default['vinted-vitess']['vttablet']['s3']['backup']['tls']['skip']['verify']['cert'] = nil
 
 # string security policy to enforce for URLs
-# default['vinted-vitess']['vttablet']['security']['policy'] =
+default['vinted-vitess']['vttablet']['security']['policy'] = nil
 
 # value comma separated list of services to enable (or disable if prefixed with '-') Example: grpc-vtworker
-# default['vinted-vitess']['vttablet']['service']['map'] =
+default['vinted-vitess']['vttablet']['service']['map'] = nil
 
 # duration how long to pause after broadcasting health to vtgate, before enforcing a new serving state
-# default['vinted-vitess']['vttablet']['serving']['state']['grace']['period'] =
+default['vinted-vitess']['vttablet']['serving']['state']['grace']['period'] = nil
 
 # int truncate queries in error logs to the given length (default unlimited)
 default['vinted-vitess']['vttablet']['sql']['max']['length']['errors'] = 0
@@ -593,46 +593,46 @@ default['vinted-vitess']['vttablet']['stats']['emit']['period'] = '1m0s'
 default['vinted-vitess']['vttablet']['stderrthreshold'] = 1
 
 # string path to table access checker config file; send SIGHUP to reload this file
-# default['vinted-vitess']['vttablet']['table']['acl']['config'] =
+default['vinted-vitess']['vttablet']['table']['acl']['config'] = nil
 
 # string The directory within the vtdataroot to store vttablet/mysql files. Defaults to being generated by the tablet uid.
-# default['vinted-vitess']['vttablet']['tablet']['dir'] =
+default['vinted-vitess']['vttablet']['tablet']['dir'] = nil
 
 # string the server ca to use to validate servers when connecting
-# default['vinted-vitess']['vttablet']['tablet']['grpc']['ca'] =
+default['vinted-vitess']['vttablet']['tablet']['grpc']['ca'] = nil
 
 # string the cert to use to connect
-# default['vinted-vitess']['vttablet']['tablet']['grpc']['cert'] =
+default['vinted-vitess']['vttablet']['tablet']['grpc']['cert'] = nil
 
 # string the key to use to connect
-# default['vinted-vitess']['vttablet']['tablet']['grpc']['key'] =
+default['vinted-vitess']['vttablet']['tablet']['grpc']['key'] = nil
 
 # string the server name to use to validate server certificate
-# default['vinted-vitess']['vttablet']['tablet']['grpc']['server']['name'] =
+default['vinted-vitess']['vttablet']['tablet']['grpc']['server']['name'] = nil
 
 # string if not empty, this hostname will be assumed instead of trying to resolve it
-# default['vinted-vitess']['vttablet']['tablet']['hostname'] =
+default['vinted-vitess']['vttablet']['tablet']['hostname'] = nil
 
 # string the server ca to use to validate servers when connecting
-# default['vinted-vitess']['vttablet']['tablet']['manager']['grpc']['ca'] =
+default['vinted-vitess']['vttablet']['tablet']['manager']['grpc']['ca'] = nil
 
 # string the cert to use to connect
-# default['vinted-vitess']['vttablet']['tablet']['manager']['grpc']['cert'] =
+default['vinted-vitess']['vttablet']['tablet']['manager']['grpc']['cert'] = nil
 
 # int concurrency to use to talk to a vttablet server for performance-sensitive RPCs (like ExecuteFetchAs{Dba,AllPrivs,App}) (default 8)
 default['vinted-vitess']['vttablet']['tablet']['manager']['grpc']['concurrency'] = 8
 
 # string the key to use to connect
-# default['vinted-vitess']['vttablet']['tablet']['manager']['grpc']['key'] =
+default['vinted-vitess']['vttablet']['tablet']['manager']['grpc']['key'] = nil
 
 # string the server name to use to validate server certificate
-# default['vinted-vitess']['vttablet']['tablet']['manager']['grpc']['server']['name'] =
+default['vinted-vitess']['vttablet']['tablet']['manager']['grpc']['server']['name'] = nil
 
 # string the protocol to use to talk to vttablet (default "grpc")
 default['vinted-vitess']['vttablet']['tablet']['manager']['protocol'] = 'grpc'
 
 # string tablet alias
-# default['vinted-vitess']['vttablet']['tablet']['path'] =
+default['vinted-vitess']['vttablet']['tablet']['path'] = nil
 
 # string how to talk to the vttablets (default "grpc")
 default['vinted-vitess']['vttablet']['tablet']['protocol'] = 'grpc'
@@ -647,16 +647,16 @@ default['vinted-vitess']['vttablet']['topo']['consul']['watch']['poll']['duratio
 default['vinted-vitess']['vttablet']['topocustomrule']['cell'] = 'global'
 
 # string path for customrules file. Disabled if empty.
-# default['vinted-vitess']['vttablet']['topocustomrule']['path'] =
+default['vinted-vitess']['vttablet']['topocustomrule']['path'] = nil
 
 # int Lease TTL for locks and master election. The client will use KeepAlive to keep the lease going. (default 30)
 default['vinted-vitess']['vttablet']['topo']['etcd']['lease']['ttl'] = 30
 
 # string the path of the global topology data in the global topology server
-# default['vinted-vitess']['vttablet']['topo']['global']['root'] =
+default['vinted-vitess']['vttablet']['topo']['global']['root'] = nil
 
 # string the address of the global topology server
-# default['vinted-vitess']['vttablet']['topo']['global']['server']['address'] =
+default['vinted-vitess']['vttablet']['topo']['global']['server']['address'] = nil
 
 # string the topology implementation to use (default "zookeeper")
 default['vinted-vitess']['vttablet']['topo']['implementation'] = 'zookeeper'
@@ -668,22 +668,22 @@ default['vinted-vitess']['vttablet']['topo']['zk']['base']['timeout'] = '30s'
 default['vinted-vitess']['vttablet']['topo']['zk']['max']['concurrency'] = 64
 
 # string the server ca to use to validate servers when connecting to the zk topo server
-# default['vinted-vitess']['vttablet']['topo']['zk']['tls']['ca'] =
+default['vinted-vitess']['vttablet']['topo']['zk']['tls']['ca'] = nil
 
 # string the cert to use to connect to the zk topo server, requires topo_zk_tls_key, enables TLS
-# default['vinted-vitess']['vttablet']['topo']['zk']['tls']['cert'] =
+default['vinted-vitess']['vttablet']['topo']['zk']['tls']['cert'] = nil
 
 # string the key to use to connect to the zk topo server, enables TLS
-# default['vinted-vitess']['vttablet']['topo']['zk']['tls']['key'] =
+default['vinted-vitess']['vttablet']['topo']['zk']['tls']['key'] = nil
 
 # Include CallerID.component when considering who the user is for the purpose of transaction limit.
-# default['vinted-vitess']['vttablet']['transaction']['limit']['by']['component'] =
+default['vinted-vitess']['vttablet']['transaction']['limit']['by']['component'] = nil
 
 # Include CallerID.principal when considering who the user is for the purpose of transaction limit. (default true)
 default['vinted-vitess']['vttablet']['transaction']['limit']['by']['principal'] = true
 
 # Include CallerID.subcomponent when considering who the user is for the purpose of transaction limit.
-# default['vinted-vitess']['vttablet']['transaction']['limit']['by']['subcomponent'] =
+default['vinted-vitess']['vttablet']['transaction']['limit']['by']['subcomponent'] = nil
 
 # Include VTGateCallerID.username when considering who the user is for the purpose of transaction limit. (default true)
 default['vinted-vitess']['vttablet']['transaction']['limit']['by']['username'] = true
@@ -695,28 +695,28 @@ default['vinted-vitess']['vttablet']['transaction']['limit']['per']['user'] = 0.
 default['vinted-vitess']['vttablet']['transaction']['log']['stream']['handler'] = '/debug/txlog'
 
 # float how long to wait (in seconds) for transactions to complete during graceful shutdown.
-# default['vinted-vitess']['vttablet']['transaction']['shutdown']['grace']['period'] =
+default['vinted-vitess']['vttablet']['transaction']['shutdown']['grace']['period'] = nil
 
 # float time in seconds. Any unresolved transaction older than this time will be sent to the coordinator to be resolved.
-# default['vinted-vitess']['vttablet']['twopc']['abandon']['age'] =
+default['vinted-vitess']['vttablet']['twopc']['abandon']['age'] = nil
 
 # string address of the (VTGate) process(es) that will be used to notify of abandoned transactions.
-# default['vinted-vitess']['vttablet']['twopc']['coordinator']['address'] =
+default['vinted-vitess']['vttablet']['twopc']['coordinator']['address'] = nil
 
 # if the flag is on, 2pc is enabled. Other 2pc flags must be supplied.
-# default['vinted-vitess']['vttablet']['twopc']['enable'] =
+default['vinted-vitess']['vttablet']['twopc']['enable'] = nil
 
 # string The configuration of the transaction throttler as a text formatted throttlerdata.Configuration protocol buffer message (default "target_replication_lag_sec: 2\nmax_replication_lag_sec: 10\ninitial_rate: 100\nmax_increase: 1\nemergency_decrease: 0.5\nmin_duration_between_increases_sec: 40\nmax_duration_between_increases_sec: 62\nmin_duration_between_decreases_sec: 20\nspread_backlog_across_sec: 20\nage_bad_rate_after_sec: 180\nbad_rate_increase: 0.1\nmax_rate_approach_threshold: 0.9\n")
-default['vinted-vitess']['vttablet']['tx']['throttler']['config'] = 'target_replication_lag_sec: 2\nmax_replication_lag_sec: 10\ninitial_rate: 100\nmax_increase: 1\nemergency_decrease: 0.5\nmin_duration_between_increases_sec: 40\nmax_duration_between_increases_sec: 62\nmin_duration_between_decreases_sec: 20\nspread_backlog_across_sec: 20\nage_bad_rate_after_sec: 180\nbad_rate_increase: 0.1\nmax_rate_approach_threshold: 0.9\n'
+default['vinted-vitess']['vttablet']['tx']['throttler']['config'] = 'TODO'
 
 # value A comma-separated list of cells. Only tabletservers running in these cells will be monitored for replication lag by the transaction throttler.
-# default['vinted-vitess']['vttablet']['tx']['throttler']['healthcheck']['cells'] =
+default['vinted-vitess']['vttablet']['tx']['throttler']['healthcheck']['cells'] = nil
 
 # duration replication lag  after which a replica is considered unhealthy (default 2h0m0s)
 default['vinted-vitess']['vttablet']['unhealthy']['threshold'] = '2h0m0s'
 
 # value comma-separated list of pattern=N settings for file-filtered logging
-# default['vinted-vitess']['vttablet']['vmodule'] =
+default['vinted-vitess']['vttablet']['vmodule'] = nil
 
 # duration delay before retrying a failed healthcheck (default 5s)
 default['vinted-vitess']['vttablet']['vreplication']['healthcheck']['retry']['delay'] = '5s'
@@ -734,14 +734,14 @@ default['vinted-vitess']['vttablet']['vreplication']['retry']['delay'] = '5s'
 default['vinted-vitess']['vttablet']['vreplication']['tablet']['type'] = 'REPLICA'
 
 # string address of a vtctld instance
-# default['vinted-vitess']['vttablet']['vtctld']['addr'] =
+default['vinted-vitess']['vttablet']['vtctld']['addr'] = nil
 
 # string how to talk to vtgate (default "grpc")
 default['vinted-vitess']['vttablet']['vtgate']['protocol'] = 'grpc'
 
 # value log level for V logs
-# default['vinted-vitess']['vttablet']['v'] =
+default['vinted-vitess']['vttablet']['v'] = nil
 
 # When enabled, vttablet will stream the MySQL replication stream from the local server, and use it to support the include_event_token ExecuteOptions.
-# default['vinted-vitess']['vttablet']['watch']['replication']['stream'] =
+default['vinted-vitess']['vttablet']['watch']['replication']['stream'] = nil
 
