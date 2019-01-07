@@ -52,7 +52,7 @@ stdin.lines do |line|
 
   attribute = key.split(/-|_/).map { |k| %{['#{k}']} }.join('')
 
-  next if comment =~ /deprecated:/
+  next if comment =~ /deprecated:/i
 
   puts "# #{comment}"
   if comment =~ /\(default /

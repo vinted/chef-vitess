@@ -157,9 +157,6 @@ default['vinted-vitess']['vtgate']['l2vtgate']['addrs'] = nil
 # duration keep running at least this long after SIGTERM before stopping (default 50ms)
 default['vinted-vitess']['vtgate']['lameduck']['period'] = '50ms'
 
-# DEPRECATED: set this flag to true to get the legacy behavior: all transactions will need an explicit begin, and DMLs outside transactions will return an error.
-default['vinted-vitess']['vtgate']['legacy']['autocommit'] = nil
-
 # duration timeout for acquiring topology locks (default 30s)
 default['vinted-vitess']['vtgate']['lock']['timeout'] = '30s'
 
