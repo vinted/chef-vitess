@@ -1,6 +1,6 @@
-# vinted-vitess CHANGELOG
+# vitess CHANGELOG
 
-This file is used to list changes made in each version of the vinted-vitess cookbook.
+This file is used to list changes made in each version of the vitess cookbook.
 
 # 0.1.0
 

@@ -1,6 +1,6 @@
 stdin = STDIN.read
 
-PREFIX_NAME = 'vinted-vitess'
+PREFIX_NAME = 'vitess'
 DEFAULT_VALUE_REGEXP = /\(default (\S+)\)$/
 
 def prefix

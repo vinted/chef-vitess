@@ -1,4 +1,4 @@
-# vinted-vitess
+# vitess
 
 TODO: Enter the cookbook description here.
 
