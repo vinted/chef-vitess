@@ -8,3 +8,8 @@ issues_url 'https://github.com/vinted/chef-vitess/issues'
 source_url 'https://github.com/vinted/chef-vitess'
 chef_version '>= 12.1' if respond_to?(:chef_version)
 version '0.1.0'
+
+supports 'redhat'
+supports 'centos'
+supports 'ubuntu'
+supports 'debian'
