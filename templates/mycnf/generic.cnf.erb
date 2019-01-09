@@ -1,0 +1,7 @@
+<% @variables.each do |key, val| %>
+<% if val.nil? %>
+<%= key %>
+<% else %>
+<%= key %> = <%= val %>
+<% end %>
+<% end %>

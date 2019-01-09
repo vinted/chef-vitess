@@ -1,6 +1,6 @@
 case node['platform']
 when 'rhel', 'centos'
-  include_recipe 'yum-mysql-community::mysql56'
+  include_recipe 'yum-mysql-community::mysql57'
 when 'debian', 'ubuntu'
   package %w[curl software-properties-common]
 
