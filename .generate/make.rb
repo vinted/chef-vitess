@@ -50,7 +50,7 @@ end
 stdin.lines do |line|
   key, comment = line.split(' ', 2)
 
-  attribute = key.split(/-|_/).map { |k| %{['#{k}']} }.join('')
+  attribute = %{['#{key}']}.downcase
 
   next if comment =~ /deprecated:/i
 
