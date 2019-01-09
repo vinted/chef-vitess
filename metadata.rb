@@ -13,3 +13,6 @@ supports 'redhat'
 supports 'centos'
 supports 'ubuntu'
 supports 'debian'
+
+depends 'poise', '~> 2.8.2'
+depends 'systemd', '~> 3.2.4'
