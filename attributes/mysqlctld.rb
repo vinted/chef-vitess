@@ -1,5 +1,5 @@
 # log to standard error as well as files
-default['vitess']['mysqlctld']['alsologtostderr'] = nil
+default['vitess']['mysqlctld']['alsologtostderr'] = 1
 
 # duration Idle timeout for app connections (default 1m0s)
 default['vitess']['mysqlctld']['app_idle_timeout'] = '1m0s'
@@ -167,7 +167,7 @@ default['vitess']['mysqlctld']['log_backtrace_at'] = nil
 default['vitess']['mysqlctld']['log_dir'] = nil
 
 # log to standard error instead of files
-default['vitess']['mysqlctld']['logtostderr'] = nil
+default['vitess']['mysqlctld']['logtostderr'] = 1
 
 # duration how long to wait in between slave -> connection attempts. Only precise to the second. (default 10s)
 default['vitess']['mysqlctld']['master_connect_retry'] = '10s'
