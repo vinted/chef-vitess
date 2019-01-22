@@ -8,6 +8,5 @@ issues_url 'https://github.com/vinted/chef-vitess/issues'
 source_url 'https://github.com/vinted/chef-vitess'
 version '0.1.0'
 
-depends 'vitess'
 depends 'mysql', '~> 8.5.1'
 depends 'yum-mysql-community'

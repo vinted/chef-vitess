@@ -2,7 +2,7 @@
 default['vitess']['vtgate']['allowed_tablet_types'] = nil
 
 # log to standard error as well as files
-default['vitess']['vtgate']['alsologtostderr'] = nil
+default['vitess']['vtgate']['alsologtostderr'] = 1
 
 # int Maximum number of requests retried simultaneously. More concurrency will increase the load on the MASTER vttablet when draining the buffer. (default 1)
 default['vitess']['vtgate']['buffer_drain_concurrency'] = 1
@@ -338,13 +338,13 @@ default['vitess']['vtgate']['topo_consul_watch_poll_duration'] = '30s'
 default['vitess']['vtgate']['topo_etcd_lease_ttl'] = 30
 
 # string the path of the global topology data in the global topology server
-default['vitess']['vtgate']['topo_global_root'] = nil
+default['vitess']['vtgate']['topo_global_root'] = '/vitess/global'
 
 # string the address of the global topology server
-default['vitess']['vtgate']['topo_global_server_address'] = nil
+default['vitess']['vtgate']['topo_global_server_address'] = 'localhost:21811'
 
 # string the topology implementation to use (default "zookeeper")
-default['vitess']['vtgate']['topo_implementation'] = 'zookeeper'
+default['vitess']['vtgate']['topo_implementation'] = 'zk2'
 
 # int concurrent topo reads (default 32)
 default['vitess']['vtgate']['topo_read_concurrency'] = 32
