@@ -21,6 +21,7 @@ class Chef
         default: lazy { node['vitess']['mysqlctld_mycnf'] }
       )
       attribute(:mysqld_path, kind_of: String, default: '/usr/sbin/mysqld')
+      attribute(:args, kind_of: String, default: lazy { to_args(node['vitess']['mysqlctld']) })
     end
   end
 
@@ -30,9 +31,6 @@ class Chef
       provides(:mysqlctld_service)
 
       def action_delete
-        file bin_location do
-          action :delete
-        end
         service new_resource.service_name do
           action %i[stop disable]
         end
@@ -55,14 +53,7 @@ class Chef
 
         install_vitess_binary(source_url: url, version: v)
         install_service
-
-        service new_resource.service_name do
-          supports(
-            status: true,
-            restart: true
-          )
-          action %i[enable start]
-        end
+        start_service
       end
       # rubocop:enable Metrics/MethodLength
       # rubocop:enable Metrics/AbcSize
@@ -81,40 +72,6 @@ class Chef
           )
         end
       end
-
-      # rubocop:disable Metrics/MethodLength
-      # rubocop:disable Metrics/AbcSize
-      def install_service
-        exec_start = "#{bin_location} #{to_args(node['vitess']['mysqlctld'])}"
-        environment = {
-          'VTROOT' => new_resource.vtroot,
-          'VTDATAROOT' => new_resource.vtdataroot,
-          'MYSQL_FLAVOR' => new_resource.mysql_flavor
-        }
-
-        systemd_service new_resource.service_name do
-          unit do
-            description "Chef managed #{new_resource.bin_name} service"
-            after Array(new_resource.service_unit_after).join(' ')
-          end
-
-          install do
-            wanted_by 'multi-user.target'
-          end
-
-          service do
-            type 'simple'
-            exec_start exec_start
-            restart new_resource.service_restart
-            timeout_sec new_resource.service_timeout_sec
-            user new_resource.user
-            group new_resource.group
-            environment environment
-          end
-        end
-      end
-      # rubocop:enable Metrics/MethodLength
-      # rubocop:enable Metrics/AbcSize
     end
   end
 end

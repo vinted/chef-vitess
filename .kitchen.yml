@@ -32,8 +32,12 @@ platforms:
       run_options: '--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'
 
 suites:
-  - name: default
+  - name: mysqlctld
     run_list:
       - recipe[test-vitess::mysql]
       - recipe[vitess::mysqlctld]
-    attributes:
+
+  - name: vtgate
+    run_list:
+      - recipe[test-vitess::zookeeper]
+      - recipe[vitess::vtgate]

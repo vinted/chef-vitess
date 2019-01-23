@@ -35,7 +35,7 @@ default['vitess']['vtgate']['consul_auth_static_file'] = nil
 default['vitess']['vtgate']['cpu_profile'] = nil
 
 # value The default tablet type to set for queries, when one is not explicitly selected (default MASTER)
-default['vitess']['vtgate']['default_tablet_type'] = 'TODO'
+default['vitess']['vtgate']['default_tablet_type'] = 'MASTER'
 
 # if specified, this process will not route any queries to local tablets in the local cell
 default['vitess']['vtgate']['disable_local_gateway'] = nil

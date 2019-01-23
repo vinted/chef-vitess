@@ -46,6 +46,13 @@ class Chef
       )
       attribute(:service_timeout_sec, kind_of: Integer, default: 5)
       attribute(:service_restart, kind_of: String, default: 'on-failure')
+
+      def to_args(args)
+        args
+          .reject { |_k, v| v.nil? }
+          .map { |k, v| "-#{k}=#{v}" }
+          .join(' ')
+      end
     end
   end
 
@@ -78,13 +85,6 @@ class Chef
 
       def vt_config_path
         @vt_config_path ||= ::File.join(new_resource.vtroot, 'config')
-      end
-
-      def to_args(args)
-        args
-          .reject { |_k, v| v.nil? }
-          .map { |k, v| "-#{k}=#{v}" }
-          .join(' ')
       end
 
       def create_directories(dirs)
@@ -156,6 +156,50 @@ class Chef
           mode '0640'
           notifies :run, 'bash[extract_vitess_file]', :immediate
           not_if { ::File.exist?(vitess_bin_file) }
+        end
+      end
+      # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
+
+      def start_service
+        service new_resource.service_name do
+          supports(
+            status: true,
+            restart: true
+          )
+          action %i[enable start]
+        end
+      end
+
+      # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
+      def install_service
+        exec_start = "#{bin_location} #{new_resource.args}"
+        environment = {
+          'VTROOT' => new_resource.vtroot,
+          'VTDATAROOT' => new_resource.vtdataroot,
+          'MYSQL_FLAVOR' => new_resource.mysql_flavor
+        }
+
+        systemd_service new_resource.service_name do
+          unit do
+            description "Chef managed #{new_resource.bin_name} service"
+            after Array(new_resource.service_unit_after).join(' ')
+          end
+
+          install do
+            wanted_by 'multi-user.target'
+          end
+
+          service do
+            type 'simple'
+            exec_start exec_start
+            restart new_resource.service_restart
+            timeout_sec new_resource.service_timeout_sec
+            user new_resource.user
+            group new_resource.group
+            environment environment
+          end
         end
       end
       # rubocop:enable Metrics/MethodLength
