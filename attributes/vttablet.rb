@@ -1,5 +1,5 @@
 # log to standard error as well as files
-default['vitess']['vttablet']['alsologtostderr'] = nil
+default['vitess']['vttablet']['alsologtostderr'] = 1
 
 # duration Idle timeout for app connections (default 1m0s)
 default['vitess']['vttablet']['app_idle_timeout'] = '1m0s'
@@ -632,7 +632,7 @@ default['vitess']['vttablet']['tablet_manager_grpc_server_name'] = nil
 default['vitess']['vttablet']['tablet_manager_protocol'] = 'grpc'
 
 # string tablet alias
-default['vitess']['vttablet']['tablet-path'] = nil
+default['vitess']['vttablet']['tablet-path'] = nil # format <cell>-<id>
 
 # string how to talk to the vttablets (default "grpc")
 default['vitess']['vttablet']['tablet_protocol'] = 'grpc'
@@ -653,13 +653,13 @@ default['vitess']['vttablet']['topocustomrule_path'] = nil
 default['vitess']['vttablet']['topo_etcd_lease_ttl'] = 30
 
 # string the path of the global topology data in the global topology server
-default['vitess']['vttablet']['topo_global_root'] = nil
+default['vitess']['vttablet']['topo_global_root'] = '/vitess/global'
 
 # string the address of the global topology server
-default['vitess']['vttablet']['topo_global_server_address'] = nil
+default['vitess']['vttablet']['topo_global_server_address'] = 'localhost:2181'
 
 # string the topology implementation to use (default "zookeeper")
-default['vitess']['vttablet']['topo_implementation'] = 'zookeeper'
+default['vitess']['vttablet']['topo_implementation'] = 'zk2'
 
 # duration zk base timeout (see zk.Connect) (default 30s)
 default['vitess']['vttablet']['topo_zk_base_timeout'] = '30s'
@@ -707,7 +707,7 @@ default['vitess']['vttablet']['twopc_coordinator_address'] = nil
 default['vitess']['vttablet']['twopc_enable'] = nil
 
 # string The configuration of the transaction throttler as a text formatted throttlerdata.Configuration protocol buffer message (default "target_replication_lag_sec: 2\nmax_replication_lag_sec: 10\ninitial_rate: 100\nmax_increase: 1\nemergency_decrease: 0.5\nmin_duration_between_increases_sec: 40\nmax_duration_between_increases_sec: 62\nmin_duration_between_decreases_sec: 20\nspread_backlog_across_sec: 20\nage_bad_rate_after_sec: 180\nbad_rate_increase: 0.1\nmax_rate_approach_threshold: 0.9\n")
-default['vitess']['vttablet']['tx-throttler-config'] = 'TODO'
+default['vitess']['vttablet']['tx-throttler-config'] = 'target_replication_lag_sec: 2\nmax_replication_lag_sec: 10\ninitial_rate: 100\nmax_increase: 1\nemergency_decrease: 0.5\nmin_duration_between_increases_sec: 40\nmax_duration_between_increases_sec: 62\nmin_duration_between_decreases_sec: 20\nspread_backlog_across_sec: 20\nage_bad_rate_after_sec: 180\nbad_rate_increase: 0.1\nmax_rate_approach_threshold: 0.9\n'
 
 # value A comma-separated list of cells. Only tabletservers running in these cells will be monitored for replication lag by the transaction throttler.
 default['vitess']['vttablet']['tx-throttler-healthcheck-cells'] = nil
