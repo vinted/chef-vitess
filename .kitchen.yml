@@ -41,3 +41,8 @@ suites:
     run_list:
       - recipe[test-vitess::zookeeper]
       - recipe[vitess::vtgate]
+
+  - name: vttablet
+    run_list:
+      - recipe[test-vitess::zookeeper]
+      - recipe[vitess::vttablet]
