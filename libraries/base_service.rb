@@ -174,7 +174,18 @@ class Chef
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
       def install_service
-        exec_start = "#{bin_location} #{new_resource.args}"
+        cmd = "#{bin_location} #{new_resource.args}"
+        exec_start = ::File.join(vt_bin_path, "#{new_resource.bin_name}.sh")
+
+        template exec_start do
+          source 'bin/wrap.sh.erb'
+          variables cmd: cmd
+          owner new_resource.user
+          group new_resource.group
+          mode '0750'
+          cookbook 'vitess'
+        end
+
         environment = {
           'VTROOT' => new_resource.vtroot,
           'VTDATAROOT' => new_resource.vtdataroot,

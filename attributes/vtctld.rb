@@ -2,7 +2,7 @@
 default['vitess']['vtctld']['action_timeout'] = '2m0s'
 
 # log to standard error as well as files
-default['vitess']['vtctld']['alsologtostderr'] = nil
+default['vitess']['vtctld']['alsologtostderr'] = 1
 
 # duration Idle timeout for app connections (default 1m0s)
 default['vitess']['vtctld']['app_idle_timeout'] = '1m0s'
@@ -356,13 +356,13 @@ default['vitess']['vtctld']['topo_consul_watch_poll_duration'] = '30s'
 default['vitess']['vtctld']['topo_etcd_lease_ttl'] = 30
 
 # string the path of the global topology data in the global topology server
-default['vitess']['vtctld']['topo_global_root'] = nil
+default['vitess']['vtctld']['topo_global_root'] = '/vitess/global'
 
 # string the address of the global topology server
-default['vitess']['vtctld']['topo_global_server_address'] = nil
+default['vitess']['vtctld']['topo_global_server_address'] = 'localhost:2181'
 
 # string the topology implementation to use (default "zookeeper")
-default['vitess']['vtctld']['topo_implementation'] = 'zookeeper'
+default['vitess']['vtctld']['topo_implementation'] = 'zk2'
 
 # duration zk base timeout (see zk.Connect) (default 30s)
 default['vitess']['vtctld']['topo_zk_base_timeout'] = '30s'
