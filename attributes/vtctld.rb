@@ -128,7 +128,7 @@ default['vitess']['vtctld']['grpc_max_connection_age_grace'] = '2562047h47m16.85
 default['vitess']['vtctld']['grpc_max_message_size'] = 16777216
 
 # int Port to listen on for gRPC calls
-default['vitess']['vtctld']['grpc_port'] = nil
+default['vitess']['vtctld']['grpc_port'] = 15999
 
 # Enable gRPC monitoring with Prometheus
 default['vitess']['vtctld']['grpc_prometheus'] = nil
@@ -209,7 +209,7 @@ default['vitess']['vtctld']['opentsdb_uri'] = nil
 default['vitess']['vtctld']['pid_file'] = nil
 
 # int port for the server
-default['vitess']['vtctld']['port'] = nil
+default['vitess']['vtctld']['port'] = 15000
 
 # duration how often try to remove old logs (default 1h0m0s)
 default['vitess']['vtctld']['purge_logs_interval'] = '1h0m0s'
