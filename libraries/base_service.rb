@@ -69,12 +69,24 @@ class Chef
               vt_bin_path,
               vt_config_path
             ]
+            install_init_dbsql
             deriver_install
           end
         end
       end
 
       protected
+
+      def install_init_dbsql
+        cookbook_file "#{vt_config_path}/init_db.sql" do
+          cookbook 'vitess'
+          source 'init_db.sql'
+          owner new_resource.user
+          group new_resource.group
+          mode '0640'
+          action :create
+        end
+      end
 
       def vt_bin_path
         @vt_bin_path ||= ::File.join(new_resource.vtroot, 'bin')
