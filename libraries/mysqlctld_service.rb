@@ -21,7 +21,7 @@ class Chef
         default: lazy { node['vitess']['mysqlctld_mycnf'] }
       )
       attribute(:mysqld_path, kind_of: String, default: '/usr/sbin/mysqld')
-      attribute(:args, kind_of: String, default: lazy { to_args(node['vitess']['mysqlctld']) })
+      attribute(:args, kind_of: Hash, default: lazy { node['vitess']['mysqlctld'] })
     end
   end
 

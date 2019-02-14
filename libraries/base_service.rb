@@ -47,11 +47,8 @@ class Chef
       attribute(:service_timeout_sec, kind_of: Integer, default: 5)
       attribute(:service_restart, kind_of: String, default: 'on-failure')
 
-      def to_args(args)
-        args
-          .reject { |_k, v| v.nil? }
-          .map { |k, v| "-#{k}=#{v}" }
-          .join(' ')
+      def additional_args
+        {}
       end
     end
   end
@@ -171,10 +168,18 @@ class Chef
         end
       end
 
+      def service_args(args = new_resource.args)
+        args
+          .merge(new_resource.additional_args)
+          .reject { |_k, v| v.nil? }
+          .map { |k, v| "-#{k}=#{v}" }
+          .join(' ')
+      end
+
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
       def install_service
-        cmd = "#{bin_location} #{new_resource.args}"
+        cmd = "#{bin_location} #{service_args}"
         exec_start = ::File.join(vt_bin_path, "#{new_resource.bin_name}.sh")
 
         template exec_start do

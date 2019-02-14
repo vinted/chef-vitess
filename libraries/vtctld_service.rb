@@ -13,19 +13,14 @@ class Chef
       )
 
       attribute(:bin_name, kind_of: String, default: 'vtctld')
-      attribute(:args, kind_of: String, default: lazy { additional_args })
+      attribute(:args, kind_of: Hash, default: lazy { node['vitess']['vtctld'] })
       attribute(:web_dir_cookbook, kind_of: String, default: 'vitess')
       attribute(:web_dir2_cookbook, kind_of: String, default: 'vitess')
 
       def additional_args
-        args = to_args(node['vitess']['vtctld'])
-        if install_web_dir?
-          args += " -web_dir=#{vtctld_web_vtctld}"
-        end
-
-        if install_web_dir2?
-          args += " -web_dir2=#{vtctld_web_vtctld2}"
-        end
+        args = {}
+        args['web_dir'] = vtctld_web_vtctld if install_web_dir?
+        args['web_dir2'] = vtctld_web_vtctld2 if install_web_dir2?
         args
       end
 

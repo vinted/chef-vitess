@@ -13,7 +13,7 @@ class Chef
       )
 
       attribute(:bin_name, kind_of: String, default: 'vtgate')
-      attribute(:args, kind_of: String, default: lazy { to_args(node['vitess']['vtgate']) })
+      attribute(:args, kind_of: Hash, default: lazy { node['vitess']['vtgate'] })
     end
   end
 
