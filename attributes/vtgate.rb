@@ -23,7 +23,7 @@ default['vitess']['vtgate']['buffer_size'] = 10
 default['vitess']['vtgate']['buffer_window'] = '10s'
 
 # string comma-separated list of cells for watching tablets
-default['vitess']['vtgate']['cells_to_watch'] = nil
+default['vitess']['vtgate']['cells_to_watch'] = 'MASTER,REPLICA'
 
 # string cell to use (default "test_nj")
 default['vitess']['vtgate']['cell'] = 'test_nj'
@@ -113,7 +113,7 @@ default['vitess']['vtgate']['grpc_max_connection_age_grace'] = '2562047h47m16.85
 default['vitess']['vtgate']['grpc_max_message_size'] = 16777216
 
 # int Port to listen on for gRPC calls
-default['vitess']['vtgate']['grpc_port'] = nil
+default['vitess']['vtgate']['grpc_port'] = 15991
 
 # Enable gRPC monitoring with Prometheus
 default['vitess']['vtgate']['grpc_prometheus'] = nil
@@ -209,7 +209,7 @@ default['vitess']['vtgate']['mysql_ldap_auth_method'] = 'mysql_clear_password'
 default['vitess']['vtgate']['mysql_server_bind_address'] = nil
 
 # int If set, also listen for MySQL binary protocol connections on this port. (default -1)
-default['vitess']['vtgate']['mysql_server_port'] = -1
+default['vitess']['vtgate']['mysql_server_port'] = 15306
 
 # duration mysql query timeout
 default['vitess']['vtgate']['mysql_server_query_timeout'] = nil
@@ -257,7 +257,7 @@ default['vitess']['vtgate']['opentsdb_uri'] = nil
 default['vitess']['vtgate']['pid_file'] = nil
 
 # int port for the server
-default['vitess']['vtgate']['port'] = nil
+default['vitess']['vtgate']['port'] = 15001
 
 # duration how often try to remove old logs (default 1h0m0s)
 default['vitess']['vtgate']['purge_logs_interval'] = '1h0m0s'
