@@ -23,7 +23,7 @@ default['vitess']['vtgate']['buffer_size'] = 10
 default['vitess']['vtgate']['buffer_window'] = '10s'
 
 # string comma-separated list of cells for watching tablets
-default['vitess']['vtgate']['cells_to_watch'] = 'MASTER,REPLICA'
+default['vitess']['vtgate']['cells_to_watch'] = nil
 
 # string cell to use (default "test_nj")
 default['vitess']['vtgate']['cell'] = 'test_nj'
@@ -275,7 +275,7 @@ default['vitess']['vtgate']['retry-count'] = 2
 default['vitess']['vtgate']['security_policy'] = nil
 
 # value comma separated list of services to enable (or disable if prefixed with '-') Example: grpc-vtworker
-default['vitess']['vtgate']['service_map'] = nil
+default['vitess']['vtgate']['service_map'] = 'grpc-vtgateservice'
 
 # int truncate queries in error logs to the given length (default unlimited)
 default['vitess']['vtgate']['sql-max-length-errors'] = 0
@@ -326,7 +326,7 @@ default['vitess']['vtgate']['tablet_refresh_interval'] = '1m0s'
 default['vitess']['vtgate']['tablet_refresh_known_tablets'] = true
 
 # string wait till connected for specified tablet types during Gateway initialization
-default['vitess']['vtgate']['tablet_types_to_wait'] = nil
+default['vitess']['vtgate']['tablet_types_to_wait'] = 'MASTER,REPLICA'
 
 # string format string describing debug tablet url formatting. See the Go code for getTabletDebugURL() how to customize this. (default "http://{{.GetTabletHostPort}}")
 default['vitess']['vtgate']['tablet_url_template'] = 'http://{{.GetTabletHostPort}}'
@@ -341,7 +341,7 @@ default['vitess']['vtgate']['topo_etcd_lease_ttl'] = 30
 default['vitess']['vtgate']['topo_global_root'] = '/vitess/global'
 
 # string the address of the global topology server
-default['vitess']['vtgate']['topo_global_server_address'] = 'localhost:21811'
+default['vitess']['vtgate']['topo_global_server_address'] = 'localhost:2181'
 
 # string the topology implementation to use (default "zookeeper")
 default['vitess']['vtgate']['topo_implementation'] = 'zk2'
