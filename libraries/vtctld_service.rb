@@ -63,7 +63,7 @@ class Chef
         return unless install_web_dir? || new_resource.install_web_dir2?
         create_directories [vtctld_web_dir]
 
-        remote_directory vtctld_web_vtctld2 do
+        remote_directory vtctld_web_vtctld do
           cookbook new_resource.web_dir_cookbook
           source 'web/vtctld'
           owner new_resource.user
@@ -75,7 +75,7 @@ class Chef
           action :create
         end
 
-        remote_directory vtctld_web_vtctld do
+        remote_directory vtctld_web_vtctld2 do
           cookbook new_resource.web_dir2_cookbook
           source 'web/vtctld2'
           owner new_resource.user
