@@ -269,7 +269,7 @@ default['vitess']['vtctld']['schema_swap_reparent_timeout'] = '30s'
 default['vitess']['vtctld']['security_policy'] = nil
 
 # value comma separated list of services to enable (or disable if prefixed with '-') Example: grpc-vtworker
-default['vitess']['vtctld']['service_map'] = nil
+default['vitess']['vtctld']['service_map'] = 'grpc-vtctl'
 
 # int truncate queries in error logs to the given length (default unlimited)
 default['vitess']['vtctld']['sql-max-length-errors'] = 0
