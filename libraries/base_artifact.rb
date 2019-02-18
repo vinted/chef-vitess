@@ -26,7 +26,7 @@ class Chef
         )
 
         file run_once_cache_file do
-          content "RUN ONCE FILE for: #{new_resource.name}, cmd: #{cmd}"
+          content "RUN ONCE FILE for: #{new_resource.name}\ncmd: #{cmd}\n"
           mode '0755'
           owner 'root'
           group 'root'
