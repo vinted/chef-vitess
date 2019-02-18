@@ -62,7 +62,9 @@ class Chef
       include Poise
 
       def additional_args
-        {}
+        args = {}
+        args['log_dir'] = service_log_dir if new_resource.args['log_dir'].nil?
+        args
       end
 
       def action_install
@@ -75,7 +77,9 @@ class Chef
               new_resource.vtdataroot,
               vt_bin_path,
               vt_config_path,
-              mycnf_path
+              mycnf_path,
+              base_log_dir,
+              service_log_dir
             ]
             install_init_dbsql
             deriver_install
@@ -84,6 +88,14 @@ class Chef
       end
 
       protected
+
+      def service_log_dir
+        @service_log_dir ||= ::File.join(base_log_dir, new_resource.service_name)
+      end
+
+      def base_log_dir
+        @base_log_dir ||= '/var/log/vitess'
+      end
 
       def mycnf_path
         @mycnf_path ||= ::File.join(vt_config_path, 'mycnf')
