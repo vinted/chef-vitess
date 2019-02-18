@@ -36,6 +36,7 @@ class Chef
       # Default switch case: master_mysql56
       # https://github.com/vitessio/vitess/blob/master/go/vt/mysqlctl/mysqld.go#L656
       attribute(:mysql_flavor, kind_of: String, default: 'master_mysql56')
+      attribute(:vt_mysql_root, kind_of: String, default: '/')
 
       # Service
       attribute(:service_name, kind_of: String, default: lazy { bin_name })
@@ -231,7 +232,8 @@ class Chef
         environment = {
           'VTROOT' => new_resource.vtroot,
           'VTDATAROOT' => new_resource.vtdataroot,
-          'MYSQL_FLAVOR' => new_resource.mysql_flavor
+          'MYSQL_FLAVOR' => new_resource.mysql_flavor,
+          'VT_MYSQL_ROOT' => new_resource.vt_mysql_root
         }
 
         systemd_service service_name do
