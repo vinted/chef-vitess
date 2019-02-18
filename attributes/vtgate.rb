@@ -188,7 +188,7 @@ default['vitess']['vtgate']['mutex-profile-fraction'] = nil
 default['vitess']['vtgate']['mysql_allow_clear_text_without_tls'] = nil
 
 # string Which auth server implementation to use. (default "static")
-default['vitess']['vtgate']['mysql_auth_server_impl'] = 'static'
+default['vitess']['vtgate']['mysql_auth_server_impl'] = 'none'
 
 # string JSON File to read the users/passwords from.
 default['vitess']['vtgate']['mysql_auth_server_static_file'] = nil
@@ -203,7 +203,7 @@ default['vitess']['vtgate']['mysql_ldap_auth_config_file'] = nil
 default['vitess']['vtgate']['mysql_ldap_auth_config_string'] = nil
 
 # string client-side authentication method to use. Supported values: mysql_clear_password, dialog. (default "mysql_clear_password")
-default['vitess']['vtgate']['mysql_ldap_auth_method'] = 'mysql_clear_password'
+default['vitess']['vtgate']['mysql_ldap_auth_method'] = nil
 
 # string Binds on this address when listening to MySQL binary protocol. Useful to restrict listening to 'localhost' only for instance.
 default['vitess']['vtgate']['mysql_server_bind_address'] = nil
