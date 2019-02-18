@@ -28,6 +28,7 @@ class Chef
         url = "#{node['vitess']['artifacts']['base_url']}/#{v}/vtbench.tgz"
 
         install_vitess_binary(source_url: url, version: v)
+        execute_command unless new_resource.command.empty?
       end
     end
   end

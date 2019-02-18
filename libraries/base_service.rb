@@ -213,12 +213,22 @@ class Chef
           .join(' ')
       end
 
+      def vitess_environment
+        {
+          'VTROOT' => new_resource.vtroot,
+          'VTDATAROOT' => new_resource.vtdataroot,
+          'MYSQL_FLAVOR' => new_resource.mysql_flavor,
+          'VT_MYSQL_ROOT' => new_resource.vt_mysql_root
+        }
+      end
+
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
       def install_service
         cmd = "#{bin_location} #{service_args}"
         service_name = new_resource.service_name
         exec_start = ::File.join(vt_bin_path, "#{service_name}.sh")
+        env = vitess_environment
 
         template exec_start do
           source 'bin/wrap.sh.erb'
@@ -228,13 +238,6 @@ class Chef
           mode '0750'
           cookbook 'vitess'
         end
-
-        environment = {
-          'VTROOT' => new_resource.vtroot,
-          'VTDATAROOT' => new_resource.vtdataroot,
-          'MYSQL_FLAVOR' => new_resource.mysql_flavor,
-          'VT_MYSQL_ROOT' => new_resource.vt_mysql_root
-        }
 
         systemd_service service_name do
           unit do
@@ -253,7 +256,7 @@ class Chef
             timeout_sec new_resource.service_timeout_sec
             user new_resource.user
             group new_resource.group
-            environment environment
+            environment env
           end
         end
       end
