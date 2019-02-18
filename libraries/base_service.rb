@@ -30,6 +30,11 @@ class Chef
         kind_of: String,
         default: lazy { raise 'Not implemented' }
       )
+      attribute(
+        :vitess_user_shell,
+        kind_of: String,
+        default: '/bin/false'
+      )
 
       attribute(:vtroot, kind_of: String, default: '/var/lib/vt')
       attribute(:vtdataroot, kind_of: String, default: '/var/lib/vtdataroot')
@@ -284,7 +289,7 @@ class Chef
 
         user new_resource.user do
           group new_resource.group
-          shell '/bin/false'
+          shell new_resource.vitess_user_shell
           action :create
           notifies :create, "group[#{new_resource.group}]", :before
         end
