@@ -18,7 +18,7 @@ class Chef
 
       def execute_command
         env = vitess_environment
-        cmd = "#{bin_location} #{new_resource.command}"
+        cmd = "#{bin_location} -alsologtostderr=1 #{new_resource.command}"
         execute "executing command: #{new_resource.bin_name} #{new_resource.command}" do
           environment env
           command cmd
