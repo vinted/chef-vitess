@@ -119,7 +119,7 @@ default['vitess']['vttablet']['db_flags'] = nil
 default['vitess']['vttablet']['db_host'] = nil
 
 # int tcp port
-default['vitess']['vttablet']['db_port'] = nil
+default['vitess']['vttablet']['db_port'] = 17000
 
 # string db repl password
 default['vitess']['vttablet']['db_repl_password'] = nil
@@ -257,7 +257,7 @@ default['vitess']['vttablet']['grpc_max_connection_age_grace'] = '2562047h47m16.
 default['vitess']['vttablet']['grpc_max_message_size'] = 16777216
 
 # int Port to listen on for gRPC calls
-default['vitess']['vttablet']['grpc_port'] = nil
+default['vitess']['vttablet']['grpc_port'] = 16000
 
 # Enable gRPC monitoring with Prometheus
 default['vitess']['vttablet']['grpc_prometheus'] = nil
@@ -446,7 +446,7 @@ default['vitess']['vttablet']['pid_file'] = nil
 default['vitess']['vttablet']['pool-name-prefix'] = nil
 
 # int port for the server
-default['vitess']['vttablet']['port'] = nil
+default['vitess']['vttablet']['port'] = 15000
 
 # duration how often try to remove old logs (default 1h0m0s)
 default['vitess']['vttablet']['purge_logs_interval'] = '1h0m0s'
