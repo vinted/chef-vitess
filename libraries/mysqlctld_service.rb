@@ -13,14 +13,6 @@ class Chef
       )
 
       attribute(:bin_name, kind_of: String, default: 'mysqlctld')
-
-      # mysql.cnf
-      attribute(
-        :mysqlctld_mycnf,
-        kind_of: Hash,
-        default: lazy { node['vitess']['mysqlctld_mycnf'] }
-      )
-      attribute(:mysqld_path, kind_of: String, default: '/usr/sbin/mysqld')
       attribute(:args, kind_of: Hash, default: lazy { node['vitess']['mysqlctld'] })
     end
   end
@@ -36,17 +28,18 @@ class Chef
         end
       end
 
+      def additional_args
+        args = {}
+        args['init_db_sql_file'] = init_dbsql_path if args['init_db_sql_file'].nil?
+        args
+      end
+
       protected
 
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
       def deriver_install
-        create_directories [mycnf_path]
-        create_mycnf_config
-        # Make mysqld available to vt/bin
-        link ::File.join(vt_bin_path, 'mysqld') do
-          to new_resource.mysqld_path
-        end
+        install_mycnf_config
 
         v = new_resource.version
         url = "#{node['vitess']['artifacts']['base_url']}/#{v}/mysqlctld.tgz"
@@ -57,21 +50,6 @@ class Chef
       end
       # rubocop:enable Metrics/MethodLength
       # rubocop:enable Metrics/AbcSize
-
-      private
-
-      def mycnf_path
-        @mycnf_path ||= ::File.join(vt_config_path, 'mycnf')
-      end
-
-      def create_mycnf_config
-        new_resource.mysqlctld_mycnf.each do |file, config|
-          generate_mycnf(
-            path: ::File.join(mycnf_path, "#{file}.cnf"),
-            variables: config
-          )
-        end
-      end
     end
   end
 end

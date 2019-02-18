@@ -47,9 +47,11 @@ class Chef
       attribute(:service_timeout_sec, kind_of: Integer, default: 5)
       attribute(:service_restart, kind_of: String, default: 'on-failure')
 
-      def additional_args
-        {}
-      end
+      # MySQL
+      attribute(:mycnf, kind_of: Hash, default: lazy { node['vitess']['mycnf'] })
+
+      # Cookbook
+      attribute(:init_dbsql_sql_cookbook, kind_of: String, default: 'vitess')
     end
   end
 
@@ -57,6 +59,10 @@ class Chef
     # Vitess base service provider should be derived
     class VitessBaseService < Chef::Provider
       include Poise
+
+      def additional_args
+        {}
+      end
 
       def action_install
         converge_by("chef-vitess installing #{new_resource.name}") do
@@ -67,7 +73,8 @@ class Chef
               new_resource.vtroot,
               new_resource.vtdataroot,
               vt_bin_path,
-              vt_config_path
+              vt_config_path,
+              mycnf_path
             ]
             install_init_dbsql
             deriver_install
@@ -77,9 +84,26 @@ class Chef
 
       protected
 
+      def mycnf_path
+        @mycnf_path ||= ::File.join(vt_config_path, 'mycnf')
+      end
+
+      def install_mycnf_config
+        new_resource.mycnf.each do |file, config|
+          generate_mycnf(
+            path: ::File.join(mycnf_path, "#{file}.cnf"),
+            variables: config
+          )
+        end
+      end
+
+      def init_dbsql_path
+        @init_dbsql_path ||= "#{vt_config_path}/init_db.sql"
+      end
+
       def install_init_dbsql
-        cookbook_file "#{vt_config_path}/init_db.sql" do
-          cookbook 'vitess'
+        cookbook_file init_dbsql_path do
+          cookbook new_resource.init_dbsql_sql_cookbook
           source 'init_db.sql'
           owner new_resource.user
           group new_resource.group
@@ -182,7 +206,7 @@ class Chef
 
       def service_args(args = new_resource.args)
         args
-          .merge(new_resource.additional_args)
+          .merge(additional_args)
           .reject { |_k, v| v.nil? }
           .map { |k, v| "-#{k}=#{v}" }
           .join(' ')
@@ -192,7 +216,8 @@ class Chef
       # rubocop:disable Metrics/AbcSize
       def install_service
         cmd = "#{bin_location} #{service_args}"
-        exec_start = ::File.join(vt_bin_path, "#{new_resource.bin_name}.sh")
+        service_name = new_resource.service_name
+        exec_start = ::File.join(vt_bin_path, "#{service_name}.sh")
 
         template exec_start do
           source 'bin/wrap.sh.erb'
@@ -209,9 +234,9 @@ class Chef
           'MYSQL_FLAVOR' => new_resource.mysql_flavor
         }
 
-        systemd_service new_resource.service_name do
+        systemd_service service_name do
           unit do
-            description "Chef managed #{new_resource.bin_name} service"
+            description "Chef managed #{service_name} service"
             after Array(new_resource.service_unit_after).join(' ')
           end
 

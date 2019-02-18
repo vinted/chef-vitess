@@ -24,6 +24,8 @@ class Chef
       protected
 
       def deriver_install
+        install_mycnf_config
+
         v = new_resource.version
         url = "#{node['vitess']['artifacts']['base_url']}/#{v}/mysqlctl.tgz"
 
