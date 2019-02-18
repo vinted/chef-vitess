@@ -57,3 +57,9 @@ suites:
     run_list:
       - recipe[test-vitess::zookeeper]
       - recipe[vitess::vtworker]
+
+  - name: cluster
+    run_list:
+      - recipe[test-vitess::mysql]
+      - recipe[test-vitess::zookeeper]
+      - recipe[test-vitess::cluster]
