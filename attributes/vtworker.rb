@@ -1,5 +1,5 @@
 # log to standard error as well as files
-default['vitess']['vtworker']['alsologtostderr'] = nil
+default['vitess']['vtworker']['alsologtostderr'] = 1
 
 # string the protocol to download binlogs from a vttablet (default "grpc")
 default['vitess']['vtworker']['binlog_player_protocol'] = 'grpc'
@@ -86,7 +86,7 @@ default['vitess']['vtworker']['grpc_max_connection_age_grace'] = '2562047h47m16.
 default['vitess']['vtworker']['grpc_max_message_size'] = 16777216
 
 # int Port to listen on for gRPC calls
-default['vitess']['vtworker']['grpc_port'] = nil
+default['vitess']['vtworker']['grpc_port'] = 15033
 
 # Enable gRPC monitoring with Prometheus
 default['vitess']['vtworker']['grpc_prometheus'] = nil
@@ -158,7 +158,7 @@ default['vitess']['vtworker']['opentsdb_uri'] = nil
 default['vitess']['vtworker']['pid_file'] = nil
 
 # int port for the server
-default['vitess']['vtworker']['port'] = nil
+default['vitess']['vtworker']['port'] = 15032
 
 # duration how often try to remove old logs (default 1h0m0s)
 default['vitess']['vtworker']['purge_logs_interval'] = '1h0m0s'
@@ -173,7 +173,7 @@ default['vitess']['vtworker']['retry_duration'] = '2h0m0s'
 default['vitess']['vtworker']['security_policy'] = nil
 
 # value comma separated list of services to enable (or disable if prefixed with '-') Example: grpc-vtworker
-default['vitess']['vtworker']['service_map'] = nil
+default['vitess']['vtworker']['service_map'] = 'grpc-vtworker'
 
 # [--exclude_tables=''] <keyspace/shard> VerticalSplitDiff <keyspace/shard>
 default['vitess']['vtworker']['splitdiff'] = nil
