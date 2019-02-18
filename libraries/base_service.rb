@@ -77,6 +77,7 @@ class Chef
           notifying_block do
             validate!
             create_user
+            set_user_ulimit
             create_directories [
               new_resource.vtroot,
               new_resource.vtdataroot,
@@ -281,6 +282,12 @@ class Chef
       # rubocop:enable Metrics/AbcSize
 
       private
+
+      def set_user_ulimit
+        user_ulimit new_resource.user do
+          filehandle_limit 100_000
+        end
+      end
 
       def create_user
         group new_resource.group do
