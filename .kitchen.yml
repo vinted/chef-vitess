@@ -1,6 +1,6 @@
 ---
 settings:
-  parallel: true
+  parallel: false
 
 driver:
   name: docker
