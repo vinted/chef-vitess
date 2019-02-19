@@ -281,6 +281,33 @@ vtexplain_artifact 'bin' do
 end
 ```
 
+#### vtctlclient
+
+```ruby
+vtctlclient_artifact 'bin' do
+  user                    String,                  default: node['vitess']['user']
+  group                   String,                  default: node['vitess']['group']
+  bin_path                String,                  default: /usr/local/bin
+  vitess_user_shell       String,                  default: /bin/false
+  vtroot                  String,                  default: /var/lib/vt
+  vtdataroot              String,                  default: /var/lib/vtdataroot
+  mysql_flavor            String,                  default: 'master_mysql56'
+  vt_mysql_root           String,                  default: /
+  mycnf                   Hash,                    default: node['vitess']['mycnf']
+  init_dbsql_sql_cookbook String,                  default: vitess
+
+  command                 String,                  default:
+  command_action          Symbol,                  default: run
+  command_creates         String,                  default:
+  command_ignore_failure  [TrueClass, FalseClass], default: false
+  command_returns         [Integer, Array],        default: 0
+  command_run_once        [TrueClass, FalseClass], default: true
+
+  version                 String,                  default: lazy { node['vitess']['version']['vtctlclient'] }
+  bin_name                String,                  default: vtctlclient
+end
+```
+
 ## Examples
 
 ```ruby
