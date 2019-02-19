@@ -1,13 +1,14 @@
 cell = 'zone1'
 topo_global_root = "/vitess/#{cell}"
+topo_global_server_address = 'localhost:2181'
 init_keyspace = 'commerce'
 
 # Assuming MySQL and Zookeeper is available
 
 vtctl_artifact 'AddCellInfo' do
   command %W[
-    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address localhost:2181 -topo_global_root #{topo_global_root}
-    AddCellInfo -root #{topo_global_root} -server_address localhost:2181 #{cell}
+    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
+    AddCellInfo -root #{topo_global_root} -server_address #{topo_global_server_address} #{cell}
   ].join(' ')
 end
 
@@ -17,6 +18,7 @@ vtctld['service_map'] = 'grpc-vtctl'
 vtctld['workflow_manager_init'] = 1
 vtctld['workflow_manager_use_election'] = 1
 vtctld['topo_global_root'] = topo_global_root
+vtctld['topo_global_server_address'] = topo_global_server_address
 
 vtctld_service 'default instance' do
   args vtctld
@@ -46,10 +48,9 @@ sleep 80
 
 # dirty way to create database on MySQL master directly
 execute 'create commerce database' do
-  command "echo 'CREATE DATABASE IF NOT EXISTS vt_#{init_keyspace};' | mysql -S /var/lib/vtdataroot/vt_#{sprintf("%010d", uids.last)}/mysql.sock"
+  command "sleep 20; echo 'CREATE DATABASE IF NOT EXISTS vt_#{init_keyspace};' | mysql -S /var/lib/vtdataroot/vt_#{sprintf("%010d", uids.last)}/mysql.sock"
   action :run
 end
-
 
 uids.each_with_index do |uid, index|
   shift = index * 100
@@ -89,7 +90,7 @@ sleep 60
 # brand new shard.
 vtctl_artifact 'InitShardMaster' do
   command %W[
-    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address localhost:2181 -topo_global_root #{topo_global_root}
+    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
     InitShardMaster -force #{init_keyspace}/0 #{cell}-#{uids.last}
   ].join(' ')
 end
@@ -107,14 +108,14 @@ end
 # Creating schema
 vtctl_artifact 'ApplySchema -sql-file' do
   command %W[
-    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address localhost:2181 -topo_global_root #{topo_global_root}
+    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
     ApplySchema -sql-file /root/create_commerce_schema.sql #{init_keyspace}
   ].join(' ')
 end
 
 vtctl_artifact 'ApplyVSchema -vschema_file' do
   command %W[
-    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address localhost:2181 -topo_global_root #{topo_global_root}
+    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
     ApplyVSchema -vschema_file /root/vschema_commerce_initial.json #{init_keyspace}
   ].join(' ')
 end
@@ -122,6 +123,7 @@ end
 # vtgate
 vtgate = node['vitess']['vtgate'].dup
 vtgate['topo_global_root'] = topo_global_root
+vtgate['topo_global_server_address'] = topo_global_server_address
 vtgate['cell'] = cell
 vtgate['cells_to_watch'] = cell
 vtgate['mysql_server_socket_path'] = '/tmp/vtgate.sock'
@@ -132,6 +134,8 @@ end
 
 vtworker = node['vitess']['vtworker'].dup
 vtworker['cell'] = cell
+vtworker['topo_global_root'] = topo_global_root
+vtworker['topo_global_server_address'] = topo_global_server_address
 
 vtworker_service 'default instance' do
   args vtworker
