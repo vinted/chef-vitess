@@ -42,7 +42,7 @@ uids.each_with_index do |uid, index|
 end
 
 # Let mysqlctld initialize
-sleep 60
+sleep 80
 
 # dirty way to create database on MySQL master directly
 execute 'create commerce database' do
