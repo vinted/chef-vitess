@@ -75,6 +75,7 @@ Rakefile
 */.bzr/*
 */.hg/*
 */.svn/*
+.generate
 
 # Berkshelf #
 #############

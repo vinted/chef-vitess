@@ -14,4 +14,11 @@ when 'debian', 'ubuntu'
   apt_update 'update'
 end
 
-package 'zookeeper'
+package %w[java-1.8.0-openjdk zookeeper]
+
+# dirty way to start zookeeper
+execute 'start zookeeper' do
+  command '/usr/lib/zookeeper/bin/zkServer.sh start'
+  creates '/var/lib/zookeeper/zookeeper_server.pid'
+  action :run
+end

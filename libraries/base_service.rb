@@ -30,12 +30,18 @@ class Chef
         kind_of: String,
         default: lazy { raise 'Not implemented' }
       )
+      attribute(
+        :vitess_user_shell,
+        kind_of: String,
+        default: '/bin/false'
+      )
 
       attribute(:vtroot, kind_of: String, default: '/var/lib/vt')
       attribute(:vtdataroot, kind_of: String, default: '/var/lib/vtdataroot')
       # Default switch case: master_mysql56
       # https://github.com/vitessio/vitess/blob/master/go/vt/mysqlctl/mysqld.go#L656
       attribute(:mysql_flavor, kind_of: String, default: 'master_mysql56')
+      attribute(:vt_mysql_root, kind_of: String, default: '/')
 
       # Service
       attribute(:service_name, kind_of: String, default: lazy { bin_name })
@@ -47,12 +53,11 @@ class Chef
       attribute(:service_timeout_sec, kind_of: Integer, default: 5)
       attribute(:service_restart, kind_of: String, default: 'on-failure')
 
-      def to_args(args)
-        args
-          .reject { |_k, v| v.nil? }
-          .map { |k, v| "-#{k}=#{v}" }
-          .join(' ')
-      end
+      # MySQL
+      attribute(:mycnf, kind_of: Hash, default: lazy { node['vitess']['mycnf'] })
+
+      # Cookbook
+      attribute(:init_dbsql_sql_cookbook, kind_of: String, default: 'vitess')
     end
   end
 
@@ -61,23 +66,70 @@ class Chef
     class VitessBaseService < Chef::Provider
       include Poise
 
+      def additional_args
+        args = {}
+        args['log_dir'] = service_log_dir if new_resource.args['log_dir'].nil?
+        args
+      end
+
       def action_install
         converge_by("chef-vitess installing #{new_resource.name}") do
           notifying_block do
             validate!
             create_user
+            set_user_ulimit
             create_directories [
               new_resource.vtroot,
               new_resource.vtdataroot,
               vt_bin_path,
-              vt_config_path
+              vt_config_path,
+              mycnf_path,
+              base_log_dir,
+              service_log_dir
             ]
+            install_init_dbsql
             deriver_install
           end
         end
       end
 
       protected
+
+      def service_log_dir
+        @service_log_dir ||= ::File.join(base_log_dir, new_resource.service_name)
+      end
+
+      def base_log_dir
+        @base_log_dir ||= '/var/log/vitess'
+      end
+
+      def mycnf_path
+        @mycnf_path ||= ::File.join(vt_config_path, 'mycnf')
+      end
+
+      def install_mycnf_config
+        new_resource.mycnf.each do |file, config|
+          generate_mycnf(
+            path: ::File.join(mycnf_path, "#{file}.cnf"),
+            variables: config
+          )
+        end
+      end
+
+      def init_dbsql_path
+        @init_dbsql_path ||= "#{vt_config_path}/init_db.sql"
+      end
+
+      def install_init_dbsql
+        cookbook_file init_dbsql_path do
+          cookbook new_resource.init_dbsql_sql_cookbook
+          source 'init_db.sql'
+          owner new_resource.user
+          group new_resource.group
+          mode '0640'
+          action :create
+        end
+      end
 
       def vt_bin_path
         @vt_bin_path ||= ::File.join(new_resource.vtroot, 'bin')
@@ -171,11 +223,30 @@ class Chef
         end
       end
 
+      def service_args(args = new_resource.args)
+        args
+          .merge(additional_args)
+          .reject { |_k, v| v.nil? }
+          .map { |k, v| "-#{k}=#{v}" }
+          .join(' ')
+      end
+
+      def vitess_environment
+        {
+          'VTROOT' => new_resource.vtroot,
+          'VTDATAROOT' => new_resource.vtdataroot,
+          'MYSQL_FLAVOR' => new_resource.mysql_flavor,
+          'VT_MYSQL_ROOT' => new_resource.vt_mysql_root
+        }
+      end
+
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
       def install_service
-        cmd = "#{bin_location} #{new_resource.args}"
-        exec_start = ::File.join(vt_bin_path, "#{new_resource.bin_name}.sh")
+        cmd = "#{bin_location} #{service_args}"
+        service_name = new_resource.service_name
+        exec_start = ::File.join(vt_bin_path, "#{service_name}.sh")
+        env = vitess_environment
 
         template exec_start do
           source 'bin/wrap.sh.erb'
@@ -186,15 +257,9 @@ class Chef
           cookbook 'vitess'
         end
 
-        environment = {
-          'VTROOT' => new_resource.vtroot,
-          'VTDATAROOT' => new_resource.vtdataroot,
-          'MYSQL_FLAVOR' => new_resource.mysql_flavor
-        }
-
-        systemd_service new_resource.service_name do
+        systemd_service service_name do
           unit do
-            description "Chef managed #{new_resource.bin_name} service"
+            description "Chef managed #{service_name} service"
             after Array(new_resource.service_unit_after).join(' ')
           end
 
@@ -209,7 +274,7 @@ class Chef
             timeout_sec new_resource.service_timeout_sec
             user new_resource.user
             group new_resource.group
-            environment environment
+            environment env
           end
         end
       end
@@ -218,6 +283,12 @@ class Chef
 
       private
 
+      def set_user_ulimit
+        user_ulimit new_resource.user do
+          filehandle_limit 100_000
+        end
+      end
+
       def create_user
         group new_resource.group do
           action :nothing
@@ -225,7 +296,7 @@ class Chef
 
         user new_resource.user do
           group new_resource.group
-          shell '/bin/false'
+          shell new_resource.vitess_user_shell
           action :create
           notifies :create, "group[#{new_resource.group}]", :before
         end

@@ -1,4 +1,4 @@
-default['vitess']['mysqlctld_mycnf']['default'] = {
+default['vitess']['mycnf']['default'] = {
   'sql_mode' => 'STRICT_TRANS_TABLES',
   'back_log' => 50,
   'binlog_format' => 'statement',
@@ -54,13 +54,13 @@ default['vitess']['mysqlctld_mycnf']['default'] = {
   'transaction-isolation' => 'REPEATABLE-READ'
 }
 
-default['vitess']['mysqlctld_mycnf']['master'] = {
+default['vitess']['mycnf']['master'] = {
   'log-bin' => '{{.BinLogPath}}',
   'log-slave-updates' => nil,
   'sync_binlog' => 1
 }
 
-default['vitess']['mysqlctld_mycnf']['replica'] = {
+default['vitess']['mycnf']['replica'] = {
   'relay-log' => '{{.RelayLogPath}}',
   'relay-log-index' => '{{.RelayLogIndexPath}}',
   'relay-log-info-file' => '{{.RelayLogInfoPath}}',
@@ -68,7 +68,7 @@ default['vitess']['mysqlctld_mycnf']['replica'] = {
   'log-slave-updates' => nil
 }
 
-default['vitess']['mysqlctld_mycnf']['master_mysql56'] = {
+default['vitess']['mycnf']['master_mysql56'] = {
   'gtid_mode' => 'ON',
   'log_bin' => nil,
   'log_slave_updates' => nil,
@@ -78,7 +78,14 @@ default['vitess']['mysqlctld_mycnf']['master_mysql56'] = {
   'relay_log_purge' => 1,
   'relay_log_recovery' => 1,
   'innodb_use_native_aio' => 0,
-  'plugin-load' => 'rpl_semi_sync_master',
+  # Semi-sync replication is required for automated unplanned failover
+  # (when the master goes away). Here we just load the plugin so it's
+  # available if desired, but it's disabled at startup.
+  #
+  # If the -enable_semi_sync flag is used, VTTablet will enable semi-sync
+  # at the proper time when replication is set up, or when masters are
+  # promoted or demoted.
+  'plugin-load-add' => 'rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so',
   'rpl_semi_sync_master_timeout' => 1_000_000_000_000_000_000,
   'rpl_semi_sync_master_wait_no_slave' => 1
 }

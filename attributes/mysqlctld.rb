@@ -215,7 +215,7 @@ default['vitess']['mysqlctld']['purge_logs_interval'] = '1h0m0s'
 default['vitess']['mysqlctld']['security_policy'] = nil
 
 # value comma separated list of services to enable (or disable if prefixed with '-') Example: grpc-vtworker
-default['vitess']['mysqlctld']['service_map'] = nil
+default['vitess']['mysqlctld']['service_map'] = 'grpc-queryservice,grpc-tabletmanager,grpc-updatestream'
 
 # string Local unix socket file to listen on
 default['vitess']['mysqlctld']['socket_file'] = nil

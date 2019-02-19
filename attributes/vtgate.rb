@@ -113,7 +113,7 @@ default['vitess']['vtgate']['grpc_max_connection_age_grace'] = '2562047h47m16.85
 default['vitess']['vtgate']['grpc_max_message_size'] = 16777216
 
 # int Port to listen on for gRPC calls
-default['vitess']['vtgate']['grpc_port'] = nil
+default['vitess']['vtgate']['grpc_port'] = 15991
 
 # Enable gRPC monitoring with Prometheus
 default['vitess']['vtgate']['grpc_prometheus'] = nil
@@ -188,7 +188,7 @@ default['vitess']['vtgate']['mutex-profile-fraction'] = nil
 default['vitess']['vtgate']['mysql_allow_clear_text_without_tls'] = nil
 
 # string Which auth server implementation to use. (default "static")
-default['vitess']['vtgate']['mysql_auth_server_impl'] = 'static'
+default['vitess']['vtgate']['mysql_auth_server_impl'] = 'none'
 
 # string JSON File to read the users/passwords from.
 default['vitess']['vtgate']['mysql_auth_server_static_file'] = nil
@@ -203,13 +203,13 @@ default['vitess']['vtgate']['mysql_ldap_auth_config_file'] = nil
 default['vitess']['vtgate']['mysql_ldap_auth_config_string'] = nil
 
 # string client-side authentication method to use. Supported values: mysql_clear_password, dialog. (default "mysql_clear_password")
-default['vitess']['vtgate']['mysql_ldap_auth_method'] = 'mysql_clear_password'
+default['vitess']['vtgate']['mysql_ldap_auth_method'] = nil
 
 # string Binds on this address when listening to MySQL binary protocol. Useful to restrict listening to 'localhost' only for instance.
 default['vitess']['vtgate']['mysql_server_bind_address'] = nil
 
 # int If set, also listen for MySQL binary protocol connections on this port. (default -1)
-default['vitess']['vtgate']['mysql_server_port'] = -1
+default['vitess']['vtgate']['mysql_server_port'] = 15306
 
 # duration mysql query timeout
 default['vitess']['vtgate']['mysql_server_query_timeout'] = nil
@@ -257,7 +257,7 @@ default['vitess']['vtgate']['opentsdb_uri'] = nil
 default['vitess']['vtgate']['pid_file'] = nil
 
 # int port for the server
-default['vitess']['vtgate']['port'] = nil
+default['vitess']['vtgate']['port'] = 15001
 
 # duration how often try to remove old logs (default 1h0m0s)
 default['vitess']['vtgate']['purge_logs_interval'] = '1h0m0s'
@@ -275,7 +275,7 @@ default['vitess']['vtgate']['retry-count'] = 2
 default['vitess']['vtgate']['security_policy'] = nil
 
 # value comma separated list of services to enable (or disable if prefixed with '-') Example: grpc-vtworker
-default['vitess']['vtgate']['service_map'] = nil
+default['vitess']['vtgate']['service_map'] = 'grpc-vtgateservice'
 
 # int truncate queries in error logs to the given length (default unlimited)
 default['vitess']['vtgate']['sql-max-length-errors'] = 0
@@ -326,7 +326,7 @@ default['vitess']['vtgate']['tablet_refresh_interval'] = '1m0s'
 default['vitess']['vtgate']['tablet_refresh_known_tablets'] = true
 
 # string wait till connected for specified tablet types during Gateway initialization
-default['vitess']['vtgate']['tablet_types_to_wait'] = nil
+default['vitess']['vtgate']['tablet_types_to_wait'] = 'MASTER,REPLICA'
 
 # string format string describing debug tablet url formatting. See the Go code for getTabletDebugURL() how to customize this. (default "http://{{.GetTabletHostPort}}")
 default['vitess']['vtgate']['tablet_url_template'] = 'http://{{.GetTabletHostPort}}'
@@ -341,7 +341,7 @@ default['vitess']['vtgate']['topo_etcd_lease_ttl'] = 30
 default['vitess']['vtgate']['topo_global_root'] = '/vitess/global'
 
 # string the address of the global topology server
-default['vitess']['vtgate']['topo_global_server_address'] = 'localhost:21811'
+default['vitess']['vtgate']['topo_global_server_address'] = 'localhost:2181'
 
 # string the topology implementation to use (default "zookeeper")
 default['vitess']['vtgate']['topo_implementation'] = 'zk2'
