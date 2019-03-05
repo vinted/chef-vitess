@@ -48,24 +48,25 @@ How to bootstrap/start cluster check #Examples section below.
 
 ```ruby
 mysqlctld_service 'instance0' do
-  user                    String,  default: node['vitess']['user']
-  group                   String,  default: node['vitess']['group']
-  bin_path                String,  default: /usr/local/bin
-  vitess_user_shell       String,  default: /bin/false
-  vtroot                  String,  default: /var/lib/vt
-  vtdataroot              String,  default: /var/lib/vtdataroot
-  mysql_flavor            String,  default: master_mysql56
-  vt_mysql_root           String,  default: /
-  service_unit_after      Array,   default: ["network.target"]
-  service_timeout_sec     Integer, default: 5
-  service_restart         String,  default: on-failure
-  mycnf                   Hash,    default: node['vitess']['mycnf']
-  init_dbsql_sql_cookbook String,  default: vitess
-  service_name            String,  default: lazy { bin_name }
+  user                     String,  default: node['vitess']['user']
+  group                    String,  default: node['vitess']['group']
+  bin_path                 String,  default: /usr/local/bin
+  vitess_user_shell        String,  default: /bin/false
+  vtroot                   String,  default: /var/lib/vt
+  vtdataroot               String,  default: /var/lib/vtdataroot
+  mysql_flavor             String,  default: master_mysql56
+  vt_mysql_root            String,  default: /
+  service_unit_after       Array,   default: ["network.target"]
+  service_timeout_sec      Integer, default: 5
+  service_restart          String,  default: on-failure
+  mycnf                    Hash,    default: node['vitess']['mycnf']
+  init_dbsql_sql_cookbook  String,  default: vitess
+  init_dbsql_sql_variables Hash,    default: {}
+  service_name             String,  default: lazy { bin_name }
 
-  version                 String,  default: node['vitess']['version']['mysqlctld']
-  bin_name                String,  default: mysqlctld
-  args                    Hash,    default: lazy { node['vitess']['mysqlctld'] }
+  version                  String,  default: node['vitess']['version']['mysqlctld']
+  bin_name                 String,  default: mysqlctld
+  args                     Hash,    default: lazy { node['vitess']['mysqlctld'] }
 end
 ```
 
@@ -73,26 +74,25 @@ end
 
 ```ruby
 vtctld_service 'instance0' do
-  user                    String,  default: node['vitess']['user']
-  group                   String,  default: node['vitess']['group']
-  bin_path                String,  default: /usr/local/bin
-  vitess_user_shell       String,  default: /bin/false
-  vtroot                  String,  default: /var/lib/vt
-  vtdataroot              String,  default: /var/lib/vtdataroot
-  mysql_flavor            String,  default: master_mysql56
-  vt_mysql_root           String,  default: /
-  service_unit_after      Array,   default: ["network.target"]
-  service_timeout_sec     Integer, default: 5
-  service_restart         String,  default: on-failure
-  mycnf                   Hash,    default: node['vitess']['mycnf']
-  init_dbsql_sql_cookbook String,  default: vitess
-  service_name            String,  default: lazy { bin_name }
+  user                     String,  default: node['vitess']['user']
+  group                    String,  default: node['vitess']['group']
+  bin_path                 String,  default: /usr/local/bin
+  vitess_user_shell        String,  default: /bin/false
+  vtroot                   String,  default: /var/lib/vt
+  vtdataroot               String,  default: /var/lib/vtdataroot
+  mysql_flavor             String,  default: master_mysql56
+  vt_mysql_root            String,  default: /
+  service_unit_after       Array,   default: ["network.target"]
+  service_timeout_sec      Integer, default: 5
+  service_restart          String,  default: on-failure
+  mycnf                    Hash,    default: node['vitess']['mycnf']
+  service_name             String,  default: lazy { bin_name }
 
-  version                 String,  default: lazy { node['vitess']['version']['vtctld'] }
-  bin_name                String,  default: vtctld
-  args                    Hash,    default: lazy { node['vitess']['vtctld'] }
-  web_dir_cookbook        String,  default: vitess
-  web_dir2_cookbook       String,  default: vitess
+  version                  String,  default: lazy { node['vitess']['version']['vtctld'] }
+  bin_name                 String,  default: vtctld
+  args                     Hash,    default: lazy { node['vitess']['vtctld'] }
+  web_dir_cookbook         String,  default: vitess
+  web_dir2_cookbook        String,  default: vitess
 end
 ```
 
@@ -100,24 +100,23 @@ end
 
 ```ruby
 vtgate_service 'instance0' do
-  user                    String,  default: node['vitess']['user']
-  group                   String,  default: node['vitess']['group']
-  bin_path                String,  default: /usr/local/bin
-  vitess_user_shell       String,  default: /bin/false
-  vtroot                  String,  default: /var/lib/vt
-  vtdataroot              String,  default: /var/lib/vtdataroot
-  mysql_flavor            String,  default: master_mysql56
-  vt_mysql_root           String,  default: /
-  service_unit_after      Array,   default: ["network.target"]
-  service_timeout_sec     Integer, default: 5
-  service_restart         String,  default: on-failure
-  mycnf                   Hash,    default: node['vitess']['mycnf']
-  init_dbsql_sql_cookbook String,  default: vitess
-  service_name            String,  default: lazy { bin_name }
+  user                     String,  default: node['vitess']['user']
+  group                    String,  default: node['vitess']['group']
+  bin_path                 String,  default: /usr/local/bin
+  vitess_user_shell        String,  default: /bin/false
+  vtroot                   String,  default: /var/lib/vt
+  vtdataroot               String,  default: /var/lib/vtdataroot
+  mysql_flavor             String,  default: master_mysql56
+  vt_mysql_root            String,  default: /
+  service_unit_after       Array,   default: ["network.target"]
+  service_timeout_sec      Integer, default: 5
+  service_restart          String,  default: on-failure
+  mycnf                    Hash,    default: node['vitess']['mycnf']
+  service_name             String,  default: lazy { bin_name }
 
-  version                 String,  default: lazy { node['vitess']['version']['vtgate'] }
-  bin_name                String,  default: vtgate
-  args                    Hash,    default: lazy { node['vitess']['vtgate'] }
+  version                  String,  default: lazy { node['vitess']['version']['vtgate'] }
+  bin_name                 String,  default: vtgate
+  args                     Hash,    default: lazy { node['vitess']['vtgate'] }
 end
 ```
 
@@ -125,24 +124,23 @@ end
 
 ```ruby
 vttablet_service 'instance0' do
-  user                    String,  default: node['vitess']['user']
-  group                   String,  default: node['vitess']['group']
-  bin_path                String,  default: /usr/local/bin
-  vitess_user_shell       String,  default: /bin/false
-  vtroot                  String,  default: /var/lib/vt
-  vtdataroot              String,  default: /var/lib/vtdataroot
-  mysql_flavor            String,  default: master_mysql56
-  vt_mysql_root           String,  default: /
-  service_unit_after      Array,   default: ["network.target"]
-  service_timeout_sec     Integer, default: 5
-  service_restart         String,  default: on-failure
-  mycnf                   Hash,    default: node['vitess']['mycnf']
-  init_dbsql_sql_cookbook String,  default: vitess
-  service_name            String,  default: lazy { bin_name }
+  user                     String,  default: node['vitess']['user']
+  group                    String,  default: node['vitess']['group']
+  bin_path                 String,  default: /usr/local/bin
+  vitess_user_shell        String,  default: /bin/false
+  vtroot                   String,  default: /var/lib/vt
+  vtdataroot               String,  default: /var/lib/vtdataroot
+  mysql_flavor             String,  default: master_mysql56
+  vt_mysql_root            String,  default: /
+  service_unit_after       Array,   default: ["network.target"]
+  service_timeout_sec      Integer, default: 5
+  service_restart          String,  default: on-failure
+  mycnf                    Hash,    default: node['vitess']['mycnf']
+  service_name             String,  default: lazy { bin_name }
 
-  version                 String,  default: lazy { node['vitess']['version']['vttablet'] }
-  bin_name                String,  default: vttablet
-  args                    Hash,    default: lazy { node['vitess']['vttablet'] }
+  version                  String,  default: lazy { node['vitess']['version']['vttablet'] }
+  bin_name                 String,  default: vttablet
+  args                     Hash,    default: lazy { node['vitess']['vttablet'] }
 end
 ```
 
@@ -150,24 +148,23 @@ end
 
 ```ruby
 vtworker_service 'instance0' do
-  user                    String,  default: node['vitess']['user']
-  group                   String,  default: node['vitess']['group']
-  bin_path                String,  default: /usr/local/bin
-  vitess_user_shell       String,  default: /bin/false
-  vtroot                  String,  default: /var/lib/vt
-  vtdataroot              String,  default: /var/lib/vtdataroot
-  mysql_flavor            String,  default: master_mysql56
-  vt_mysql_root           String,  default: /
-  service_unit_after      Array,   default: ["network.target"]
-  service_timeout_sec     Integer, default: 5
-  service_restart         String,  default: on-failure
-  mycnf                   Hash,    default: node['vitess']['mycnf']
-  init_dbsql_sql_cookbook String,  default: vitess
-  service_name            String,  default: lazy { bin_name }
+  user                     String,  default: node['vitess']['user']
+  group                    String,  default: node['vitess']['group']
+  bin_path                 String,  default: /usr/local/bin
+  vitess_user_shell        String,  default: /bin/false
+  vtroot                   String,  default: /var/lib/vt
+  vtdataroot               String,  default: /var/lib/vtdataroot
+  mysql_flavor             String,  default: master_mysql56
+  vt_mysql_root            String,  default: /
+  service_unit_after       Array,   default: ["network.target"]
+  service_timeout_sec      Integer, default: 5
+  service_restart          String,  default: on-failure
+  mycnf                    Hash,    default: node['vitess']['mycnf']
+  service_name             String,  default: lazy { bin_name }
 
-  version                 String,  default: lazy { node['vitess']['version']['vtworker'] }
-  bin_name                String,  default: vtworker
-  args                    Hash,    default: lazy { node['vitess']['vtworker'] }
+  version                  String,  default: lazy { node['vitess']['version']['vtworker'] }
+  bin_name                 String,  default: vtworker
+  args                     Hash,    default: lazy { node['vitess']['vtworker'] }
 end
 ```
 
@@ -177,26 +174,27 @@ end
 
 ```ruby
 mysqlctl_artifact 'bin' do
-  user                    String,                  default: node['vitess']['user']
-  group                   String,                  default: node['vitess']['group']
-  bin_path                String,                  default: /usr/local/bin
-  vitess_user_shell       String,                  default: /bin/false
-  vtroot                  String,                  default: /var/lib/vt
-  vtdataroot              String,                  default: /var/lib/vtdataroot
-  mysql_flavor            String,                  default: 'master_mysql56'
-  vt_mysql_root           String,                  default: /
-  mycnf                   Hash,                    default: node['vitess']['mycnf']
-  init_dbsql_sql_cookbook String,                  default: vitess
+  user                     String,                  default: node['vitess']['user']
+  group                    String,                  default: node['vitess']['group']
+  bin_path                 String,                  default: /usr/local/bin
+  vitess_user_shell        String,                  default: /bin/false
+  vtroot                   String,                  default: /var/lib/vt
+  vtdataroot               String,                  default: /var/lib/vtdataroot
+  mysql_flavor             String,                  default: 'master_mysql56'
+  vt_mysql_root            String,                  default: /
+  mycnf                    Hash,                    default: node['vitess']['mycnf']
+  init_dbsql_sql_cookbook  String,                  default: vitess
+  init_dbsql_sql_variables Hash,                    default: {}
 
-  command                 String,                  default:
-  command_action          Symbol,                  default: run
-  command_creates         String,                  default:
-  command_ignore_failure  [TrueClass, FalseClass], default: false
-  command_returns         [Integer, Array],        default: 0
-  command_run_once        [TrueClass, FalseClass], default: true
+  command                  String,                  default:
+  command_action           Symbol,                  default: run
+  command_creates          String,                  default:
+  command_ignore_failure   [TrueClass, FalseClass], default: false
+  command_returns          [Integer, Array],        default: 0
+  command_run_once         [TrueClass, FalseClass], default: true
 
-  version                 String,                  default: lazy { node['vitess']['version']['mysqlctl'] }
-  bin_name                String,                  default: mysqlctl
+  version                  String,                  default: lazy { node['vitess']['version']['mysqlctl'] }
+  bin_name                 String,                  default: mysqlctl
 end
 ```
 
@@ -204,26 +202,25 @@ end
 
 ```ruby
 vtbench_artifact 'bin' do
-  user                    String,                  default: node['vitess']['user']
-  group                   String,                  default: node['vitess']['group']
-  bin_path                String,                  default: /usr/local/bin
-  vitess_user_shell       String,                  default: /bin/false
-  vtroot                  String,                  default: /var/lib/vt
-  vtdataroot              String,                  default: /var/lib/vtdataroot
-  mysql_flavor            String,                  default: 'master_mysql56'
-  vt_mysql_root           String,                  default: /
-  mycnf                   Hash,                    default: node['vitess']['mycnf']
-  init_dbsql_sql_cookbook String,                  default: vitess
+  user                     String,                  default: node['vitess']['user']
+  group                    String,                  default: node['vitess']['group']
+  bin_path                 String,                  default: /usr/local/bin
+  vitess_user_shell        String,                  default: /bin/false
+  vtroot                   String,                  default: /var/lib/vt
+  vtdataroot               String,                  default: /var/lib/vtdataroot
+  mysql_flavor             String,                  default: 'master_mysql56'
+  vt_mysql_root            String,                  default: /
+  mycnf                    Hash,                    default: node['vitess']['mycnf']
 
-  command                 String,                  default:
-  command_action          Symbol,                  default: run
-  command_creates         String,                  default:
-  command_ignore_failure  [TrueClass, FalseClass], default: false
-  command_returns         [Integer, Array],        default: 0
-  command_run_once        [TrueClass, FalseClass], default: true
+  command                  String,                  default:
+  command_action           Symbol,                  default: run
+  command_creates          String,                  default:
+  command_ignore_failure   [TrueClass, FalseClass], default: false
+  command_returns          [Integer, Array],        default: 0
+  command_run_once         [TrueClass, FalseClass], default: true
 
-  version                 String,                  default: lazy { node['vitess']['version']['vtbench'] }
-  bin_name                String,                  default: vtbench
+  version                  String,                  default: lazy { node['vitess']['version']['vtbench'] }
+  bin_name                 String,                  default: vtbench
 end
 ```
 
@@ -231,26 +228,25 @@ end
 
 ```ruby
 vtctl_artifact 'bin' do
-  user                    String,                  default: node['vitess']['user']
-  group                   String,                  default: node['vitess']['group']
-  bin_path                String,                  default: /usr/local/bin
-  vitess_user_shell       String,                  default: /bin/false
-  vtroot                  String,                  default: /var/lib/vt
-  vtdataroot              String,                  default: /var/lib/vtdataroot
-  mysql_flavor            String,                  default: 'master_mysql56'
-  vt_mysql_root           String,                  default: /
-  mycnf                   Hash,                    default: node['vitess']['mycnf']
-  init_dbsql_sql_cookbook String,                  default: vitess
+  user                     String,                  default: node['vitess']['user']
+  group                    String,                  default: node['vitess']['group']
+  bin_path                 String,                  default: /usr/local/bin
+  vitess_user_shell        String,                  default: /bin/false
+  vtroot                   String,                  default: /var/lib/vt
+  vtdataroot               String,                  default: /var/lib/vtdataroot
+  mysql_flavor             String,                  default: 'master_mysql56'
+  vt_mysql_root            String,                  default: /
+  mycnf                    Hash,                    default: node['vitess']['mycnf']
 
-  command                 String,                  default:
-  command_action          Symbol,                  default: run
-  command_creates         String,                  default:
-  command_ignore_failure  [TrueClass, FalseClass], default: false
-  command_returns         [Integer, Array],        default: 0
-  command_run_once        [TrueClass, FalseClass], default: true
+  command                  String,                  default:
+  command_action           Symbol,                  default: run
+  command_creates          String,                  default:
+  command_ignore_failure   [TrueClass, FalseClass], default: false
+  command_returns          [Integer, Array],        default: 0
+  command_run_once         [TrueClass, FalseClass], default: true
 
-  version                 String,                  default: lazy { node['vitess']['version']['vtctl'] }
-  bin_name                String,                  default: vtctl
+  version                  String,                  default: lazy { node['vitess']['version']['vtctl'] }
+  bin_name                 String,                  default: vtctl
 end
 ```
 
@@ -258,26 +254,25 @@ end
 
 ```ruby
 vtexplain_artifact 'bin' do
-  user                    String,                  default: node['vitess']['user']
-  group                   String,                  default: node['vitess']['group']
-  bin_path                String,                  default: /usr/local/bin
-  vitess_user_shell       String,                  default: /bin/false
-  vtroot                  String,                  default: /var/lib/vt
-  vtdataroot              String,                  default: /var/lib/vtdataroot
-  mysql_flavor            String,                  default: 'master_mysql56'
-  vt_mysql_root           String,                  default: /
-  mycnf                   Hash,                    default: node['vitess']['mycnf']
-  init_dbsql_sql_cookbook String,                  default: vitess
+  user                     String,                  default: node['vitess']['user']
+  group                    String,                  default: node['vitess']['group']
+  bin_path                 String,                  default: /usr/local/bin
+  vitess_user_shell        String,                  default: /bin/false
+  vtroot                   String,                  default: /var/lib/vt
+  vtdataroot               String,                  default: /var/lib/vtdataroot
+  mysql_flavor             String,                  default: 'master_mysql56'
+  vt_mysql_root            String,                  default: /
+  mycnf                    Hash,                    default: node['vitess']['mycnf']
 
-  command                 String,                  default:
-  command_action          Symbol,                  default: run
-  command_creates         String,                  default:
-  command_ignore_failure  [TrueClass, FalseClass], default: false
-  command_returns         [Integer, Array],        default: 0
-  command_run_once        [TrueClass, FalseClass], default: true
+  command                  String,                  default:
+  command_action           Symbol,                  default: run
+  command_creates          String,                  default:
+  command_ignore_failure   [TrueClass, FalseClass], default: false
+  command_returns          [Integer, Array],        default: 0
+  command_run_once         [TrueClass, FalseClass], default: true
 
-  version                 String,                  default: lazy { node['vitess']['version']['vtexplain'] }
-  bin_name                String,                  default: vtexplain
+  version                  String,                  default: lazy { node['vitess']['version']['vtexplain'] }
+  bin_name                 String,                  default: vtexplain
 end
 ```
 
@@ -285,26 +280,25 @@ end
 
 ```ruby
 vtctlclient_artifact 'bin' do
-  user                    String,                  default: node['vitess']['user']
-  group                   String,                  default: node['vitess']['group']
-  bin_path                String,                  default: /usr/local/bin
-  vitess_user_shell       String,                  default: /bin/false
-  vtroot                  String,                  default: /var/lib/vt
-  vtdataroot              String,                  default: /var/lib/vtdataroot
-  mysql_flavor            String,                  default: 'master_mysql56'
-  vt_mysql_root           String,                  default: /
-  mycnf                   Hash,                    default: node['vitess']['mycnf']
-  init_dbsql_sql_cookbook String,                  default: vitess
+  user                     String,                  default: node['vitess']['user']
+  group                    String,                  default: node['vitess']['group']
+  bin_path                 String,                  default: /usr/local/bin
+  vitess_user_shell        String,                  default: /bin/false
+  vtroot                   String,                  default: /var/lib/vt
+  vtdataroot               String,                  default: /var/lib/vtdataroot
+  mysql_flavor             String,                  default: 'master_mysql56'
+  vt_mysql_root            String,                  default: /
+  mycnf                    Hash,                    default: node['vitess']['mycnf']
 
-  command                 String,                  default:
-  command_action          Symbol,                  default: run
-  command_creates         String,                  default:
-  command_ignore_failure  [TrueClass, FalseClass], default: false
-  command_returns         [Integer, Array],        default: 0
-  command_run_once        [TrueClass, FalseClass], default: true
+  command                  String,                  default:
+  command_action           Symbol,                  default: run
+  command_creates          String,                  default:
+  command_ignore_failure   [TrueClass, FalseClass], default: false
+  command_returns          [Integer, Array],        default: 0
+  command_run_once         [TrueClass, FalseClass], default: true
 
-  version                 String,                  default: lazy { node['vitess']['version']['vtctlclient'] }
-  bin_name                String,                  default: vtctlclient
+  version                  String,                  default: lazy { node['vitess']['version']['vtctlclient'] }
+  bin_name                 String,                  default: vtctlclient
 end
 ```
 
