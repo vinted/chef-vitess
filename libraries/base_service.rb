@@ -58,6 +58,7 @@ class Chef
 
       # Cookbook
       attribute(:init_dbsql_sql_cookbook, kind_of: String, default: 'vitess')
+      attribute(:init_dbsql_sql_variables, kind_of: Hash, default: {})
     end
   end
 
@@ -87,7 +88,6 @@ class Chef
               base_log_dir,
               service_log_dir
             ]
-            install_init_dbsql
             deriver_install
           end
         end
@@ -121,9 +121,10 @@ class Chef
       end
 
       def install_init_dbsql
-        cookbook_file init_dbsql_path do
+        template init_dbsql_path do
           cookbook new_resource.init_dbsql_sql_cookbook
-          source 'init_db.sql'
+          variables new_resource.init_dbsql_sql_variables
+          source 'sql/init_db.sql.erb'
           owner new_resource.user
           group new_resource.group
           mode '0640'
