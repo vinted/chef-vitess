@@ -302,6 +302,74 @@ vtctlclient_artifact 'bin' do
 end
 ```
 
+### Shell wrappers
+
+#### vtctl_shell
+
+```ruby
+vtctl_shell 'bin' do
+  user              String, default: node['vitess']['user']
+  group             String, default: node['vitess']['group']
+  bin_path          String, default: /usr/local/bin
+  vitess_user_shell String, default: /bin/false
+  vtroot            String, default: /var/lib/vt
+  vtdataroot        String, default: /var/lib/vtdataroot
+  mysql_flavor      String, default: 'master_mysql56'
+  vt_mysql_root     String, default: /
+
+  file_name         String, default: default: lazy { bin_name }
+  file_prefix       String, default: default: default: lazy { raise 'Please provide shell prefix' }
+  command           String, default: ''
+  environment       Hash,   default: {}
+
+  version           String, default: lazy { node['vitess']['version']['vtctl'] }
+end
+```
+
+#### mysqlctl_shell
+
+```ruby
+mysqlctl_shell 'bin' do
+  user              String, default: node['vitess']['user']
+  group             String, default: node['vitess']['group']
+  bin_path          String, default: /usr/local/bin
+  vitess_user_shell String, default: /bin/false
+  vtroot            String, default: /var/lib/vt
+  vtdataroot        String, default: /var/lib/vtdataroot
+  mysql_flavor      String, default: 'master_mysql56'
+  vt_mysql_root     String, default: /
+
+  file_name         String, default: default: lazy { bin_name }
+  file_prefix       String, default: default: default: lazy { raise 'Please provide shell prefix' }
+  command           string, default: ''
+  environment       Hash,   default: {}
+
+  version           String, default: lazy { node['vitess']['version']['mysqlctl'] }
+end
+```
+
+#### vtctlclient_shell
+
+```ruby
+vtctlclient_shell 'bin' do
+  user              String, default: node['vitess']['user']
+  group             String, default: node['vitess']['group']
+  bin_path          String, default: /usr/local/bin
+  vitess_user_shell String, default: /bin/false
+  vtroot            String, default: /var/lib/vt
+  vtdataroot        String, default: /var/lib/vtdataroot
+  mysql_flavor      String, default: 'master_mysql56'
+  vt_mysql_root     String, default: /
+
+  file_name         String, default: default: lazy { bin_name }
+  file_prefix       String, default: default: default: lazy { raise 'Please provide shell prefix' }
+  command           String, default: ''
+  environment       Hash,   default: {}
+
+  version           String, default: lazy { node['vitess']['version']['vtctlclient'] }
+end
+```
+
 ## Examples
 
 ```ruby

@@ -63,3 +63,7 @@ suites:
       - recipe[test-vitess::mysql]
       - recipe[test-vitess::zookeeper]
       - recipe[test-vitess::cluster]
+
+  - name: shellwrapper
+    run_list:
+      - recipe[test-vitess::shell]
