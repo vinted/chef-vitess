@@ -235,12 +235,6 @@ default['vitess']['vtworker']['tablet_protocol'] = 'grpc'
 # string format string describing debug tablet url formatting. See the Go code for getTabletDebugURL() how to customize this. (default "http://{{.GetTabletHostPort}}")
 default['vitess']['vtworker']['tablet_url_template'] = 'http://{{.GetTabletHostPort}}'
 
-# commands are listed below, sorted by group. Use './vt/bin/vtworker <command> -h' for more help.
-default['vitess']['vtworker']['the'] = nil
-
-# global optional parameters are:
-default['vitess']['vtworker']['the'] = nil
-
 # duration time of the long poll for watch queries. Interrupting a watch may wait for up to that time. (default 30s)
 default['vitess']['vtworker']['topo_consul_watch_poll_duration'] = '30s'
 
