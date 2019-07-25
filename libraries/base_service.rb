@@ -229,7 +229,7 @@ class Chef
           .merge(additional_args)
           .reject { |_k, v| v.nil? }
           .map { |k, v| "-#{k}=#{v}" }
-          .join(' ')
+          .join(" \\\n ")
       end
 
       def vitess_environment
@@ -244,7 +244,7 @@ class Chef
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
       def install_service
-        cmd = "#{bin_location} #{service_args}"
+        cmd = "#{bin_location} \\\n #{service_args}"
         service_name = new_resource.service_name
         exec_start = ::File.join(vt_bin_path, "#{service_name}.sh")
         env = vitess_environment
