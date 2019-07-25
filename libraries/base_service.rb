@@ -128,6 +128,7 @@ class Chef
           owner new_resource.user
           group new_resource.group
           mode '0640'
+          sensitive true
           action :create
         end
       end
