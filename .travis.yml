@@ -13,7 +13,7 @@ cache:
   - vendor/bundle
 
 script:
-  - bundle exec kitchen test --concurrency
+  - bundle exec kitchen test
 
 notifications:
   disable: true
