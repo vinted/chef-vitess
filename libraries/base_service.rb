@@ -183,33 +183,72 @@ class Chef
         )
       end
 
-      # rubocop:disable Metrics/MethodLength
-      # rubocop:disable Metrics/AbcSize
-      def install_vitess_binary(source_url:, version:)
-        cache_path = Chef::Config[:file_cache_path]
-        bin_name_with_version = "#{version}-#{new_resource.bin_name}"
-        loc = bin_location
+      def vitess_release_hash
+        @vitess_release_hash ||= {}
+        @vitess_release_hash[new_resource.bin_name] ||= new_resource.version.split('-')[1]
+      end
 
-        bash 'extract_vitess_file' do
+      def vitess_release_url
+        node['vitess']['releases'][vitess_release_hash]['url']
+      end
+
+      def vitess_release_checksum
+        node['vitess']['releases'][vitess_release_hash]['checksum']
+      end
+
+      def vitess_release_cache_path
+        cache_path = Chef::Config[:file_cache_path]
+        release_url = vitess_release_url
+        archive_file_name = ::File.basename(release_url)
+        archive_cache_path = ::File.join(cache_path, archive_file_name)
+        archive_cache_path.gsub(/\.tar\.gz$/, '')
+      end
+
+      def cache_vitess_binary
+        cache_path = Chef::Config[:file_cache_path]
+        release_url = vitess_release_url
+        release_checksum = vitess_release_checksum
+        archive_file_name = ::File.basename(release_url)
+        archive_cache_path = ::File.join(cache_path, archive_file_name)
+
+        bash "extract vitess bin file #{archive_cache_path}" do
           cwd cache_path
           user 'root'
-          code <<-CODE
-            tar -zxf #{bin_name_with_version} -C #{new_resource.bin_path} &&
-            chown root:root #{loc} &&
-            chmod 0755 #{loc}
-          CODE
+          code "tar -zxf #{archive_cache_path}"
           action :nothing
         end
 
-        vitess_bin_file = ::File.join(cache_path, bin_name_with_version)
-
-        remote_file vitess_bin_file do
-          source source_url
+        remote_file archive_cache_path do
+          source release_url
           owner 'root'
           group 'root'
           mode '0640'
-          notifies :run, 'bash[extract_vitess_file]', :immediate
-          not_if { ::File.exist?(vitess_bin_file) }
+          checksum release_checksum
+          notifies :run, "bash[extract vitess bin file #{archive_cache_path}]", :immediate
+        end
+      end
+
+      # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
+      def install_vitess_binary
+        bin_name_with_release = "#{new_resource.bin_name}-#{vitess_release_hash}"
+        bin_path_with_release = ::File.join(new_resource.bin_path, bin_name_with_release)
+        bin_source_path = ::File.join(vitess_release_cache_path, 'bin', new_resource.bin_name)
+
+        cache_vitess_binary
+
+        bash "copy #{bin_source_path} to #{bin_path_with_release}" do
+          user 'root'
+          code <<-CODE
+            cp #{bin_source_path} #{bin_path_with_release} &&
+            chown root:root #{bin_path_with_release} &&
+            chmod 0755 #{bin_path_with_release}
+          CODE
+          creates bin_path_with_release
+        end
+
+        link ::File.join(new_resource.bin_path, new_resource.bin_name) do
+          to bin_path_with_release
         end
       end
       # rubocop:enable Metrics/MethodLength

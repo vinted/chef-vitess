@@ -14,16 +14,18 @@ Cookbook configures Vitess clustering system through custom Chef resources. Supp
 default['vitess']['user'] = 'vitess'
 default['vitess']['group'] = 'vitess'
 
-default['vitess']['version']['mysqlctld'] = 'v3.0.0'
-default['vitess']['version']['vtctlclient'] = 'v3.0.0'
-default['vitess']['version']['vtctld'] = 'v3.0.0'
-default['vitess']['version']['vtgate'] = 'v3.0.0'
-default['vitess']['version']['vttablet'] = 'v3.0.0'
-default['vitess']['version']['vtworker'] = 'v3.0.0'
-default['vitess']['version']['mysqlctl'] = 'v3.0.0'
-default['vitess']['version']['vtctl'] = 'v3.0.0'
-default['vitess']['version']['vtexplain'] = 'v3.0.0'
-default['vitess']['version']['vtbench'] = 'v3.0.0'
+
+default['vitess']['version']['mysqlctld'] = 'v3.0.0-b5207f0'
+default['vitess']['version']['vtctlclient'] = 'v3.0.0-b5207f0'
+default['vitess']['version']['vtctld'] = 'v3.0.0-b5207f0'
+default['vitess']['version']['vtgate'] = 'v3.0.0-b5207f0'
+default['vitess']['version']['vttablet'] = 'v3.0.0-b5207f0'
+default['vitess']['version']['vtworker'] = 'v3.0.0-b5207f0'
+default['vitess']['version']['mysqlctl'] = 'v3.0.0-b5207f0'
+default['vitess']['version']['vtctl'] = 'v3.0.0-b5207f0'
+default['vitess']['version']['vtexplain'] = 'v3.0.0-b5207f0'
+default['vitess']['version']['vtbench'] = 'v3.0.0-b5207f0'
+
 ```
 
 For Vitess configuration there are over 731 options available, check them in attributes folder.

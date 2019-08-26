@@ -51,6 +51,10 @@ class Chef
         @vtctld_web_dir ||= ::File.join(new_resource.vtroot, 'web')
       end
 
+      def vtctld_web_release_dir
+        @vtctld_web_release_dir ||= ::File.join(new_resource.vtroot, "web-#{vitess_release_hash}")
+      end
+
       def action_delete
         service new_resource.service_name do
           action %i[stop disable]
@@ -60,39 +64,26 @@ class Chef
       protected
 
       def install_web_directory
-        return unless install_web_dir? || new_resource.install_web_dir2?
-        create_directories [vtctld_web_dir]
+        cache_vitess_binary
+        web_cache_path = ::File.join(vitess_release_cache_path, 'web')
 
-        remote_directory vtctld_web_vtctld do
-          cookbook new_resource.web_dir_cookbook
-          source 'web/vtctld'
-          owner new_resource.user
-          group new_resource.group
-          files_owner new_resource.user
-          files_group new_resource.group
-          files_mode '0640'
-          mode '0755'
-          action :create
+        bash 'copy web assets' do
+          user 'root'
+          code <<-CODE
+            cp -r #{web_cache_path} #{vtctld_web_release_dir} &&
+            chown root:root #{vtctld_web_release_dir} &&
+            chmod 0644 #{vtctld_web_release_dir}
+          CODE
+          not_if { ::File.exist? vtctld_web_release_dir }
         end
 
-        remote_directory vtctld_web_vtctld2 do
-          cookbook new_resource.web_dir2_cookbook
-          source 'web/vtctld2'
-          owner new_resource.user
-          group new_resource.group
-          files_owner new_resource.user
-          files_group new_resource.group
-          files_mode '0640'
-          mode '0755'
-          action :create
+        link vtctld_web_dir do
+          to vtctld_web_release_dir
         end
       end
 
       def deriver_install
-        v = new_resource.version
-        url = "#{node['vitess']['artifacts']['base_url']}/#{v}/vtctld.tgz"
-
-        install_vitess_binary(source_url: url, version: v)
+        install_vitess_binary
         install_web_directory
         install_service
         start_service

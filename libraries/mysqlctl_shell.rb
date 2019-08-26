@@ -26,10 +26,7 @@ class Chef
       protected
 
       def deriver_install
-        v = new_resource.version
-        url = "#{node['vitess']['artifacts']['base_url']}/#{v}/mysqlctl.tgz"
-
-        install_vitess_binary(source_url: url, version: v)
+        install_vitess_binary
         super
       end
     end

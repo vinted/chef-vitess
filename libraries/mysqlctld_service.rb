@@ -41,11 +41,7 @@ class Chef
       def deriver_install
         install_mycnf_config
         install_init_dbsql
-
-        v = new_resource.version
-        url = "#{node['vitess']['artifacts']['base_url']}/#{v}/mysqlctld.tgz"
-
-        install_vitess_binary(source_url: url, version: v)
+        install_vitess_binary
         install_service
         start_service
       end
