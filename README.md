@@ -56,7 +56,7 @@ mysqlctld_service 'instance0' do
   vitess_user_shell        String,  default: /bin/false
   vtroot                   String,  default: /var/lib/vt
   vtdataroot               String,  default: /var/lib/vtdataroot
-  mysql_flavor             String,  default: master_mysql56
+  mysql_flavor             String,  default: master_percona57
   vt_mysql_root            String,  default: /
   service_unit_after       Array,   default: ["network.target"]
   service_timeout_sec      Integer, default: 5
@@ -82,7 +82,7 @@ vtctld_service 'instance0' do
   vitess_user_shell        String,  default: /bin/false
   vtroot                   String,  default: /var/lib/vt
   vtdataroot               String,  default: /var/lib/vtdataroot
-  mysql_flavor             String,  default: master_mysql56
+  mysql_flavor             String,  default: master_percona57
   vt_mysql_root            String,  default: /
   service_unit_after       Array,   default: ["network.target"]
   service_timeout_sec      Integer, default: 5
@@ -108,7 +108,7 @@ vtgate_service 'instance0' do
   vitess_user_shell        String,  default: /bin/false
   vtroot                   String,  default: /var/lib/vt
   vtdataroot               String,  default: /var/lib/vtdataroot
-  mysql_flavor             String,  default: master_mysql56
+  mysql_flavor             String,  default: master_percona57
   vt_mysql_root            String,  default: /
   service_unit_after       Array,   default: ["network.target"]
   service_timeout_sec      Integer, default: 5
@@ -132,7 +132,7 @@ vttablet_service 'instance0' do
   vitess_user_shell        String,  default: /bin/false
   vtroot                   String,  default: /var/lib/vt
   vtdataroot               String,  default: /var/lib/vtdataroot
-  mysql_flavor             String,  default: master_mysql56
+  mysql_flavor             String,  default: master_percona57
   vt_mysql_root            String,  default: /
   service_unit_after       Array,   default: ["network.target"]
   service_timeout_sec      Integer, default: 5
@@ -156,7 +156,7 @@ vtworker_service 'instance0' do
   vitess_user_shell        String,  default: /bin/false
   vtroot                   String,  default: /var/lib/vt
   vtdataroot               String,  default: /var/lib/vtdataroot
-  mysql_flavor             String,  default: master_mysql56
+  mysql_flavor             String,  default: master_percona57
   vt_mysql_root            String,  default: /
   service_unit_after       Array,   default: ["network.target"]
   service_timeout_sec      Integer, default: 5
@@ -182,7 +182,7 @@ mysqlctl_artifact 'bin' do
   vitess_user_shell        String,                  default: /bin/false
   vtroot                   String,                  default: /var/lib/vt
   vtdataroot               String,                  default: /var/lib/vtdataroot
-  mysql_flavor             String,                  default: 'master_mysql56'
+  mysql_flavor             String,                  default: 'master_percona57'
   vt_mysql_root            String,                  default: /
   mycnf                    Hash,                    default: node['vitess']['mycnf']
   init_dbsql_sql_cookbook  String,                  default: vitess
@@ -210,7 +210,7 @@ vtbench_artifact 'bin' do
   vitess_user_shell        String,                  default: /bin/false
   vtroot                   String,                  default: /var/lib/vt
   vtdataroot               String,                  default: /var/lib/vtdataroot
-  mysql_flavor             String,                  default: 'master_mysql56'
+  mysql_flavor             String,                  default: 'master_percona57'
   vt_mysql_root            String,                  default: /
   mycnf                    Hash,                    default: node['vitess']['mycnf']
 
@@ -236,7 +236,7 @@ vtctl_artifact 'bin' do
   vitess_user_shell        String,                  default: /bin/false
   vtroot                   String,                  default: /var/lib/vt
   vtdataroot               String,                  default: /var/lib/vtdataroot
-  mysql_flavor             String,                  default: 'master_mysql56'
+  mysql_flavor             String,                  default: 'master_percona57'
   vt_mysql_root            String,                  default: /
   mycnf                    Hash,                    default: node['vitess']['mycnf']
 
@@ -262,7 +262,7 @@ vtexplain_artifact 'bin' do
   vitess_user_shell        String,                  default: /bin/false
   vtroot                   String,                  default: /var/lib/vt
   vtdataroot               String,                  default: /var/lib/vtdataroot
-  mysql_flavor             String,                  default: 'master_mysql56'
+  mysql_flavor             String,                  default: 'master_percona57'
   vt_mysql_root            String,                  default: /
   mycnf                    Hash,                    default: node['vitess']['mycnf']
 
@@ -288,7 +288,7 @@ vtctlclient_artifact 'bin' do
   vitess_user_shell        String,                  default: /bin/false
   vtroot                   String,                  default: /var/lib/vt
   vtdataroot               String,                  default: /var/lib/vtdataroot
-  mysql_flavor             String,                  default: 'master_mysql56'
+  mysql_flavor             String,                  default: 'master_percona57'
   vt_mysql_root            String,                  default: /
   mycnf                    Hash,                    default: node['vitess']['mycnf']
 
@@ -316,7 +316,7 @@ vtctl_shell 'bin' do
   vitess_user_shell String, default: /bin/false
   vtroot            String, default: /var/lib/vt
   vtdataroot        String, default: /var/lib/vtdataroot
-  mysql_flavor      String, default: 'master_mysql56'
+  mysql_flavor      String, default: 'master_percona57'
   vt_mysql_root     String, default: /
 
   file_name         String, default: default: lazy { bin_name }
@@ -338,7 +338,7 @@ mysqlctl_shell 'bin' do
   vitess_user_shell String, default: /bin/false
   vtroot            String, default: /var/lib/vt
   vtdataroot        String, default: /var/lib/vtdataroot
-  mysql_flavor      String, default: 'master_mysql56'
+  mysql_flavor      String, default: 'master_percona57'
   vt_mysql_root     String, default: /
 
   file_name         String, default: default: lazy { bin_name }
@@ -360,7 +360,7 @@ vtctlclient_shell 'bin' do
   vitess_user_shell String, default: /bin/false
   vtroot            String, default: /var/lib/vt
   vtdataroot        String, default: /var/lib/vtdataroot
-  mysql_flavor      String, default: 'master_mysql56'
+  mysql_flavor      String, default: 'master_percona57'
   vt_mysql_root     String, default: /
 
   file_name         String, default: default: lazy { bin_name }

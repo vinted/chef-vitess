@@ -1,7 +1,10 @@
 default['vitess']['mycnf']['default'] = {
+  'gtid_mode' => 'ON',
+  'enforce_gtid_consistency' => 'ON',
   'sql_mode' => 'STRICT_TRANS_TABLES',
   'back_log' => 50,
-  'binlog_format' => 'statement',
+  'binlog_format' => 'ROW',
+  'binlog_row_image' => 'full',
   'character_set_server' => 'utf8',
   'collation_server' => 'utf8_general_ci',
   'connect_timeout' => 30,
@@ -51,25 +54,52 @@ default['vitess']['mycnf']['default'] = {
   'thread_cache_size' => 200,
   'tmpdir' => '{{.TmpDir}}',
   'tmp_table_size' => '32M',
-  'transaction-isolation' => 'REPEATABLE-READ'
+  'transaction-isolation' => 'REPEATABLE-READ',
+  'rpl_semi_sync_master_enabled' => 'ON',
+  'rpl_semi_sync_slave_enabled' => 'ON',
+  'plugin_dir' => '/usr/lib64/mysql/plugin',
+  'plugin-load-add' => 'rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so',
+  'rpl_semi_sync_master_timeout' => 1_000_000_000_000_000_000,
+  'rpl_semi_sync_master_wait_no_slave' => 0
 }
 
 default['vitess']['mycnf']['master'] = {
+  'gtid_mode' => 'ON',
+  'enforce_gtid_consistency' => 'ON',
   'log-bin' => '{{.BinLogPath}}',
   'log-slave-updates' => nil,
-  'sync_binlog' => 1
+  'sync_binlog' => 1,
+  'rpl_semi_sync_master_enabled' => 'ON',
+  'rpl_semi_sync_slave_enabled' => 'ON',
+  'plugin-load-add' => 'rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so',
+  'rpl_semi_sync_master_timeout' => 1_000_000_000_000_000_000,
+  'rpl_semi_sync_master_wait_no_slave' => 0,
+  'binlog_format' => 'ROW',
+  'plugin_dir' => '/usr/lib64/mysql/plugin',
+  'binlog_row_image' => 'full'
 }
 
 default['vitess']['mycnf']['replica'] = {
+  'gtid_mode' => 'ON',
+  'enforce_gtid_consistency' => 'ON',
   'relay-log' => '{{.RelayLogPath}}',
   'relay-log-index' => '{{.RelayLogIndexPath}}',
   'relay-log-info-file' => '{{.RelayLogInfoPath}}',
   'master-info-file' => '{{.MasterInfoFile}}',
-  'log-slave-updates' => nil
+  'log-slave-updates' => nil,
+  'rpl_semi_sync_master_enabled' => 'ON',
+  'rpl_semi_sync_slave_enabled' => 'ON',
+  'plugin-load-add' => 'rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so',
+  'rpl_semi_sync_master_timeout' => 1_000_000_000_000_000_000,
+  'rpl_semi_sync_master_wait_no_slave' => 0,
+  'binlog_format' => 'ROW',
+  'plugin_dir' => '/usr/lib64/mysql/plugin',
+  'binlog_row_image' => 'full'
 }
 
-default['vitess']['mycnf']['master_mysql56'] = {
+default['vitess']['mycnf']['master_percona57'] = {
   'gtid_mode' => 'ON',
+  'enforce_gtid_consistency' => 'ON',
   'log_bin' => nil,
   'log_slave_updates' => nil,
   'enforce_gtid_consistency' => nil,
@@ -87,5 +117,10 @@ default['vitess']['mycnf']['master_mysql56'] = {
   # promoted or demoted.
   'plugin-load-add' => 'rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so',
   'rpl_semi_sync_master_timeout' => 1_000_000_000_000_000_000,
-  'rpl_semi_sync_master_wait_no_slave' => 1
+  'rpl_semi_sync_master_wait_no_slave' => 0,
+  'rpl_semi_sync_master_enabled' => 'ON',
+  'rpl_semi_sync_slave_enabled' => 'ON',
+  'binlog_format' => 'ROW',
+  'plugin_dir' => '/usr/lib64/mysql/plugin',
+  'binlog_row_image' => 'full'
 }

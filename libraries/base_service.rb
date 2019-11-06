@@ -38,9 +38,9 @@ class Chef
 
       attribute(:vtroot, kind_of: String, default: '/var/lib/vt')
       attribute(:vtdataroot, kind_of: String, default: '/var/lib/vtdataroot')
-      # Default switch case: master_mysql56
+      # Default switch case: master_percona57
       # https://github.com/vitessio/vitess/blob/master/go/vt/mysqlctl/mysqld.go#L656
-      attribute(:mysql_flavor, kind_of: String, default: 'master_mysql56')
+      attribute(:mysql_flavor, kind_of: String, default: 'master_percona57')
       attribute(:vt_mysql_root, kind_of: String, default: '/')
 
       # Service
