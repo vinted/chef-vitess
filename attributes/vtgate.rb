@@ -388,10 +388,10 @@ default['vitess']['vtgate']['topo_etcd_lease_ttl'] = 30
 default['vitess']['vtgate']['topo_global_root'] = '/vitess/global'
 
 # the address of the global topology server
-default['vitess']['vtgate']['topo_global_server_address'] = 'localhost:2181'
+default['vitess']['vtgate']['topo_global_server_address'] = 'localhost:2379'
 
 # the topology implementation to use
-default['vitess']['vtgate']['topo_implementation'] = 'zk2'
+default['vitess']['vtgate']['topo_implementation'] = 'etcd2'
 
 # concurrent topo reads (default 32)
 default['vitess']['vtgate']['topo_read_concurrency'] = 32

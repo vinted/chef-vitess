@@ -1003,10 +1003,10 @@ default['vitess']['vttablet']['topo_etcd_lease_ttl'] = 30
 default['vitess']['vttablet']['topo_global_root'] = '/vitess/global'
 
 # the address of the global topology server
-default['vitess']['vttablet']['topo_global_server_address'] = 'localhost:2181'
+default['vitess']['vttablet']['topo_global_server_address'] = 'localhost:2379'
 
 # the topology implementation to use
-default['vitess']['vttablet']['topo_implementation'] = 'zk2'
+default['vitess']['vttablet']['topo_implementation'] = 'etcd2'
 
 # auth to use when connecting to the zk topo server, file contents should be <scheme>:<auth>, e.g.,
 # digest:user:pass
