@@ -32,36 +32,47 @@ platforms:
   #     run_command: '/lib/systemd/systemd'
   #     run_options: '--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'
 
+topology_attributes_zk2: &topology_attributes_zk2
+  test-vitess:
+    topo_implementation: zk2
+  vitess:
+    mysqlctld: { topo_global_server_address: 'localhost:2181', topo_implementation: 'zk2' }
+    vtctld: { topo_global_server_address: 'localhost:2181', topo_implementation: 'zk2' }
+    vtgate: { topo_global_server_address: 'localhost:2181', topo_implementation: 'zk2' }
+    vttablet: { topo_global_server_address: 'localhost:2181', topo_implementation: 'zk2' }
+    vtworker: { topo_global_server_address: 'localhost:2181', topo_implementation: 'zk2' }
+
 suites:
-  - name: mysqlctld
+  # ETCD topology
+  - name: etcd-mysqlctld
     run_list:
       - recipe[test-vitess::mysql]
       - recipe[vitess::mysqlctld]
 
-  - name: vtgate
+  - name: etcd-vtgate
     run_list:
-      - recipe[test-vitess::zookeeper]
+      - recipe[test-vitess::etcd]
       - recipe[vitess::vtgate]
 
-  - name: vttablet
+  - name: etcd-vttablet
     run_list:
-      - recipe[test-vitess::zookeeper]
+      - recipe[test-vitess::etcd]
       - recipe[vitess::vttablet]
 
-  - name: vtctld
+  - name: etcd-vtctld
     run_list:
-      - recipe[test-vitess::zookeeper]
+      - recipe[test-vitess::etcd]
       - recipe[vitess::vtctld]
 
-  - name: vtworker
+  - name: etcd-vtworker
     run_list:
-      - recipe[test-vitess::zookeeper]
+      - recipe[test-vitess::etcd]
       - recipe[vitess::vtworker]
 
-  - name: cluster
+  - name: etcd-cluster
     run_list:
       - recipe[test-vitess::mysql]
-      - recipe[test-vitess::zookeeper]
+      - recipe[test-vitess::etcd]
       - recipe[test-vitess::cluster]
     driver:
       forward:
@@ -73,6 +84,65 @@ suites:
         - '25100:25100'
         - '25200:25200'
 
-  - name: shellwrapper
+  - name: etcd-shellwrapper
     run_list:
       - recipe[test-vitess::shell]
+
+  # Zookeeper topology
+  - name: zk-mysqlctld
+    run_list:
+      - recipe[test-vitess::mysql]
+      - recipe[vitess::mysqlctld]
+    attributes:
+      <<: *topology_attributes_zk2
+
+  - name: zk-vtgate
+    run_list:
+      - recipe[test-vitess::zookeeper]
+      - recipe[vitess::vtgate]
+    attributes:
+      <<: *topology_attributes_zk2
+
+  - name: zk-vttablet
+    run_list:
+      - recipe[test-vitess::zookeeper]
+      - recipe[vitess::vttablet]
+    attributes:
+      <<: *topology_attributes_zk2
+
+  - name: zk-vtctld
+    run_list:
+      - recipe[test-vitess::zookeeper]
+      - recipe[vitess::vtctld]
+    attributes:
+      <<: *topology_attributes_zk2
+
+  - name: zk-vtworker
+    run_list:
+      - recipe[test-vitess::zookeeper]
+      - recipe[vitess::vtworker]
+    attributes:
+      <<: *topology_attributes_zk2
+
+  - name: zk-cluster
+    run_list:
+      - recipe[test-vitess::mysql]
+      - recipe[test-vitess::zookeeper]
+      - recipe[test-vitess::cluster]
+    attributes:
+      <<: *topology_attributes_zk2
+    driver:
+      forward:
+        - '15001:15000'
+        - '10001:10000'
+        - '10101:10100'
+        - '10201:10200'
+        - '25001:25000'
+        - '25101:25100'
+        - '25201:25200'
+
+  - name: zk-shellwrapper
+    run_list:
+      - recipe[test-vitess::shell]
+    attributes:
+      <<: *topology_attributes_zk2

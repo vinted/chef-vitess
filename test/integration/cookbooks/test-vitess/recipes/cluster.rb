@@ -1,13 +1,14 @@
+topo = node['test-vitess']['topo_implementation']
 cell = 'zone1'
 topo_global_root = "/vitess/#{cell}"
-topo_global_server_address = 'localhost:2181'
+topo_global_server_address = node['test-vitess']['topo'][topo]['server_address']
 init_keyspace = 'commerce'
 
-# Assuming MySQL and Zookeeper is available
+# Assuming MySQL and Zookeeper or etcd is available
 
 vtctl_artifact 'AddCellInfo' do
   command %W[
-    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
+    -alsologtostderr=1 -topo_implementation #{topo} -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
     AddCellInfo -root #{topo_global_root} -server_address #{topo_global_server_address} #{cell}
   ].join(' ')
 end
@@ -90,7 +91,7 @@ sleep 60
 # brand new shard.
 vtctl_artifact 'InitShardMaster' do
   command %W[
-    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
+    -alsologtostderr=1 -topo_implementation #{topo} -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
     InitShardMaster -force #{init_keyspace}/0 #{cell}-#{uids.last}
   ].join(' ')
 end
@@ -108,14 +109,14 @@ end
 # Creating schema
 vtctl_artifact 'ApplySchema -sql-file' do
   command %W[
-    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
+    -alsologtostderr=1 -topo_implementation #{topo} -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
     ApplySchema -sql-file /root/create_commerce_schema.sql #{init_keyspace}
   ].join(' ')
 end
 
 vtctl_artifact 'ApplyVSchema -vschema_file' do
   command %W[
-    -alsologtostderr=1 -topo_implementation zk2 -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
+    -alsologtostderr=1 -topo_implementation #{topo} -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
     ApplyVSchema -vschema_file /root/vschema_commerce_initial.json #{init_keyspace}
   ].join(' ')
 end
