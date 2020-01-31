@@ -511,12 +511,6 @@ default['vitess']['vtctld']['wait_for_drain_sleep_rdonly'] = '5s'
 # (default 15s)
 default['vitess']['vtctld']['wait_for_drain_sleep_replica'] = '15s'
 
-# directory from which to serve vtctld web interface resources
-default['vitess']['vtctld']['web_dir'] = nil
-
-# directory from which to serve vtctld2 web interface resources
-default['vitess']['vtctld']['web_dir2'] = nil
-
 # comma separated list of workflow types to disable
 default['vitess']['vtctld']['workflow_manager_disable'] = nil
 

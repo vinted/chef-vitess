@@ -1,4 +1,4 @@
-default['vitess']['releases']['ec34ce1']['url'] =
-  'https://github.com/planetscale/vitess-releases/releases/download/ec34ce1/vitess-release-ec34ce1.tar.gz'
-default['vitess']['releases']['ec34ce1']['checksum'] =
-  '7d6a1d7eff84f86e6f7aab32891a20bfd55d8177422eedf7f7a81577e31e4ab0'
+default['vitess']['releases']['df54e56']['url'] =
+  'https://github.com/planetscale/vitess-releases/releases/download/df54e56/vitess-4.0.1-df54e56.tar.gz'
+default['vitess']['releases']['df54e56']['checksum'] =
+  'b39ce907c218beae57f3cb970b7ef13541a43957b2fc8f862ba31b77011673d0'
