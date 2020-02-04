@@ -35,6 +35,21 @@ class Chef
         kind_of: String,
         default: '/bin/false'
       )
+      attribute(
+        :topo_global_root,
+        kind_of: String,
+        default: lazy { node['vitess']['topo_global_root'] }
+      )
+      attribute(
+        :topo_global_server_address,
+        kind_of: String,
+        default: lazy { node['vitess']['topo_global_server_address'] }
+      )
+      attribute(
+        :topo_implementation,
+        kind_of: String,
+        default: lazy { node['vitess']['topo_implementation'] }
+      )
 
       attribute(:vtroot, kind_of: String, default: '/var/lib/vt')
       attribute(:vtdataroot, kind_of: String, default: '/var/lib/vtdataroot')
@@ -68,7 +83,11 @@ class Chef
       include Poise
 
       def additional_args
-        args = {}
+        args = {
+          'topo_global_root' => new_resource.topo_global_root,
+          'topo_global_server_address' => new_resource.topo_global_server_address,
+          'topo_implementation' => new_resource.topo_implementation,
+        }
         args['log_dir'] = service_log_dir if new_resource.args['log_dir'].nil?
         args
       end
@@ -135,6 +154,14 @@ class Chef
 
       def vt_bin_path
         @vt_bin_path ||= ::File.join(new_resource.vtroot, 'bin')
+      end
+
+      def vt_topo_args
+        @vt_topo_args ||= %W(
+          -topo_implementation #{new_resource.topo_implementation}
+          -topo_global_server_address #{new_resource.topo_global_server_address}
+          -topo_global_root #{new_resource.topo_global_root}
+        ).join(' ')
       end
 
       def vt_config_path

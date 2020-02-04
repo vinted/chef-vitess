@@ -19,7 +19,7 @@ class Chef
 
       def execute_command
         env = vitess_environment
-        cmd = "#{bin_location} -alsologtostderr=1 #{new_resource.command}"
+        cmd = "#{bin_location} -alsologtostderr=1 #{vt_topo_args} #{new_resource.command}"
         run_once_cache_file = ::File.join(
           Chef::Config[:file_cache_path],
           "vitess_run_once_#{Digest::MD5.hexdigest(new_resource.command)}"
