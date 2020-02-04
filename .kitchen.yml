@@ -37,36 +37,34 @@ topology_attributes_zk2: &topology_attributes_zk2
 
 suites:
   # ETCD topology
-  - name: etcd-mysqlctld
+  - name: etcd-default
     run_list:
       - recipe[test-vitess::mysql]
+      - recipe[test-vitess::etcd]
       - recipe[vitess::mysqlctld]
-
-  - name: etcd-vtgate
-    run_list:
-      - recipe[test-vitess::etcd]
       - recipe[vitess::vtgate]
-
-  - name: etcd-vttablet
-    run_list:
-      - recipe[test-vitess::etcd]
       - recipe[vitess::vttablet]
-
-  - name: etcd-vtctld
-    run_list:
-      - recipe[test-vitess::etcd]
       - recipe[vitess::vtctld]
-
-  - name: etcd-vtworker
-    run_list:
-      - recipe[test-vitess::etcd]
       - recipe[vitess::vtworker]
+    verifier:
+      inspec_tests:
+        - test/integration/mysqlctld
+        - test/integration/vtgate
+        - test/integration/vttablet
+        - test/integration/vtctld
+        - test/integration/vtworker
 
-  - name: etcd-cluster
+  - name: etcd-test-cluster
     run_list:
       - recipe[test-vitess::mysql]
       - recipe[test-vitess::etcd]
       - recipe[test-vitess::cluster]
+      - recipe[test-vitess::shell]
+    verifier:
+      inspec_tests:
+        - test/integration/etcd
+        - test/integration/cluster
+        - test/integration/shellwrapper
     driver:
       forward:
         - '15000:15000'
@@ -77,53 +75,39 @@ suites:
         - '25100:25100'
         - '25200:25200'
 
-  - name: etcd-shellwrapper
-    run_list:
-      - recipe[test-vitess::shell]
-
   # Zookeeper topology
-  - name: zk-mysqlctld
+  - name: zk-default
     run_list:
       - recipe[test-vitess::mysql]
+      - recipe[test-vitess::zookeeper]
       - recipe[vitess::mysqlctld]
-    attributes:
-      <<: *topology_attributes_zk2
-
-  - name: zk-vtgate
-    run_list:
-      - recipe[test-vitess::zookeeper]
       - recipe[vitess::vtgate]
-    attributes:
-      <<: *topology_attributes_zk2
-
-  - name: zk-vttablet
-    run_list:
-      - recipe[test-vitess::zookeeper]
       - recipe[vitess::vttablet]
-    attributes:
-      <<: *topology_attributes_zk2
-
-  - name: zk-vtctld
-    run_list:
-      - recipe[test-vitess::zookeeper]
       - recipe[vitess::vtctld]
-    attributes:
-      <<: *topology_attributes_zk2
-
-  - name: zk-vtworker
-    run_list:
-      - recipe[test-vitess::zookeeper]
       - recipe[vitess::vtworker]
     attributes:
       <<: *topology_attributes_zk2
+    verifier:
+      inspec_tests:
+        - test/integration/mysqlctld
+        - test/integration/vtgate
+        - test/integration/vttablet
+        - test/integration/vtctld
+        - test/integration/vtworker
 
-  - name: zk-cluster
+  - name: zk-test-cluster
     run_list:
       - recipe[test-vitess::mysql]
       - recipe[test-vitess::zookeeper]
       - recipe[test-vitess::cluster]
+      - recipe[test-vitess::shell]
     attributes:
       <<: *topology_attributes_zk2
+    verifier:
+      inspec_tests:
+        - test/integration/zookeeper
+        - test/integration/cluster
+        - test/integration/shellwrapper
     driver:
       forward:
         - '15001:15000'
@@ -133,9 +117,3 @@ suites:
         - '25001:25000'
         - '25101:25100'
         - '25201:25200'
-
-  - name: zk-shellwrapper
-    run_list:
-      - recipe[test-vitess::shell]
-    attributes:
-      <<: *topology_attributes_zk2
