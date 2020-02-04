@@ -1,14 +1,7 @@
-topo = node['test-vitess']['topo_implementation']
-topo_global_server_address = node['test-vitess']['topo'][topo]['server_address']
-
-cell = 'vin'
-topo_global_root = "/vitess/#{cell}"
-topo_global_server_address = node['test-vitess']['topo'][topo]['server_address']
 init_keyspace = 'commerce'
 
 vtctl_shell 'ApplySchema -sql-file' do
   command %W[
-    -topo_implementation #{topo} -topo_global_server_address #{topo_global_server_address} -topo_global_root #{topo_global_root}
     ApplySchema -sql-file /root/create_commerce_schema.sql #{init_keyspace}
   ].join(' ')
   environment 'KITCHEN' => 1

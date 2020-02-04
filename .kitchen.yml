@@ -33,14 +33,7 @@ platforms:
   #     run_options: '--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'
 
 topology_attributes_zk2: &topology_attributes_zk2
-  test-vitess:
-    topo_implementation: zk2
-  vitess:
-    mysqlctld: { topo_global_server_address: 'localhost:2181', topo_implementation: 'zk2' }
-    vtctld: { topo_global_server_address: 'localhost:2181', topo_implementation: 'zk2' }
-    vtgate: { topo_global_server_address: 'localhost:2181', topo_implementation: 'zk2' }
-    vttablet: { topo_global_server_address: 'localhost:2181', topo_implementation: 'zk2' }
-    vtworker: { topo_global_server_address: 'localhost:2181', topo_implementation: 'zk2' }
+  vitess: { topo_global_server_address: 'localhost:2181', topo_implementation: 'zk2' }
 
 suites:
   # ETCD topology
