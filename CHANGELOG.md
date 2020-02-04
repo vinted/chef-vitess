@@ -17,7 +17,8 @@ Initial release.
 - [CHANGE] Added support for df54e56 (2020-01-23) release
 - [CHANGE] `web_dir` for vtctld deprecated
 
-# 3.1.0
+# 4.0.0
 
 - [CHANGE] Default topology changed to etcd
+- [CHANGE] Topology configuration moved to global attributes
 - [FEATURE] Added etcd tests
