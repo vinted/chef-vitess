@@ -22,3 +22,7 @@ Initial release.
 - [CHANGE] Default topology changed to etcd
 - [CHANGE] Topology configuration moved to global attributes
 - [FEATURE] Added etcd tests
+
+# 4.1.0
+
+- [CHANGE] Added support for 041757f (2020-01-30) release
