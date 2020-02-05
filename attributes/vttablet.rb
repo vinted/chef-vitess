@@ -999,15 +999,6 @@ default['vitess']['vttablet']['topo_consul_watch_poll_duration'] = '30s'
 # (default 30)
 default['vitess']['vttablet']['topo_etcd_lease_ttl'] = 30
 
-# the path of the global topology data in the global topology server
-default['vitess']['vttablet']['topo_global_root'] = '/vitess/global'
-
-# the address of the global topology server
-default['vitess']['vttablet']['topo_global_server_address'] = 'localhost:2181'
-
-# the topology implementation to use
-default['vitess']['vttablet']['topo_implementation'] = 'zk2'
-
 # auth to use when connecting to the zk topo server, file contents should be <scheme>:<auth>, e.g.,
 # digest:user:pass
 default['vitess']['vttablet']['topo_zk_auth_file'] = nil

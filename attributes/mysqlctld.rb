@@ -320,15 +320,6 @@ default['vitess']['mysqlctld']['tablet_manager_protocol'] = 'grpc'
 # tablet uid (default 41983)
 default['vitess']['mysqlctld']['tablet_uid'] = 41_983
 
-# the path of the global topology data in the global topology server
-default['vitess']['mysqlctld']['topo_global_root'] = '/vitess/global'
-
-# the address of the global topology server
-default['vitess']['mysqlctld']['topo_global_server_address'] = 'localhost:2181'
-
-# the topology implementation to use
-default['vitess']['mysqlctld']['topo_implementation'] = 'zk2'
-
 # tracing service to use (default "noop")
 default['vitess']['mysqlctld']['tracer'] = 'noop'
 

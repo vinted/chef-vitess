@@ -384,15 +384,6 @@ default['vitess']['vtgate']['topo_consul_watch_poll_duration'] = '30s'
 # (default 30)
 default['vitess']['vtgate']['topo_etcd_lease_ttl'] = 30
 
-# the path of the global topology data in the global topology server
-default['vitess']['vtgate']['topo_global_root'] = '/vitess/global'
-
-# the address of the global topology server
-default['vitess']['vtgate']['topo_global_server_address'] = 'localhost:2181'
-
-# the topology implementation to use
-default['vitess']['vtgate']['topo_implementation'] = 'zk2'
-
 # concurrent topo reads (default 32)
 default['vitess']['vtgate']['topo_read_concurrency'] = 32
 
