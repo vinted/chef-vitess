@@ -14,11 +14,9 @@ when 'debian', 'ubuntu'
   apt_update 'update'
 end
 
-package %w[
-  Percona-Server-shared-57
-  Percona-Server-devel-57
-  Percona-Server-client-57
-  Percona-Server-server-57
-  Percona-Server-57-debuginfo
-  percona-xtrabackup-24
-]
+package 'Percona-Server-shared-57'
+package 'Percona-Server-devel-57'
+package 'Percona-Server-client-57'
+package 'Percona-Server-server-57'
+package 'Percona-Server-57-debuginfo'
+package 'percona-xtrabackup-24'
