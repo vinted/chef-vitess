@@ -156,14 +156,6 @@ class Chef
         @vt_bin_path ||= ::File.join(new_resource.vtroot, 'bin')
       end
 
-      def vt_topo_args
-        @vt_topo_args ||= %W(
-          -topo_implementation #{new_resource.topo_implementation}
-          -topo_global_server_address #{new_resource.topo_global_server_address}
-          -topo_global_root #{new_resource.topo_global_root}
-        ).join(' ')
-      end
-
       def vt_config_path
         @vt_config_path ||= ::File.join(new_resource.vtroot, 'config')
       end

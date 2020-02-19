@@ -2,7 +2,11 @@ init_keyspace = 'commerce'
 
 vtctl_shell 'ApplySchema -sql-file' do
   command %W[
-    ApplySchema -sql-file /root/create_commerce_schema.sql #{init_keyspace}
+    ApplySchema
+    -topo_implementation #{node['vitess']['topo_implementation']}
+    -topo_global_server_address #{node['vitess']['topo_global_server_address']}
+    -topo_global_root #{node['vitess']['topo_global_root']}
+    -sql-file /root/create_commerce_schema.sql #{init_keyspace}
   ].join(' ')
   environment 'KITCHEN' => 1
   file_prefix 'ApplySchema'
