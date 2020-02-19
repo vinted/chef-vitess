@@ -1,6 +1,8 @@
 cell = 'zone1'
 topo_cell_root = "/vitess/#{cell}"
 topo_implementation = node['vitess']['topo_implementation']
+topo_global_server_address = node['vitess']['topo_global_server_address']
+topo_global_root = node['vitess']['topo_global_root']
 topo_cell_server_address = node['vitess']['topo_global_server_address']
 init_keyspace = 'commerce'
 
@@ -9,6 +11,9 @@ init_keyspace = 'commerce'
 vtctl_artifact 'AddCellInfo' do
   command %W[
     -alsologtostderr=1
+    -topo_implementation #{topo_implementation}
+    -topo_global_server_address #{topo_global_server_address}
+    -topo_global_root #{topo_global_root}
     AddCellInfo -root #{topo_cell_root} -server_address #{topo_cell_server_address} #{cell}
   ].join(' ')
 end
@@ -89,6 +94,9 @@ sleep 60
 vtctl_artifact 'InitShardMaster' do
   command %W[
     -alsologtostderr=1
+    -topo_implementation #{topo_implementation}
+    -topo_global_server_address #{topo_global_server_address}
+    -topo_global_root #{topo_global_root}
     InitShardMaster -force #{init_keyspace}/0 #{cell}-#{uids.last}
   ].join(' ')
 end
@@ -107,6 +115,9 @@ end
 vtctl_artifact 'ApplySchema -sql-file' do
   command %W[
     -alsologtostderr=1
+    -topo_implementation #{topo_implementation}
+    -topo_global_server_address #{topo_global_server_address}
+    -topo_global_root #{topo_global_root}
     ApplySchema -sql-file /root/create_commerce_schema.sql #{init_keyspace}
   ].join(' ')
 end
@@ -114,6 +125,9 @@ end
 vtctl_artifact 'ApplyVSchema -vschema_file' do
   command %W[
     -alsologtostderr=1
+    -topo_implementation #{topo_implementation}
+    -topo_global_server_address #{topo_global_server_address}
+    -topo_global_root #{topo_global_root}
     ApplyVSchema -vschema_file /root/vschema_commerce_initial.json #{init_keyspace}
   ].join(' ')
 end

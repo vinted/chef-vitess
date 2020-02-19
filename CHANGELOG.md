@@ -26,3 +26,7 @@ Initial release.
 # 4.1.0
 
 - [CHANGE] Added support for 041757f (2020-01-30) release
+
+# 4.2.0
+
+- [CHANGE] Fix incompatible command arguments for artifacts  (2020-02-19) release
