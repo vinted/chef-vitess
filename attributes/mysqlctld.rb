@@ -33,6 +33,12 @@ default['vitess']['mysqlctld']['backup_storage_number_blocks'] = 2
 # write cpu profile to file
 default['vitess']['mysqlctld']['cpu_profile'] = nil
 
+# host to send spans to. if empty, no tracing will be done
+default['vitess']['mysqlctld']['datadog-agent-host'] = nil
+
+# port to send spans to. if empty, no tracing will be done
+default['vitess']['mysqlctld']['datadog-agent-port'] = nil
+
 # deprecated: use db_charset (default "utf8")
 default['vitess']['mysqlctld']['db-config-dba-charset'] = 'utf8'
 
@@ -158,12 +164,12 @@ default['vitess']['mysqlctld']['grpc_initial_conn_window_size'] = nil
 default['vitess']['mysqlctld']['grpc_initial_window_size'] = nil
 
 # After a duration of this time if the client doesn't see any activity it pings the server to see if
-# the transport is still alive
-default['vitess']['mysqlctld']['grpc_keepalive_time'] = nil
+# the transport is still alive. (default 10s)
+default['vitess']['mysqlctld']['grpc_keepalive_time'] = '10s'
 
 # After having pinged for keepalive check, the client waits for a duration of Timeout and if no
-# activity is seen even after that the connection is closed
-default['vitess']['mysqlctld']['grpc_keepalive_timeout'] = nil
+# activity is seen even after that the connection is closed. (default 10s)
+default['vitess']['mysqlctld']['grpc_keepalive_timeout'] = '10s'
 
 # key to use, requires grpc_cert, enables TLS
 default['vitess']['mysqlctld']['grpc_key'] = nil
@@ -211,9 +217,6 @@ default['vitess']['mysqlctld']['keep_logs_by_mtime'] = nil
 
 # keep running at least this long after SIGTERM before stopping (default 50ms)
 default['vitess']['mysqlctld']['lameduck-period'] = '50ms'
-
-# deprecated: timeout for acquiring topology locks, use remote_operation_timeout (default 30s)
-default['vitess']['mysqlctld']['lock_timeout'] = '30s'
 
 # when logging hits line file:N, emit a stack trace
 default['vitess']['mysqlctld']['log_backtrace_at'] = nil
@@ -303,6 +306,12 @@ default['vitess']['mysqlctld']['sql-max-length-ui'] = 512
 
 # The name of the registered push-based monitoring/stats backend to use
 default['vitess']['mysqlctld']['stats_backend'] = nil
+
+# List of dimensions to be combined into a single "all" value in exported stats vars
+default['vitess']['mysqlctld']['stats_combine_dimensions'] = nil
+
+# Variables to be dropped from the list of exported variables.
+default['vitess']['mysqlctld']['stats_drop_variables'] = nil
 
 # Interval between emitting stats to all registered backends (default 1m0s)
 default['vitess']['mysqlctld']['stats_emit_period'] = '1m0s'

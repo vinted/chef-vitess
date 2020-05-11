@@ -37,11 +37,14 @@ default['vitess']['vtgate']['consul_auth_static_file'] = nil
 # write cpu profile to file
 default['vitess']['vtgate']['cpu_profile'] = nil
 
+# host to send spans to. if empty, no tracing will be done
+default['vitess']['vtgate']['datadog-agent-host'] = nil
+
+# port to send spans to. if empty, no tracing will be done
+default['vitess']['vtgate']['datadog-agent-port'] = nil
+
 # The default tablet type to set for queries, when one is not explicitly selected (default MASTER)
 default['vitess']['vtgate']['default_tablet_type'] = 'MASTER'
-
-# if specified, this process will not route any queries to local tablets in the local cell
-default['vitess']['vtgate']['disable_local_gateway'] = nil
 
 # the replication lag that is considered too high when selecting the minimum num vttablets for
 # serving (default 2h0m0s)
@@ -100,12 +103,12 @@ default['vitess']['vtgate']['grpc_initial_conn_window_size'] = nil
 default['vitess']['vtgate']['grpc_initial_window_size'] = nil
 
 # After a duration of this time if the client doesn't see any activity it pings the server to see if
-# the transport is still alive
-default['vitess']['vtgate']['grpc_keepalive_time'] = nil
+# the transport is still alive. (default 10s)
+default['vitess']['vtgate']['grpc_keepalive_time'] = '10s'
 
 # After having pinged for keepalive check, the client waits for a duration of Timeout and if no
-# activity is seen even after that the connection is closed
-default['vitess']['vtgate']['grpc_keepalive_timeout'] = nil
+# activity is seen even after that the connection is closed. (default 10s)
+default['vitess']['vtgate']['grpc_keepalive_timeout'] = '10s'
 
 # key to use, requires grpc_cert, enables TLS
 default['vitess']['vtgate']['grpc_key'] = nil
@@ -168,9 +171,6 @@ default['vitess']['vtgate']['lameduck-period'] = '50ms'
 # use the legacy algorithm when selecting the vttablets for serving (default true)
 default['vitess']['vtgate']['legacy_replication_lag_algorithm'] = true
 
-# deprecated: timeout for acquiring topology locks, use remote_operation_timeout (default 30s)
-default['vitess']['vtgate']['lock_timeout'] = '30s'
-
 # when logging hits line file:N, emit a stack trace
 default['vitess']['vtgate']['log_backtrace_at'] = nil
 
@@ -226,6 +226,9 @@ default['vitess']['vtgate']['mysql_auth_static_reload_interval'] = nil
 # "mysql_clear_password")
 default['vitess']['vtgate']['mysql_clientcert_auth_method'] = 'mysql_clear_password'
 
+# Default session workload (OLTP, OLAP, DBA) (default "UNSPECIFIED")
+default['vitess']['vtgate']['mysql_default_workload'] = 'UNSPECIFIED'
+
 # JSON File from which to read LDAP server config
 default['vitess']['vtgate']['mysql_ldap_auth_config_file'] = nil
 
@@ -242,6 +245,9 @@ default['vitess']['vtgate']['mysql_server_bind_address'] = nil
 
 # If set, also listen for MySQL binary protocol connections on this port. (default -1)
 default['vitess']['vtgate']['mysql_server_port'] = 15_306
+
+# Delay after which buffered response will flushed to client. (default 100ms)
+default['vitess']['vtgate']['mysql_server_flush_delay'] = '100ms'
 
 # mysql query timeout
 default['vitess']['vtgate']['mysql_server_query_timeout'] = nil
@@ -294,6 +300,9 @@ default['vitess']['vtgate']['pid_file'] = nil
 # port for the server
 default['vitess']['vtgate']['port'] = 15_001
 
+# Enable HAProxy PROXY protocol on MySQL listener socket
+default['vitess']['vtgate']['proxy_protocol'] = nil
+
 # how often try to remove old logs (default 1h0m0s)
 default['vitess']['vtgate']['purge_logs_interval'] = '1h0m0s'
 
@@ -333,6 +342,12 @@ default['vitess']['vtgate']['srv_topo_cache_ttl'] = '1s'
 
 # The name of the registered push-based monitoring/stats backend to use
 default['vitess']['vtgate']['stats_backend'] = nil
+
+# List of dimensions to be combined into a single "all" value in exported stats vars
+default['vitess']['vtgate']['stats_combine_dimensions'] = nil
+
+# Variables to be dropped from the list of exported variables.
+default['vitess']['vtgate']['stats_drop_variables'] = nil
 
 # Interval between emitting stats to all registered backends (default 1m0s)
 default['vitess']['vtgate']['stats_emit_period'] = '1m0s'

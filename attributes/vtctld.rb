@@ -48,6 +48,12 @@ default['vitess']['vtctld']['consul_auth_static_file'] = nil
 # write cpu profile to file
 default['vitess']['vtctld']['cpu_profile'] = nil
 
+# host to send spans to. if empty, no tracing will be done
+default['vitess']['vtctld']['datadog-agent-host'] = nil
+
+# port to send spans to. if empty, no tracing will be done
+default['vitess']['vtctld']['datadog-agent-port'] = nil
+
 # db credentials file; send SIGHUP to reload this file
 default['vitess']['vtctld']['db-credentials-file'] = nil
 
@@ -87,9 +93,6 @@ default['vitess']['vtctld']['file_backup_storage_root'] = nil
 # Google Cloud Storage bucket to use for backups
 default['vitess']['vtctld']['gcs_backup_storage_bucket'] = nil
 
-# This flag is unused and deprecated. It will be removed entirely in a future release
-default['vitess']['vtctld']['gcs_backup_storage_project'] = nil
-
 # root prefix for all backup-related object names
 default['vitess']['vtctld']['gcs_backup_storage_root'] = nil
 
@@ -122,12 +125,12 @@ default['vitess']['vtctld']['grpc_initial_conn_window_size'] = nil
 default['vitess']['vtctld']['grpc_initial_window_size'] = nil
 
 # After a duration of this time if the client doesn't see any activity it pings the server to see if
-# the transport is still alive
-default['vitess']['vtctld']['grpc_keepalive_time'] = nil
+# the transport is still alive. (default 10s)
+default['vitess']['vtctld']['grpc_keepalive_time'] = '10s'
 
 # After having pinged for keepalive check, the client waits for a duration of Timeout and if no
-# activity is seen even after that the connection is closed
-default['vitess']['vtctld']['grpc_keepalive_timeout'] = nil
+# activity is seen even after that the connection is closed. (default 10s)
+default['vitess']['vtctld']['grpc_keepalive_timeout'] = '10s'
 
 # key to use, requires grpc_cert, enables TLS
 default['vitess']['vtctld']['grpc_key'] = nil
@@ -175,9 +178,6 @@ default['vitess']['vtctld']['lameduck-period'] = '50ms'
 
 # use the legacy algorithm when selecting the vttablets for serving (default true)
 default['vitess']['vtctld']['legacy_replication_lag_algorithm'] = true
-
-# deprecated: timeout for acquiring topology locks, use remote_operation_timeout (default 30s)
-default['vitess']['vtctld']['lock_timeout'] = '30s'
 
 # when logging hits line file:N, emit a stack trace
 default['vitess']['vtctld']['log_backtrace_at'] = nil
@@ -243,6 +243,9 @@ default['vitess']['vtctld']['pool_hostname_resolve_interval'] = nil
 
 # port for the server
 default['vitess']['vtctld']['port'] = 15_000
+
+# Setting this true will make vtctld proxy the tablet status instead of redirecting to them
+default['vitess']['vtctld']['proxy_tablets'] = nil
 
 # how often try to remove old logs (default 1h0m0s)
 default['vitess']['vtctld']['purge_logs_interval'] = '1h0m0s'
@@ -328,6 +331,12 @@ default['vitess']['vtctld']['srv_topo_cache_ttl'] = '1s'
 
 # The name of the registered push-based monitoring/stats backend to use
 default['vitess']['vtctld']['stats_backend'] = nil
+
+# List of dimensions to be combined into a single "all" value in exported stats vars
+default['vitess']['vtctld']['stats_combine_dimensions'] = nil
+
+# Variables to be dropped from the list of exported variables.
+default['vitess']['vtctld']['stats_drop_variables'] = nil
 
 # Interval between emitting stats to all registered backends (default 1m0s)
 default['vitess']['vtctld']['stats_emit_period'] = '1m0s'
