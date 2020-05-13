@@ -48,12 +48,6 @@ default['vitess']['vtctld']['consul_auth_static_file'] = nil
 # write cpu profile to file
 default['vitess']['vtctld']['cpu_profile'] = nil
 
-# host to send spans to. if empty, no tracing will be done
-default['vitess']['vtctld']['datadog-agent-host'] = nil
-
-# port to send spans to. if empty, no tracing will be done
-default['vitess']['vtctld']['datadog-agent-port'] = nil
-
 # db credentials file; send SIGHUP to reload this file
 default['vitess']['vtctld']['db-credentials-file'] = nil
 

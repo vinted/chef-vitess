@@ -37,12 +37,6 @@ default['vitess']['vtgate']['consul_auth_static_file'] = nil
 # write cpu profile to file
 default['vitess']['vtgate']['cpu_profile'] = nil
 
-# host to send spans to. if empty, no tracing will be done
-default['vitess']['vtgate']['datadog-agent-host'] = nil
-
-# port to send spans to. if empty, no tracing will be done
-default['vitess']['vtgate']['datadog-agent-port'] = nil
-
 # The default tablet type to set for queries, when one is not explicitly selected (default MASTER)
 default['vitess']['vtgate']['default_tablet_type'] = 'MASTER'
 

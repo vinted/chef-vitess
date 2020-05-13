@@ -58,12 +58,6 @@ default['vitess']['vttablet']['consul_auth_static_file'] = nil
 # write cpu profile to file
 default['vitess']['vttablet']['cpu_profile'] = nil
 
-# host to send spans to. if empty, no tracing will be done
-default['vitess']['vttablet']['datadog-agent-host'] = nil
-
-# port to send spans to. if empty, no tracing will be done
-default['vitess']['vttablet']['datadog-agent-port'] = nil
-
 # deprecated: use db_charset (default "utf8")
 default['vitess']['vttablet']['db-config-allprivs-charset'] = 'utf8'
 

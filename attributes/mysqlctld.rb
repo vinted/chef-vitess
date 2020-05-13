@@ -33,12 +33,6 @@ default['vitess']['mysqlctld']['backup_storage_number_blocks'] = 2
 # write cpu profile to file
 default['vitess']['mysqlctld']['cpu_profile'] = nil
 
-# host to send spans to. if empty, no tracing will be done
-default['vitess']['mysqlctld']['datadog-agent-host'] = nil
-
-# port to send spans to. if empty, no tracing will be done
-default['vitess']['mysqlctld']['datadog-agent-port'] = nil
-
 # deprecated: use db_charset (default "utf8")
 default['vitess']['mysqlctld']['db-config-dba-charset'] = 'utf8'
 

@@ -18,3 +18,9 @@ default['vitess']['version']['mysqlctl'] = 'v6.0-9fe7fd3'
 default['vitess']['version']['vtctl'] = 'v6.0-9fe7fd3'
 default['vitess']['version']['vtexplain'] = 'v6.0-9fe7fd3'
 default['vitess']['version']['vtbench'] = 'v6.0-9fe7fd3'
+
+# host to send spans to. if empty, no tracing will be done
+default['vitess']['datadog-agent-host'] = nil
+
+# port to send spans to. if empty, no tracing will be done
+default['vitess']['datadog-agent-port'] = nil
