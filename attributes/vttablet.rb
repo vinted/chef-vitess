@@ -52,10 +52,6 @@ default['vitess']['vttablet']['binlog_use_v3_resharding_mode'] = true
 # Path to JSON config file for ceph backup storage (default "ceph_backup_config.json")
 default['vitess']['vttablet']['ceph_backup_storage_config'] = 'ceph_backup_config.json'
 
-# size of a special pool that will be used if the client requests that statements be executed with
-# the CLIENT_FOUND_ROWS option of MySQL. (default 20)
-default['vitess']['vttablet']['client-found-rows-pool-size'] = 20
-
 # JSON File to read the topos/tokens from
 default['vitess']['vttablet']['consul_auth_static_file'] = nil
 
@@ -64,9 +60,6 @@ default['vitess']['vttablet']['cpu_profile'] = nil
 
 # deprecated: use db_charset (default "utf8")
 default['vitess']['vttablet']['db-config-allprivs-charset'] = 'utf8'
-
-# deprecated: dbname does not need to be explicitly configured
-default['vitess']['vttablet']['db-config-allprivs-dbname'] = nil
 
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-allprivs-flags'] = nil
@@ -104,9 +97,6 @@ default['vitess']['vttablet']['db-config-allprivs-unixsocket'] = nil
 # deprecated: use db_charset (default "utf8")
 default['vitess']['vttablet']['db-config-app-charset'] = 'utf8'
 
-# deprecated: dbname does not need to be explicitly configured
-default['vitess']['vttablet']['db-config-app-dbname'] = nil
-
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-app-flags'] = nil
 
@@ -142,9 +132,6 @@ default['vitess']['vttablet']['db-config-app-unixsocket'] = nil
 
 # deprecated: use db_charset (default "utf8")
 default['vitess']['vttablet']['db-config-appdebug-charset'] = 'utf8'
-
-# deprecated: dbname does not need to be explicitly configured
-default['vitess']['vttablet']['db-config-appdebug-dbname'] = nil
 
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-appdebug-flags'] = nil
@@ -182,9 +169,6 @@ default['vitess']['vttablet']['db-config-appdebug-unixsocket'] = nil
 # deprecated: use db_charset (default "utf8")
 default['vitess']['vttablet']['db-config-dba-charset'] = 'utf8'
 
-# deprecated: dbname does not need to be explicitly configured
-default['vitess']['vttablet']['db-config-dba-dbname'] = nil
-
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-dba-flags'] = nil
 
@@ -221,9 +205,6 @@ default['vitess']['vttablet']['db-config-dba-unixsocket'] = nil
 # deprecated: use db_charset (default "utf8")
 default['vitess']['vttablet']['db-config-filtered-charset'] = 'utf8'
 
-# deprecated: dbname does not need to be explicitly configured
-default['vitess']['vttablet']['db-config-filtered-dbname'] = nil
-
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-filtered-flags'] = nil
 
@@ -259,9 +240,6 @@ default['vitess']['vttablet']['db-config-filtered-unixsocket'] = nil
 
 # deprecated: use db_charset (default "utf8")
 default['vitess']['vttablet']['db-config-repl-charset'] = 'utf8'
-
-# deprecated: dbname does not need to be explicitly configured
-default['vitess']['vttablet']['db-config-repl-dbname'] = nil
 
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-repl-flags'] = nil
@@ -408,12 +386,14 @@ default['vitess']['vttablet']['discovery_low_replication_lag'] = '30s'
 # true iff we should emit stats to push-based monitoring/stats backends
 default['vitess']['vttablet']['emit_stats'] = nil
 
-# if the flag is on, a DML outsides a transaction will be auto committed. This flag is deprecated and
-# is unsafe. Instead, use the VTGate provided autocommit feature
-default['vitess']['vttablet']['enable-autocommit'] = nil
-
 # This option enables the query consolidator. (default true)
 default['vitess']['vttablet']['enable-consolidator'] = true
+
+# This option enables the query consolidator only on replicas.
+default['vitess']['vttablet']['enable-consolidator-replicas'] = nil
+
+# This option fetches & caches fields (columns) when storing query plans (default true)
+default['vitess']['vttablet']['enable-query-plan-field-caching'] = true
 
 # If true replication-lag-based throttling on transactions will be enabled
 default['vitess']['vttablet']['enable-tx-throttler'] = nil
@@ -461,9 +441,6 @@ default['vitess']['vttablet']['finalize_external_reparent_timeout'] = '30s'
 # Google Cloud Storage bucket to use for backups
 default['vitess']['vttablet']['gcs_backup_storage_bucket'] = nil
 
-# This flag is unused and deprecated. It will be removed entirely in a future release
-default['vitess']['vttablet']['gcs_backup_storage_project'] = nil
-
 # root prefix for all backup-related object names
 default['vitess']['vttablet']['gcs_backup_storage_root'] = nil
 
@@ -496,12 +473,12 @@ default['vitess']['vttablet']['grpc_initial_conn_window_size'] = nil
 default['vitess']['vttablet']['grpc_initial_window_size'] = nil
 
 # After a duration of this time if the client doesn't see any activity it pings the server to see if
-# the transport is still alive
-default['vitess']['vttablet']['grpc_keepalive_time'] = nil
+# the transport is still alive. (default 10s)
+default['vitess']['vttablet']['grpc_keepalive_time'] = '10s'
 
 # After having pinged for keepalive check, the client waits for a duration of Timeout and if no
-# activity is seen even after that the connection is closed
-default['vitess']['vttablet']['grpc_keepalive_timeout'] = nil
+# activity is seen even after that the connection is closed. (default 10s)
+default['vitess']['vttablet']['grpc_keepalive_timeout'] = '10s'
 
 # key to use, requires grpc_cert, enables TLS
 default['vitess']['vttablet']['grpc_key'] = nil
@@ -563,7 +540,8 @@ default['vitess']['vttablet']['init_db_name_override'] = nil
 # (init parameter) keyspace to use for this tablet
 default['vitess']['vttablet']['init_keyspace'] = nil
 
-# (init parameter) populate metadata tables
+# (init parameter) populate metadata tables even if restore_from_backup is disabled.
+# If restore_from_backup is enabled, metadata tables are always populated regardless of this flag.
 default['vitess']['vttablet']['init_populate_metadata'] = nil
 
 # (init parameter) shard to use for this tablet
@@ -577,6 +555,9 @@ default['vitess']['vttablet']['init_tags'] = nil
 
 # (init parameter) timeout to use for the init phase. (default 1m0s)
 default['vitess']['vttablet']['init_timeout'] = '1m0s'
+
+# connection timeout to mysqld in milliseconds (0 for no timeout)
+default['vitess']['vttablet']['db_connect_timeout_ms'] = 0
 
 # host and port to send spans to. if empty, no tracing will be done
 default['vitess']['vttablet']['jaeger-agent-host'] = nil
@@ -595,9 +576,6 @@ default['vitess']['vttablet']['legacy_replication_lag_algorithm'] = true
 
 # How long to keep the table locked before timing out (default 1m0s)
 default['vitess']['vttablet']['lock_tables_timeout'] = '1m0s'
-
-# deprecated: timeout for acquiring topology locks, use remote_operation_timeout (default 30s)
-default['vitess']['vttablet']['lock_timeout'] = '30s'
 
 # when logging hits line file:N, emit a stack trace
 default['vitess']['vttablet']['log_backtrace_at'] = nil
@@ -687,6 +665,9 @@ default['vitess']['vttablet']['mycnf_socket_file'] = nil
 # mysql tmp directory
 default['vitess']['vttablet']['mycnf_tmp_dir'] = nil
 
+# Delay after which buffered response will flushed to client. (default 100ms)
+default['vitess']['vttablet']['mysql_server_flush_delay'] = '100ms'
+
 # JSON File to read the users/passwords from
 default['vitess']['vttablet']['mysql_auth_server_static_file'] = nil
 
@@ -735,10 +716,6 @@ default['vitess']['vttablet']['orc_timeout'] = '30s'
 # If set, the process will write its pid to the named file, and delete it on graceful shutdown
 default['vitess']['vttablet']['pid_file'] = nil
 
-# pool name prefix, vttablet has several pools and each of them has a name. This config specifies the
-# prefix of these pool names
-default['vitess']['vttablet']['pool-name-prefix'] = nil
-
 # if set force an update to all hostnames and reconnect if changed, defaults to 0 (disabled)
 default['vitess']['vttablet']['pool_hostname_resolve_interval'] = nil
 
@@ -760,9 +737,6 @@ default['vitess']['vttablet']['querylog-format'] = 'text'
 # an acl that exempt from table acl checking (this acl is free to access any vitess tables)
 default['vitess']['vttablet']['queryserver-config-acl-exempt-acl'] = nil
 
-# query server allow unsafe dml statements
-default['vitess']['vttablet']['queryserver-config-allowunsafe-dmls'] = nil
-
 # If this flag is enabled, tabletserver will emit monitoring metrics and let the request pass
 # regardless of table acl check results
 default['vitess']['vttablet']['queryserver-config-enable-table-acl-dry-run'] = nil
@@ -776,20 +750,12 @@ default['vitess']['vttablet']['queryserver-config-idle-timeout'] = 1_800
 # query server max dml rows per statement, maximum number of rows allowed to return at a time for an
 # update or delete with either 1) an equality where clauses on primary keys, or 2) a subselect
 # statement. For update and delete statements in above two categories, vttablet will split the
-# original query into multiple small queries based on this configuration value.  (default 500)
-default['vitess']['vttablet']['queryserver-config-max-dml-rows'] = 500
+# original query into multiple small queries based on this configuration value.
+default['vitess']['vttablet']['queryserver-config-max-dml-rows'] = nil
 
 # query server max result size, maximum number of rows allowed to return from vttablet for
 # non-streaming queries. (default 10000)
 default['vitess']['vttablet']['queryserver-config-max-result-size'] = 10_000
-
-# query server message pool prefill parallelism, a non-zero value will prefill the pool using the
-# specified parallelism
-default['vitess']['vttablet']['queryserver-config-message-conn-pool-prefill-parallelism'] = nil
-
-# query server message connection pool size, message pool is used by message managers: recommended
-# value is one per message table (default 5)
-default['vitess']['vttablet']['queryserver-config-message-conn-pool-size'] = 5
 
 # query server message postpone cap is the maximum number of messages that can be postponed at any
 # given time. Set this number to substantially lower than transaction cap, so that the transaction
@@ -817,8 +783,8 @@ default['vitess']['vttablet']['queryserver-config-query-cache-size'] = 5_000
 default['vitess']['vttablet']['queryserver-config-query-pool-timeout'] = nil
 
 # query server query pool waiter limit, this is the maximum number of queries that can be queued
-# waiting to get a connection (default 50000)
-default['vitess']['vttablet']['queryserver-config-query-pool-waiter-cap'] = 50_000
+# waiting to get a connection (default 5000)
+default['vitess']['vttablet']['queryserver-config-query-pool-waiter-cap'] = 5_000
 
 # query server query timeout (in seconds), this is the query timeout in vttablet side. If a query
 # takes more than this timeout, it will be killed. (default 30)
@@ -865,8 +831,8 @@ default['vitess']['vttablet']['queryserver-config-transaction-timeout'] = 30
 default['vitess']['vttablet']['queryserver-config-txpool-timeout'] = 1
 
 # query server transaction pool waiter limit, this is the maximum number of transactions that can be
-# queued waiting to get a connection (default 50000)
-default['vitess']['vttablet']['queryserver-config-txpool-waiter-cap'] = 50_000
+# queued waiting to get a connection (default 5000)
+default['vitess']['vttablet']['queryserver-config-txpool-waiter-cap'] = 5_000
 
 # query server result size warning threshold, warn if number of rows returned from vttablet for
 # non-streaming queries exceeds this
@@ -937,11 +903,20 @@ default['vitess']['vttablet']['stats_backend'] = nil
 # Interval between emitting stats to all registered backends (default 1m0s)
 default['vitess']['vttablet']['stats_emit_period'] = '1m0s'
 
+# List of dimensions to be combined into a single "all" value in exported stats vars
+default['vitess']['vttablet']['stats_combine_dimensions'] = nil
+
+# Variables to be dropped from the list of exported variables.
+default['vitess']['vttablet']['stats_drop_variables'] = nil
+
 # logs at or above this threshold go to stderr (default 1)
 default['vitess']['vttablet']['stderrthreshold'] = 1
 
 # path to table access checker config file; send SIGHUP to reload this file
 default['vitess']['vttablet']['table-acl-config'] = nil
+
+# Ticker to reload ACLs
+default['vitess']['vttablet']['table-acl-config-reload-interval'] = nil
 
 # tablet alias
 default['vitess']['vttablet']['tablet-path'] = nil
@@ -1129,6 +1104,9 @@ default['vitess']['vttablet']['xbstream_restore_flags'] = nil
 # flags to pass to backup command. These should be space separated and will be added to the end of
 # the command
 default['vitess']['vttablet']['xtrabackup_backup_flags'] = nil
+
+# flags to pass to prepare command. These should be space separated and will be added to the end of the command
+default['vitess']['vttablet']['xtrabackup_prepare_flags'] = nil
 
 # directory location of the xtrabackup executable, e.g., /usr/bin
 default['vitess']['vttablet']['xtrabackup_root_path'] = nil

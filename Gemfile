@@ -14,6 +14,6 @@ end
 
 group :kitchen_common do
   gem 'kitchen-docker'
-  gem 'kitchen-inspec'
+  gem 'kitchen-inspec', '<= 1.3.1'
   gem 'test-kitchen'
 end

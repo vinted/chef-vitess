@@ -50,6 +50,16 @@ class Chef
         kind_of: String,
         default: lazy { node['vitess']['topo_implementation'] }
       )
+      attribute(
+        :datadog_agent_host,
+        kind_of: String,
+        default: lazy { node['vitess']['datadog-agent-host'] }
+      )
+      attribute(
+        :datadog_agent_port,
+        kind_of: String,
+        default: lazy { node['vitess']['datadog-agent-port'] }
+      )
 
       attribute(:vtroot, kind_of: String, default: '/var/lib/vt')
       attribute(:vtdataroot, kind_of: String, default: '/var/lib/vtdataroot')
@@ -88,6 +98,8 @@ class Chef
           'topo_global_server_address' => new_resource.topo_global_server_address,
           'topo_implementation' => new_resource.topo_implementation,
         }
+        args['datadog-agent-host'] = new_resource.datadog_agent_host if !new_resource.datadog_agent_host.nil?
+        args['datadog-agent-port'] = new_resource.datadog_agent_port if !new_resource.datadog_agent_port.nil?
         args['log_dir'] = service_log_dir if new_resource.args['log_dir'].nil?
         args
       end

@@ -30,3 +30,8 @@ Initial release.
 # 4.2.0
 
 - [CHANGE] Fix incompatible command arguments for artifacts  (2020-02-19) release
+
+# 4.3.0
+
+- [CHANGE] Added support for 9fe7fd3 (2020-05-20) release
+- [CHANGE] Some deprecated flags are removed
