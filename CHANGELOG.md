@@ -35,3 +35,7 @@ Initial release.
 
 - [CHANGE] Added support for 9fe7fd3 (2020-05-20) release
 - [CHANGE] Some deprecated flags are removed
+
+
+# 4.3.1
+- [CHANGE] Added support for 25db221 (2020-05-14) release (minor patch)
