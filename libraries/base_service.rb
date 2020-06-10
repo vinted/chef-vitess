@@ -79,6 +79,7 @@ class Chef
       attribute(:service_restart, kind_of: String, default: 'on-failure')
 
       # MySQL
+      attribute(:mycnf_cookbook, kind_of: String, default: 'vitess')
       attribute(:mycnf, kind_of: Hash, default: lazy { node['vitess']['mycnf'] })
 
       # Cookbook
@@ -184,6 +185,7 @@ class Chef
 
       def generate_mycnf(path:, variables:)
         template path do
+          cookbook new_resource.mycnf_cookbook
           source 'mycnf/generic.cnf.erb'
           variables variables: variables
           owner new_resource.user
