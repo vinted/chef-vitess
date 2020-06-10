@@ -39,3 +39,7 @@ Initial release.
 
 # 4.3.1
 - [CHANGE] Added support for 25db221 (2020-05-14) release (minor patch)
+
+# 4.3.2
+- [CHANGE] Added support for 41c356e (2020-06-04) release (minor patch)
+- [FIX] my.cnf missing `[mysqld]`
