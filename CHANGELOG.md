@@ -46,3 +46,7 @@ Initial release.
 
 # 4.3.3
 - [FIX] `finalize_external_reparent_timeout` is no longer used with vttablet
+
+# 4.3.4
+- [FIX] `schema_swap_admin_query_timeout`, `schema_swap_backup_concurrency`, `schema_swap_delay_between_errors`, `schema_swap_reparent_timeout` are no longer used with vtctld
+
