@@ -435,9 +435,6 @@ default['vitess']['vttablet']['file_backup_storage_root'] = nil
 # file based custom rule path
 default['vitess']['vttablet']['filecustomrules'] = nil
 
-# Timeout for the finalize stage of a fast external reparent reconciliation. (default 30s)
-default['vitess']['vttablet']['finalize_external_reparent_timeout'] = '30s'
-
 # Google Cloud Storage bucket to use for backups
 default['vitess']['vttablet']['gcs_backup_storage_bucket'] = nil
 
