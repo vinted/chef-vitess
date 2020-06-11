@@ -290,20 +290,6 @@ default['vitess']['vtctld']['schema_change_slave_timeout'] = '10s'
 # The user who submits this schema change
 default['vitess']['vtctld']['schema_change_user'] = nil
 
-# timeout for SQL queries used to save and retrieve meta information for schema swap process (default
-# 30s)
-default['vitess']['vtctld']['schema_swap_admin_query_timeout'] = '30s'
-
-# number of simultaneous compression/checksum jobs to run for seed backup during schema swap (default
-# 4)
-default['vitess']['vtctld']['schema_swap_backup_concurrency'] = 4
-
-# time to wait after a retryable error happened in the schema swap process (default 1m0s)
-default['vitess']['vtctld']['schema_swap_delay_between_errors'] = '1m0s'
-
-# timeout to wait for slaves when doing reparent during schema swap (default 30s)
-default['vitess']['vtctld']['schema_swap_reparent_timeout'] = '30s'
-
 # the name of a registered security policy to use for controlling access to URLs - empty means allow
 # all for anyone (built-in policies: deny-all, read-only)
 default['vitess']['vtctld']['security_policy'] = nil
