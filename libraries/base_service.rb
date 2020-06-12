@@ -83,6 +83,7 @@ class Chef
       attribute(:mycnf, kind_of: Hash, default: lazy { node['vitess']['mycnf'] })
 
       # Cookbook
+      attribute(:init_dbsql_sql_postfix, kind_of: String, default: '')
       attribute(:init_dbsql_sql_cookbook, kind_of: String, default: 'vitess')
       attribute(:init_dbsql_sql_variables, kind_of: Hash, default: {})
     end
@@ -149,7 +150,7 @@ class Chef
       end
 
       def init_dbsql_path
-        @init_dbsql_path ||= "#{vt_config_path}/init_db.sql"
+        @init_dbsql_path ||= "#{vt_config_path}/init_db#{new_resource.init_dbsql_sql_postfix}.sql"
       end
 
       def install_init_dbsql

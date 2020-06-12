@@ -50,3 +50,5 @@ Initial release.
 # 4.3.4
 - [FIX] `schema_swap_admin_query_timeout`, `schema_swap_backup_concurrency`, `schema_swap_delay_between_errors`, `schema_swap_reparent_timeout` are no longer used with vtctld
 
+# 4.4.0
+- [FEATURE] base resource now includes `init_dbsql_sql_postfix` to enable having multiple `init_db.sql` files
