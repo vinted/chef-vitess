@@ -52,3 +52,6 @@ Initial release.
 
 # 4.4.0
 - [FEATURE] base resource now includes `init_dbsql_sql_postfix` to enable having multiple `init_db.sql` files
+
+# 4.5.0
+- [CHANGE] Removed old 6.0 releases. Added support for afe46d8 (2020-06-10) release with fixed autocommit
