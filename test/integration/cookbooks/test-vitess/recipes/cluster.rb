@@ -44,6 +44,7 @@ uids.each_with_index do |uid, index|
   mysqlctld_service "mysqlctld instance #{index}" do
     args mysqlctld
     service_name "mysqlctld#{index}"
+    init_dbsql_sql_postfix "mysqlctld#{index}"
   end
 end
 
