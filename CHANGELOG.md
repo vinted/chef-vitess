@@ -55,3 +55,6 @@ Initial release.
 
 # 4.5.0
 - [CHANGE] Removed old 6.0 releases. Added support for afe46d8 (2020-06-10) release with fixed autocommit
+
+# 4.6.0
+- [CHANGE] Removed old 6.0 releases. Added support for bbfe181 (2020-06-25) release
