@@ -58,3 +58,6 @@ Initial release.
 
 # 4.6.0
 - [CHANGE] Removed old 6.0 releases. Added support for bbfe181 (2020-06-25) release
+
+# 4.7.0
+- [CHANGE] Removed old 6.0 releases. Added support for b3294e8 (2020-18-17) release with 7.0.0 vitess
