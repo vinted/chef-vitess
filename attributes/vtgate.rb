@@ -61,8 +61,8 @@ default['vitess']['vtgate']['enable_buffer_dry_run'] = nil
 # controls the capacity of the lru cache. (default 10000)
 default['vitess']['vtgate']['gate_query_cache_size'] = 10_000
 
-# The implementation of gateway (default "discoverygateway")
-default['vitess']['vtgate']['gateway_implementation'] = 'discoverygateway'
+# The implementation of gateway (default "tabletgateway")
+default['vitess']['vtgate']['gateway_implementation'] = 'tabletgateway'
 
 # At startup, the gateway will wait up to that duration to get one tablet per
 # keyspace/shard/tablettype (default 30s)

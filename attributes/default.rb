@@ -8,16 +8,16 @@ default['vitess']['topo_global_server_address'] = 'localhost:2379'
 # the topology implementation to use
 default['vitess']['topo_implementation'] = 'etcd2'
 
-default['vitess']['version']['mysqlctld'] = 'v6.0-bbfe181'
-default['vitess']['version']['vtctlclient'] = 'v6.0-bbfe181'
-default['vitess']['version']['vtctld'] = 'v6.0-bbfe181'
-default['vitess']['version']['vtgate'] = 'v6.0-bbfe181'
-default['vitess']['version']['vttablet'] = 'v6.0-bbfe181'
-default['vitess']['version']['vtworker'] = 'v6.0-bbfe181'
-default['vitess']['version']['mysqlctl'] = 'v6.0-bbfe181'
-default['vitess']['version']['vtctl'] = 'v6.0-bbfe181'
-default['vitess']['version']['vtexplain'] = 'v6.0-bbfe181'
-default['vitess']['version']['vtbench'] = 'v6.0-bbfe181'
+default['vitess']['version']['mysqlctld'] = 'v7.0.0-b3294e8'
+default['vitess']['version']['vtctlclient'] = 'v7.0.0-b3294e8'
+default['vitess']['version']['vtctld'] = 'v7.0.0-b3294e8'
+default['vitess']['version']['vtgate'] = 'v7.0.0-b3294e8'
+default['vitess']['version']['vttablet'] = 'v7.0.0-b3294e8'
+default['vitess']['version']['vtworker'] = 'v7.0.0-b3294e8'
+default['vitess']['version']['mysqlctl'] = 'v7.0.0-b3294e8'
+default['vitess']['version']['vtctl'] = 'v7.0.0-b3294e8'
+default['vitess']['version']['vtexplain'] = 'v7.0.0-b3294e8'
+default['vitess']['version']['vtbench'] = 'v7.0.0-b3294e8'
 
 # host to send spans to. if empty, no tracing will be done
 default['vitess']['datadog-agent-host'] = nil

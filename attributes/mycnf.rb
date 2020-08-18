@@ -49,7 +49,6 @@ default['vitess']['mycnf']['default'] = {
   # the master.
   'skip_slave_start' => nil,
   'slave_net_timeout' => 60,
-  'slave_load_tmpdir' => '{{.SlaveLoadTmpDir}}',
   'slow-query-log' => nil,
   'slow-query-log-file' => '{{.SlowLogPath}}',
   'socket' => '{{.SocketFile}}',

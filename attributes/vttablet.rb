@@ -650,9 +650,6 @@ default['vitess']['vttablet']['mycnf_relay_log_path'] = nil
 # mysql server id of the server (if specified, mycnf-file will be ignored)
 default['vitess']['vttablet']['mycnf_server_id'] = nil
 
-# slave load tmp directory
-default['vitess']['vttablet']['mycnf_slave_load_tmp_dir'] = nil
-
 # mysql slow query log path
 default['vitess']['vttablet']['mycnf_slow_log_path'] = nil
 

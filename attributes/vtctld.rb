@@ -285,7 +285,7 @@ default['vitess']['vtctld']['schema_change_controller'] = nil
 default['vitess']['vtctld']['schema_change_dir'] = nil
 
 # how long to wait for slaves to receive the schema change (default 10s)
-default['vitess']['vtctld']['schema_change_slave_timeout'] = '10s'
+default['vitess']['vtctld']['schema_change_replicas_timeout'] = '10s'
 
 # The user who submits this schema change
 default['vitess']['vtctld']['schema_change_user'] = nil
