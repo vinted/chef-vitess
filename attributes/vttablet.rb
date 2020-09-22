@@ -504,7 +504,7 @@ default['vitess']['vttablet']['grpc_server_initial_conn_window_size'] = nil
 default['vitess']['vttablet']['grpc_server_initial_window_size'] = nil
 
 # grpc server minimum keepalive time (default 5m0s)
-default['vitess']['vttablet']['grpc_server_keepalive_enforcement_policy_min_time'] = '5m0s'
+default['vitess']['vttablet']['grpc_server_keepalive_enforcement_policy_min_time'] = '10s'
 
 # grpc server permit client keepalive pings even when there are no active streams (RPCs)
 default['vitess']['vttablet']['grpc_server_keepalive_enforcement_policy_permit_without_stream'] = nil
