@@ -61,3 +61,8 @@ Initial release.
 
 # 4.7.0
 - [CHANGE] Removed old 6.0 releases. Added support for b3294e8 (2020-18-17) release with 7.0.0 vitess
+
+# 4.8.0
+- [CHANGE] Added support for 40ee160 (2020-09-22) release with pre 7.0.2 vitess
+- [CHANGE] Switch default release to 40ee160
+- [CHANGE] `grpc_server_keepalive_enforcement_policy_min_time` default changed
