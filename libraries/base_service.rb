@@ -219,7 +219,7 @@ class Chef
 
       def vitess_release_hash
         @vitess_release_hash ||= {}
-        @vitess_release_hash[new_resource.bin_name] ||= new_resource.version.split('-')[1]
+        @vitess_release_hash[new_resource.bin_name] ||= new_resource.version.split('-').last
       end
 
       def vitess_release_url

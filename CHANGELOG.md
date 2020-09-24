@@ -66,3 +66,7 @@ Initial release.
 - [CHANGE] Added support for 40ee160 (2020-09-22) release with pre 7.0.2 vitess
 - [CHANGE] Switch default release to 40ee160
 - [CHANGE] `grpc_server_keepalive_enforcement_policy_min_time` default changed
+
+# 4.9.0
+- [CHANGE] Added support for c02b7d5 (2020-09-24) release with 7.0.2 vitess
+- [CHANGE] Switch default release to c02b7d5
