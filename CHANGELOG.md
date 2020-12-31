@@ -73,3 +73,4 @@ Initial release.
 
 # 4.10.0
 - [CHANGE] Use `exec` in service bash wrapper
+- [CHANGE] Lock json gem to v2.4.1
