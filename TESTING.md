@@ -1,5 +1,4 @@
-Testing chef-vitess
-======================================
+# Testing chef-vitess
 
 This cookbook is equipped with both unit tests (chefspec) and integration tests
 (test-kitchen and serverspec). Contributions to this cookbook should include tests
@@ -22,3 +21,19 @@ $ bundle exec kitchen destroy
 The final destroy is intended to clean up any systems that failed a test, and is
 mostly useful when running with kitchen drivers for cloud providers, so that no
 machines are left orphaned and costing you money.
+
+## Possible problems
+
+If kitchen fails and you see this in the logs:
+
+```text
+------Exception-------
+Class: Kitchen::ActionFailed
+Message: Could not parse Docker build output for image ID
+```
+
+Disable BuildKit:
+
+```bash
+export DOCKER_BUILDKIT=0
+```

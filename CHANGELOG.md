@@ -70,3 +70,7 @@ Initial release.
 # 4.9.0
 - [CHANGE] Added support for c02b7d5 (2020-09-24) release with 7.0.2 vitess
 - [CHANGE] Switch default release to c02b7d5
+
+# 4.10.0
+- [CHANGE] Use `exec` in service bash wrapper
+- [CHANGE] Lock json gem to v2.4.1

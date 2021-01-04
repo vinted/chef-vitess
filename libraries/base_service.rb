@@ -318,7 +318,7 @@ class Chef
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
       def install_service
-        cmd = "#{bin_location} \\\n #{service_args}"
+        cmd = "exec #{bin_location} \\\n #{service_args}"
         service_name = new_resource.service_name
         exec_start = ::File.join(vt_bin_path, "#{service_name}.sh")
         env = vitess_environment
