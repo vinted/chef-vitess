@@ -266,8 +266,8 @@ default['vitess']['vtgate']['mysql_server_ssl_cert'] = nil
 # Path to ssl key for mysql server plugin SSL
 default['vitess']['vtgate']['mysql_server_ssl_key'] = nil
 
-# MySQL server version to advertise. (default "5.5.10-Vitess")
-default['vitess']['vtgate']['mysql_server_version'] = '5.5.10-Vitess'
+# MySQL server version to advertise. (default "5.7.9-Vitess")
+default['vitess']['vtgate']['mysql_server_version'] = '5.7.21-Vitess'
 
 # connection write timeout
 default['vitess']['vtgate']['mysql_server_write_timeout'] = nil

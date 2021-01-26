@@ -74,3 +74,6 @@ Initial release.
 # 4.10.0
 - [CHANGE] Use `exec` in service bash wrapper
 - [CHANGE] Lock json gem to v2.4.1
+
+# 4.11.0
+- [CHANGE] bump advertised mysql version to `5.7.21-Vitess`
