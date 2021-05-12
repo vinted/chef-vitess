@@ -259,6 +259,7 @@ class Chef
           mode '0640'
           checksum release_checksum
           notifies :run, "bash[extract vitess bin file #{archive_cache_path}]", :immediate
+          not_if { ::File.exist?(archive_cache_path) }
         end
       end
 
