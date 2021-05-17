@@ -6,7 +6,7 @@ topo_global_root = node['vitess']['topo_global_root']
 topo_cell_server_address = node['vitess']['topo_global_server_address']
 init_keyspace = 'commerce'
 
-# Assuming MySQL and Zookeeper or etcd is available
+# Assuming MySQL and etcd is available
 
 vtctl_artifact 'AddCellInfo' do
   command %W[

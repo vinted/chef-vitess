@@ -319,25 +319,6 @@ default['vitess']['vtworker']['topo_consul_watch_poll_duration'] = '30s'
 # (default 30)
 default['vitess']['vtworker']['topo_etcd_lease_ttl'] = 30
 
-# auth to use when connecting to the zk topo server, file contents should be <scheme>:<auth>, e.g.,
-# digest:user:pass
-default['vitess']['vtworker']['topo_zk_auth_file'] = nil
-
-# zk base timeout (see zk.Connect) (default 30s)
-default['vitess']['vtworker']['topo_zk_base_timeout'] = '30s'
-
-# maximum number of pending requests to send to a Zookeeper server. (default 64)
-default['vitess']['vtworker']['topo_zk_max_concurrency'] = 64
-
-# the server ca to use to validate servers when connecting to the zk topo server
-default['vitess']['vtworker']['topo_zk_tls_ca'] = nil
-
-# the cert to use to connect to the zk topo server, requires topo_zk_tls_key, enables TLS
-default['vitess']['vtworker']['topo_zk_tls_cert'] = nil
-
-# the key to use to connect to the zk topo server, enables TLS
-default['vitess']['vtworker']['topo_zk_tls_key'] = nil
-
 # tracing service to use (default "noop")
 default['vitess']['vtworker']['tracer'] = 'noop'
 
