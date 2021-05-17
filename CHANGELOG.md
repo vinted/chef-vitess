@@ -78,5 +78,6 @@ Initial release.
 # 4.11.0
 - [CHANGE] bump advertised mysql version to `5.7.21-Vitess`
 
-# 4.12.0
+# 5.0.0
 - [CHANGE] Do not perform binary checksum if it is already cached
+- [DEPRECATE] Remove zookeeper configuration and tests since etcd is a recommended topo
