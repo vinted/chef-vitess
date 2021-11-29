@@ -58,8 +58,14 @@ default['vitess']['vttablet']['consul_auth_static_file'] = nil
 # write cpu profile to file
 default['vitess']['vttablet']['cpu_profile'] = nil
 
-# deprecated: use db_charset (default "utf8")
-default['vitess']['vttablet']['db-config-allprivs-charset'] = 'utf8'
+
+if vitess_major_version('vttablet') < 11
+  # deprecated: use db_charset (default "utf8")
+  default['vitess']['vttablet']['db-config-allprivs-charset'] = 'utf8'
+
+  # deprecated: use db_allprivs_user (default "vt_allprivs")
+  default['vitess']['vttablet']['db-config-allprivs-uname'] = 'vt_allprivs'
+end
 
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-allprivs-flags'] = nil
@@ -88,14 +94,17 @@ default['vitess']['vttablet']['db-config-allprivs-ssl-cert'] = nil
 # deprecated: use db_ssl_key
 default['vitess']['vttablet']['db-config-allprivs-ssl-key'] = nil
 
-# deprecated: use db_allprivs_user (default "vt_allprivs")
-default['vitess']['vttablet']['db-config-allprivs-uname'] = 'vt_allprivs'
-
 # deprecated: use db_socket
 default['vitess']['vttablet']['db-config-allprivs-unixsocket'] = nil
 
-# deprecated: use db_charset (default "utf8")
-default['vitess']['vttablet']['db-config-app-charset'] = 'utf8'
+
+if vitess_major_version('vttablet') < 11
+  # deprecated: use db_charset (default "utf8")
+  default['vitess']['vttablet']['db-config-app-charset'] = 'utf8'
+
+  # deprecated: use db_app_user (default "vt_app")
+  default['vitess']['vttablet']['db-config-app-uname'] = 'vt_app'
+end
 
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-app-flags'] = nil
@@ -124,14 +133,16 @@ default['vitess']['vttablet']['db-config-app-ssl-cert'] = nil
 # deprecated: use db_ssl_key
 default['vitess']['vttablet']['db-config-app-ssl-key'] = nil
 
-# deprecated: use db_app_user (default "vt_app")
-default['vitess']['vttablet']['db-config-app-uname'] = 'vt_app'
-
 # deprecated: use db_socket
 default['vitess']['vttablet']['db-config-app-unixsocket'] = nil
 
-# deprecated: use db_charset (default "utf8")
-default['vitess']['vttablet']['db-config-appdebug-charset'] = 'utf8'
+if vitess_major_version('vttablet') < 11
+  # deprecated: use db_charset (default "utf8")
+  default['vitess']['vttablet']['db-config-appdebug-charset'] = 'utf8'
+
+  # deprecated: use db_appdebug_user (default "vt_appdebug")
+  default['vitess']['vttablet']['db-config-appdebug-uname'] = 'vt_appdebug'
+end
 
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-appdebug-flags'] = nil
@@ -160,14 +171,16 @@ default['vitess']['vttablet']['db-config-appdebug-ssl-cert'] = nil
 # deprecated: use db_ssl_key
 default['vitess']['vttablet']['db-config-appdebug-ssl-key'] = nil
 
-# deprecated: use db_appdebug_user (default "vt_appdebug")
-default['vitess']['vttablet']['db-config-appdebug-uname'] = 'vt_appdebug'
-
 # deprecated: use db_socket
 default['vitess']['vttablet']['db-config-appdebug-unixsocket'] = nil
 
-# deprecated: use db_charset (default "utf8")
-default['vitess']['vttablet']['db-config-dba-charset'] = 'utf8'
+if vitess_major_version('vttablet') < 11
+  # deprecated: use db_charset (default "utf8")
+  default['vitess']['vttablet']['db-config-dba-charset'] = 'utf8'
+
+  # deprecated: use db_dba_user (default "vt_dba")
+  default['vitess']['vttablet']['db-config-dba-uname'] = 'vt_dba'
+end
 
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-dba-flags'] = nil
@@ -196,14 +209,16 @@ default['vitess']['vttablet']['db-config-dba-ssl-cert'] = nil
 # deprecated: use db_ssl_key
 default['vitess']['vttablet']['db-config-dba-ssl-key'] = nil
 
-# deprecated: use db_dba_user (default "vt_dba")
-default['vitess']['vttablet']['db-config-dba-uname'] = 'vt_dba'
-
 # deprecated: use db_socket
 default['vitess']['vttablet']['db-config-dba-unixsocket'] = nil
 
-# deprecated: use db_charset (default "utf8")
-default['vitess']['vttablet']['db-config-filtered-charset'] = 'utf8'
+if vitess_major_version('vttablet') < 11
+  # deprecated: use db_charset (default "utf8")
+  default['vitess']['vttablet']['db-config-filtered-charset'] = 'utf8'
+
+  # deprecated: use db_filtered_user (default "vt_filtered")
+  default['vitess']['vttablet']['db-config-filtered-uname'] = 'vt_filtered'
+end
 
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-filtered-flags'] = nil
@@ -232,14 +247,16 @@ default['vitess']['vttablet']['db-config-filtered-ssl-cert'] = nil
 # deprecated: use db_ssl_key
 default['vitess']['vttablet']['db-config-filtered-ssl-key'] = nil
 
-# deprecated: use db_filtered_user (default "vt_filtered")
-default['vitess']['vttablet']['db-config-filtered-uname'] = 'vt_filtered'
-
 # deprecated: use db_socket
 default['vitess']['vttablet']['db-config-filtered-unixsocket'] = nil
 
-# deprecated: use db_charset (default "utf8")
-default['vitess']['vttablet']['db-config-repl-charset'] = 'utf8'
+if vitess_major_version('vttablet') < 11
+  # deprecated: use db_charset (default "utf8")
+  default['vitess']['vttablet']['db-config-repl-charset'] = 'utf8'
+
+  # deprecated: use db_repl_user (default "vt_repl")
+  default['vitess']['vttablet']['db-config-repl-uname'] = 'vt_repl'
+end
 
 # deprecated: use db_flags
 default['vitess']['vttablet']['db-config-repl-flags'] = nil
@@ -267,9 +284,6 @@ default['vitess']['vttablet']['db-config-repl-ssl-cert'] = nil
 
 # deprecated: use db_ssl_key
 default['vitess']['vttablet']['db-config-repl-ssl-key'] = nil
-
-# deprecated: use db_repl_user (default "vt_repl")
-default['vitess']['vttablet']['db-config-repl-uname'] = 'vt_repl'
 
 # deprecated: use db_socket
 default['vitess']['vttablet']['db-config-repl-unixsocket'] = nil
@@ -598,8 +612,13 @@ default['vitess']['vttablet']['logtostderr'] = nil
 # how long to wait in between slave -> connection attempts. Only precise to the second. (default 10s)
 default['vitess']['vttablet']['master_connect_retry'] = '10s'
 
-# profile every n bytes allocated (default 524288)
-default['vitess']['vttablet']['mem-profile-rate'] = 524_288
+if vitess_major_version('vttablet') < 11
+  # profile every n bytes allocated (default 524288)
+  default['vitess']['vttablet']['mem-profile-rate'] = 524_288
+else
+  # mem-profile-rate deprecated in v11
+  default['vitess']['vttablet']['pprof'] = 'mem'
+end
 
 # the minimum number of vttablets that will be continue to be used even with low replication lag
 # (default 2)

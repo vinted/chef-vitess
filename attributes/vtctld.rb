@@ -191,8 +191,13 @@ default['vitess']['vtctld']['logtostderr'] = nil
 # how long to wait in between slave -> connection attempts. Only precise to the second. (default 10s)
 default['vitess']['vtctld']['master_connect_retry'] = '10s'
 
-# profile every n bytes allocated (default 524288)
-default['vitess']['vtctld']['mem-profile-rate'] = 524_288
+if vitess_major_version('vtctld') < 11
+  # profile every n bytes allocated (default 524288)
+  default['vitess']['vtctld']['mem-profile-rate'] = 524_288
+else
+  # mem-profile-rate deprecated in v11
+  default['vitess']['vtctld']['pprof'] = 'mem'
+end
 
 # the minimum number of vttablets that will be continue to be used even with low replication lag
 # (default 2)

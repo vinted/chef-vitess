@@ -33,8 +33,16 @@ default['vitess']['mysqlctld']['backup_storage_number_blocks'] = 2
 # write cpu profile to file
 default['vitess']['mysqlctld']['cpu_profile'] = nil
 
-# deprecated: use db_charset (default "utf8")
-default['vitess']['mysqlctld']['db-config-dba-charset'] = 'utf8'
+if vitess_major_version('mysqlctld') < 11
+  # deprecated: use db_charset (default "utf8")
+  default['vitess']['mysqlctld']['db-config-dba-charset'] = 'utf8'
+
+  # db dba deprecated: use db_dba_password
+  default['vitess']['mysqlctld']['db-config-dba-pass'] = nil
+
+  # deprecated: use db_dba_user (default "vt_dba")
+  default['vitess']['mysqlctld']['db-config-dba-uname'] = 'vt_dba'
+end
 
 # deprecated: dbname does not need to be explicitly configured
 default['vitess']['mysqlctld']['db-config-dba-dbname'] = nil
@@ -44,9 +52,6 @@ default['vitess']['mysqlctld']['db-config-dba-flags'] = nil
 
 # deprecated: use db_host
 default['vitess']['mysqlctld']['db-config-dba-host'] = nil
-
-# db dba deprecated: use db_dba_password
-default['vitess']['mysqlctld']['db-config-dba-pass'] = nil
 
 # deprecated: use db_port
 default['vitess']['mysqlctld']['db-config-dba-port'] = nil
@@ -65,9 +70,6 @@ default['vitess']['mysqlctld']['db-config-dba-ssl-cert'] = nil
 
 # deprecated: use db_ssl_key
 default['vitess']['mysqlctld']['db-config-dba-ssl-key'] = nil
-
-# deprecated: use db_dba_user (default "vt_dba")
-default['vitess']['mysqlctld']['db-config-dba-uname'] = 'vt_dba'
 
 # deprecated: use db_socket
 default['vitess']['mysqlctld']['db-config-dba-unixsocket'] = nil
@@ -230,8 +232,13 @@ default['vitess']['mysqlctld']['logtostderr'] = nil
 # how long to wait in between slave -> connection attempts. Only precise to the second. (default 10s)
 default['vitess']['mysqlctld']['master_connect_retry'] = '10s'
 
-# profile every n bytes allocated (default 524288)
-default['vitess']['mysqlctld']['mem-profile-rate'] = 524_288
+if vitess_major_version('mysqlctld') < 11
+  # profile every n bytes allocated (default 524288)
+  default['vitess']['mysqlctld']['mem-profile-rate'] = 524_288
+else
+  # mem-profile-rate deprecated in v11
+  default['vitess']['mysqlctld']['pprof'] = 'mem'
+end
 
 # profile every n mutex contention events (see runtime.SetMutexProfileFraction)
 default['vitess']['mysqlctld']['mutex-profile-fraction'] = nil
