@@ -13,3 +13,18 @@ default['vitess']['releases']['c02b7d5']['url'] =
   'https://github.com/planetscale/vitess-releases/releases/download/c02b7d5/vitess-8.0-dev-c02b7d5.tar.gz'
 default['vitess']['releases']['c02b7d5']['checksum'] =
   '32ba1bf114a0af22e799981d067c998e42f27184330e90250e35acfbb4cd7bd2'
+
+default['vitess']['releases']['58cd7b0']['url'] =
+  'https://github.com/vinted/vitess-binary-files/releases/download/v9.0.2/vitess-9.0.2-58cd7b0.tar.gz'
+default['vitess']['releases']['58cd7b0']['checksum'] =
+  'a278972cd8dd63e4c55d197468570c4ecca72da8e5466ce40a8e95b047cb0f7e'
+
+default['vitess']['releases']['fc78470']['url'] =
+  'https://github.com/vinted/vitess-binary-files/releases/download/v10.0.2/vitess-10.0.2-fc78470.tar.gz'
+default['vitess']['releases']['fc78470']['checksum'] =
+  '2335fb06e630bcee43390e4fabd52e56a75a84596cc452b65d0e74496f7242c7'
+
+default['vitess']['releases']['92ac1ff']['url'] =
+  'https://github.com/vinted/vitess-binary-files/releases/download/v11.0.1/vitess-11.0.1-92ac1ff.tar.gz'
+default['vitess']['releases']['92ac1ff']['checksum'] =
+  '3071abcac34c9546853d21d76147f4c775dc6e098339bcfa53f5bc7d08cd854a'

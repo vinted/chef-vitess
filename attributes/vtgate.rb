@@ -187,8 +187,13 @@ default['vitess']['vtgate']['logtostderr'] = nil
 # result. (default 300000)
 default['vitess']['vtgate']['max_memory_rows'] = 300_000
 
-# profile every n bytes allocated (default 524288)
-default['vitess']['vtgate']['mem-profile-rate'] = 524_288
+if vitess_major_version('vtgate') < 11
+  # profile every n bytes allocated (default 524288)
+  default['vitess']['vtgate']['mem-profile-rate'] = 524_288
+else
+  # mem-profile-rate deprecated in v11
+  default['vitess']['vtgate']['pprof'] = 'mem'
+end
 
 # the amount of time to give for a vttablet to resume if it ends a message stream, usually because of
 # a reparent. (default 30s)

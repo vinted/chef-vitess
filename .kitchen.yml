@@ -74,3 +74,93 @@ suites:
         - '25000:25000'
         - '25100:25100'
         - '25200:25200'
+
+  - name: etcd-default-vitess-9
+    run_list:
+      - recipe[test-vitess::mysql]
+      - recipe[test-vitess::etcd]
+      - recipe[vitess::mysqlctld]
+      - recipe[vitess::vtgate]
+      - recipe[vitess::vttablet]
+      - recipe[vitess::vtctld]
+      - recipe[vitess::vtworker]
+    verifier:
+      inspec_tests:
+        - test/integration/mysqlctld
+        - test/integration/vtgate
+        - test/integration/vttablet
+        - test/integration/vtctld
+        - test/integration/vtworker
+    attributes:
+      vitess:
+        version:
+          mysqlctld: v9.0.2-58cd7b0
+          vtctlclient: v9.0.2-58cd7b0
+          vtctld: v9.0.2-58cd7b0
+          vtgate: v9.0.2-58cd7b0
+          vttablet: v9.0.2-58cd7b0
+          vtworker: v9.0.2-58cd7b0
+          mysqlctl: v9.0.2-58cd7b0
+          vtctl: v9.0.2-58cd7b0
+          vtexplain: v9.0.2-58cd7b0
+          vtbench: v9.0.2-58cd7b0
+
+  - name: etcd-default-vitess-10
+    run_list:
+      - recipe[test-vitess::mysql]
+      - recipe[test-vitess::etcd]
+      - recipe[vitess::mysqlctld]
+      - recipe[vitess::vtgate]
+      - recipe[vitess::vttablet]
+      - recipe[vitess::vtctld]
+      - recipe[vitess::vtworker]
+    verifier:
+      inspec_tests:
+        - test/integration/mysqlctld
+        - test/integration/vtgate
+        - test/integration/vttablet
+        - test/integration/vtctld
+        - test/integration/vtworker
+    attributes:
+      vitess:
+        version:
+          mysqlctld: v10.0.2-fc78470
+          vtctlclient: v10.0.2-fc78470
+          vtctld: v10.0.2-fc78470
+          vtgate: v10.0.2-fc78470
+          vttablet: v10.0.2-fc78470
+          vtworker: v10.0.2-fc78470
+          mysqlctl: v10.0.2-fc78470
+          vtctl: v10.0.2-fc78470
+          vtexplain: v10.0.2-fc78470
+          vtbench: v10.0.2-fc78470
+
+  - name: etcd-default-vitess-11
+    run_list:
+      - recipe[test-vitess::mysql]
+      - recipe[test-vitess::etcd]
+      - recipe[vitess::mysqlctld]
+      - recipe[vitess::vtgate]
+      - recipe[vitess::vttablet]
+      - recipe[vitess::vtctld]
+      - recipe[vitess::vtworker]
+    verifier:
+      inspec_tests:
+        - test/integration/mysqlctld
+        - test/integration/vtgate
+        - test/integration/vttablet
+        - test/integration/vtctld
+        - test/integration/vtworker
+    attributes:
+      vitess:
+        version:
+          mysqlctld: v11.0.1-92ac1ff
+          vtctlclient: v11.0.1-92ac1ff
+          vtctld: v11.0.1-92ac1ff
+          vtgate: v11.0.1-92ac1ff
+          vttablet: v11.0.1-92ac1ff
+          vtworker: v11.0.1-92ac1ff
+          mysqlctl: v11.0.1-92ac1ff
+          vtctl: v11.0.1-92ac1ff
+          vtexplain: v11.0.1-92ac1ff
+          vtbench: v11.0.1-92ac1ff
