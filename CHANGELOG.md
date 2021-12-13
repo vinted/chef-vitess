@@ -87,3 +87,7 @@ Initial release.
 - [CHANGE] Added support for fc78470 (2021-05-27) release with 10.0.2 vitess
 - [CHANGE] Added support for 92ac1ff (2021-09-09) release with 11.0.1 vitess
 - [CHANGE] Added Gemfile.lock
+
+# 5.1.1
+- [CHANGE] Added support for option to disable link updates
+- [FIX] Tests fix and upgrade of dependencies

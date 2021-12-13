@@ -24,3 +24,6 @@ default['vitess']['datadog-agent-host'] = nil
 
 # port to send spans to. if empty, no tracing will be done
 default['vitess']['datadog-agent-port'] = nil
+
+# option to disable link updates
+default['vitess']['disable_update_links'] = false

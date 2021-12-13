@@ -284,6 +284,7 @@ class Chef
 
         link ::File.join(new_resource.bin_path, new_resource.bin_name) do
           to bin_path_with_release
+          not_if { node['vitess']['disable_update_links'] and ::File.exist?("#{new_resource.bin_path}/#{new_resource.bin_name}") }
         end
       end
       # rubocop:enable Metrics/MethodLength

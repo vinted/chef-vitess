@@ -1,3 +1,5 @@
+require_relative 'helpers'
+
 %w[
   Percona-Server-shared-57
   Percona-Server-devel-57
