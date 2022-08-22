@@ -1,7 +1,19 @@
 case node['platform']
-when 'rhel', 'centos'
-  execute 'rpm -Uhv https://repo.percona.com/yum/percona-release-latest.noarch.rpm' do
-    creates '/etc/yum.repos.d/percona-original-release.repo'
+when 'rhel', 'centos', 'rocky'
+  if node['platform_version'].to_i < 8
+    execute 'rpm -Uhv https://repo.percona.com/yum/percona-release-latest.noarch.rpm' do
+      creates '/etc/yum.repos.d/percona-original-release.repo'
+    end
+  end
+  if node['platform_version'].to_i >= 8
+    package 'findutils'
+    execute 'rpm -Uhv https://repo.percona.com/yum/percona-release-latest.noarch.rpm' do
+      creates '/etc/yum.repos.d/percona-prel-release.repo'
+    end
+    execute 'percona-release setup ps-57' do
+      creates '/etc/yum.repos.d/percona-ps-57-release.repo'
+    end
+    execute 'dnf module disable mysql -y'
   end
 when 'debian', 'ubuntu'
   package %w[curl software-properties-common]
@@ -14,7 +26,9 @@ when 'debian', 'ubuntu'
   apt_update 'update'
 end
 
-package 'Percona-Server-shared-57'
+package 'Percona-Server-shared-57' do
+  flush_cache [ :before ]
+end
 package 'Percona-Server-devel-57'
 package 'Percona-Server-client-57'
 package 'Percona-Server-server-57'

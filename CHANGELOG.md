@@ -90,3 +90,6 @@ Initial release.
 
 # 5.2.0
 - [CHANGE] Added support for 3f6945d (2022-01-10) release with 11.0.4 Vitess.
+
+# 5.3.0
+- [CHANGE] Added support for Rocky Linux

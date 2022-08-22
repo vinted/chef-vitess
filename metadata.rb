@@ -6,14 +6,15 @@ description 'Installs/Configures Vitess database clustering system.'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 issues_url 'https://github.com/vinted/chef-vitess/issues'
 source_url 'https://github.com/vinted/chef-vitess'
-chef_version '>= 12.1' if respond_to?(:chef_version)
-version '5.2.0'
+chef_version '>= 12.14' if respond_to?(:chef_version)
+version '5.3.0'
 
 supports 'redhat'
 supports 'centos'
 supports 'ubuntu'
 supports 'debian'
+supports 'rocky'
 
 depends 'poise', '~> 2.8.2'
 depends 'systemd', '~> 3.2.4'
-depends 'ulimit', '~> 1.0.0'
+depends 'ulimit', '~> 1.1.1'

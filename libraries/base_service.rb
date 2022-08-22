@@ -206,7 +206,7 @@ class Chef
 
       def platform_supported?
         platform = node['platform']
-        return if %w[redhat centos debian ubuntu].include?(platform)
+        return if %w[redhat centos debian ubuntu rocky].include?(platform)
         raise "Platform #{platform} is not supported"
       end
 
