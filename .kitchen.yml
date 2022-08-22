@@ -66,15 +66,6 @@ suites:
         - test/integration/etcd
         - test/integration/cluster
         - test/integration/shellwrapper
-    driver:
-      forward:
-        - '15000:15000'
-        - '10000:10000'
-        - '10100:10100'
-        - '10200:10200'
-        - '25000:25000'
-        - '25100:25100'
-        - '25200:25200'
 
   - name: etcd-default-vitess-9
     run_list:
