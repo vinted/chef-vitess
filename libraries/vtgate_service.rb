@@ -20,12 +20,11 @@ class Chef
   class Provider
     # Vtgate service installation and configuration
     class VtgateService < VitessBaseService
-
       provides(:vtgate_service)
 
       def action_delete
         service new_resource.service_name do
-          action %i[stop disable]
+          action %i(stop disable)
         end
       end
 

@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
-cinc_gem_source = 'https://packagecloud.io/cinc-project/stable'
 
 group :lint do
   gem 'cookstyle'
-  gem 'foodcritic', '~> 6.0'
 end
 
 group :unit do

@@ -58,7 +58,6 @@ default['vitess']['vttablet']['consul_auth_static_file'] = nil
 # write cpu profile to file
 default['vitess']['vttablet']['cpu_profile'] = nil
 
-
 if vitess_major_version('vttablet') < 11
   # deprecated: use db_charset (default "utf8")
   default['vitess']['vttablet']['db-config-allprivs-charset'] = 'utf8'
@@ -96,7 +95,6 @@ default['vitess']['vttablet']['db-config-allprivs-ssl-key'] = nil
 
 # deprecated: use db_socket
 default['vitess']['vttablet']['db-config-allprivs-unixsocket'] = nil
-
 
 if vitess_major_version('vttablet') < 11
   # deprecated: use db_charset (default "utf8")

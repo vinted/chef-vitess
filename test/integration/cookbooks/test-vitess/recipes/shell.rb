@@ -1,13 +1,13 @@
 init_keyspace = 'commerce'
 
 vtctl_shell 'ApplySchema -sql-file' do
-  command %W[
+  command %W(
     ApplySchema
     -topo_implementation #{node['vitess']['topo_implementation']}
     -topo_global_server_address #{node['vitess']['topo_global_server_address']}
     -topo_global_root #{node['vitess']['topo_global_root']}
     -sql-file /root/create_commerce_schema.sql #{init_keyspace}
-  ].join(' ')
+  ).join(' ')
   environment 'KITCHEN' => 1
   file_prefix 'ApplySchema'
 end
@@ -18,17 +18,17 @@ end
 # commands
 
 vtctlclient_shell 'VtctlClient' do
-  command %W[
+  command %W(
     vtctlclient
-  ].join(' ')
+  ).join(' ')
   environment 'CLIENT' => 1
   file_prefix 'client'
 end
 
 mysqlctl_shell 'Mysqlctl' do
-  command %W[
+  command %W(
     mysqlctl
-  ].join(' ')
+  ).join(' ')
   environment 'CL' => 1
   file_prefix 'client'
 end

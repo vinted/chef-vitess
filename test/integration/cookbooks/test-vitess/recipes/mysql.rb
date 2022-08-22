@@ -1,5 +1,5 @@
 case node['platform']
-when 'rhel', 'centos', 'rocky'
+when 'redhat', 'centos', 'rocky'
   if node['platform_version'].to_i < 8
     execute 'rpm -Uhv https://repo.percona.com/yum/percona-release-latest.noarch.rpm' do
       creates '/etc/yum.repos.d/percona-original-release.repo'
@@ -16,7 +16,7 @@ when 'rhel', 'centos', 'rocky'
     execute 'dnf module disable mysql -y'
   end
 when 'debian', 'ubuntu'
-  package %w[curl software-properties-common]
+  package %w(curl software-properties-common)
 
   execute 'download mysql-apt-config' do
     command %(add-apt-repository 'https://repo.percona.com/apt/percona-release_latest.xenial_all.deb')

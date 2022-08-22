@@ -13,7 +13,7 @@ provisioner:
   environments_path: 'test/integration/environments'
   roles_path: 'test/integration/roles'
   require_chef_omnibus: 17
-  chef_client_path: '/usr/bin/chef-client'
+  product_name: cinc
 
 verifier:
   name: inspec
