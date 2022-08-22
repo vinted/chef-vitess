@@ -4,8 +4,7 @@ when 'redhat', 'centos', 'rocky'
     execute 'rpm -Uhv https://repo.percona.com/yum/percona-release-latest.noarch.rpm' do
       creates '/etc/yum.repos.d/percona-original-release.repo'
     end
-  end
-  if node['platform_version'].to_i >= 8
+  else
     package 'findutils'
     execute 'rpm -Uhv https://repo.percona.com/yum/percona-release-latest.noarch.rpm' do
       creates '/etc/yum.repos.d/percona-prel-release.repo'
