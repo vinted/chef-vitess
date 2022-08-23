@@ -73,7 +73,7 @@ class Chef
       attribute(
         :service_unit_after,
         kind_of: Array,
-        default: %w[network.target]
+        default: %w(network.target)
       )
       attribute(:service_timeout_sec, kind_of: Integer, default: 5)
       attribute(:service_restart, kind_of: String, default: 'on-failure')
@@ -100,8 +100,8 @@ class Chef
           'topo_global_server_address' => new_resource.topo_global_server_address,
           'topo_implementation' => new_resource.topo_implementation,
         }
-        args['datadog-agent-host'] = new_resource.datadog_agent_host if !new_resource.datadog_agent_host.nil?
-        args['datadog-agent-port'] = new_resource.datadog_agent_port if !new_resource.datadog_agent_port.nil?
+        args['datadog-agent-host'] = new_resource.datadog_agent_host unless new_resource.datadog_agent_host.nil?
+        args['datadog-agent-port'] = new_resource.datadog_agent_port unless new_resource.datadog_agent_port.nil?
         args['log_dir'] = service_log_dir if new_resource.args['log_dir'].nil?
         args
       end
@@ -119,7 +119,7 @@ class Chef
               vt_config_path,
               mycnf_path,
               base_log_dir,
-              service_log_dir
+              service_log_dir,
             ]
             deriver_install
           end
@@ -206,7 +206,7 @@ class Chef
 
       def platform_supported?
         platform = node['platform']
-        return if %w[redhat centos debian ubuntu].include?(platform)
+        return if %w(redhat centos debian ubuntu rocky).include?(platform)
         raise "Platform #{platform} is not supported"
       end
 
@@ -258,8 +258,8 @@ class Chef
           group 'root'
           mode '0640'
           checksum release_checksum
-          notifies :run, "bash[extract vitess bin file #{archive_cache_path}]", :immediate
-          not_if { ::File.exist?(archive_cache_path) }
+          notifies :run, "bash[extract vitess bin file #{archive_cache_path}]", :immediately
+          action :create_if_missing
         end
       end
 
@@ -295,14 +295,14 @@ class Chef
             status: true,
             restart: true
           )
-          action %i[enable start]
+          action %i(enable start)
         end
       end
 
       def service_args(args = new_resource.args)
         args
           .merge(additional_args)
-          .reject { |_k, v| v.nil? }
+          .compact
           .map { |k, v| "-#{k}=#{v}" }
           .join(" \\\n ")
       end
@@ -312,7 +312,7 @@ class Chef
           'VTROOT' => new_resource.vtroot,
           'VTDATAROOT' => new_resource.vtdataroot,
           'MYSQL_FLAVOR' => new_resource.mysql_flavor,
-          'VT_MYSQL_ROOT' => new_resource.vt_mysql_root
+          'VT_MYSQL_ROOT' => new_resource.vt_mysql_root,
         }
       end
 

@@ -20,12 +20,11 @@ class Chef
   class Provider
     # Vtworker service installation and configuration
     class VtworkerService < VitessBaseService
-
       provides(:vtworker_service)
 
       def action_delete
         service new_resource.service_name do
-          action %i[stop disable]
+          action %i(stop disable)
         end
       end
 

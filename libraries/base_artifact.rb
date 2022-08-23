@@ -14,7 +14,6 @@ class Chef
 
   class Provider
     class BaseArtifact < VitessBaseService
-
       protected
 
       def execute_command

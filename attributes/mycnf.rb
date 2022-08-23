@@ -63,7 +63,7 @@ default['vitess']['mycnf']['default'] = {
   'plugin_dir' => '/usr/lib64/mysql/plugin',
   'plugin-load-add' => 'rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so',
   'rpl_semi_sync_master_timeout' => 1_000_000_000_000_000_000,
-  'rpl_semi_sync_master_wait_no_slave' => 0
+  'rpl_semi_sync_master_wait_no_slave' => 0,
 }
 
 default['vitess']['mycnf']['master'] = {
@@ -78,7 +78,7 @@ default['vitess']['mycnf']['master'] = {
   'rpl_semi_sync_master_wait_no_slave' => 0,
   'binlog_format' => 'ROW',
   'plugin_dir' => '/usr/lib64/mysql/plugin',
-  'binlog_row_image' => 'full'
+  'binlog_row_image' => 'full',
 }
 
 default['vitess']['mycnf']['replica'] = {
@@ -93,7 +93,7 @@ default['vitess']['mycnf']['replica'] = {
   'rpl_semi_sync_master_wait_no_slave' => 0,
   'binlog_format' => 'ROW',
   'plugin_dir' => '/usr/lib64/mysql/plugin',
-  'binlog_row_image' => 'full'
+  'binlog_row_image' => 'full',
 }
 
 default['vitess']['mycnf']['master_percona57'] = {
@@ -119,5 +119,5 @@ default['vitess']['mycnf']['master_percona57'] = {
   'rpl_semi_sync_slave_enabled' => 'ON',
   'binlog_format' => 'ROW',
   'plugin_dir' => '/usr/lib64/mysql/plugin',
-  'binlog_row_image' => 'full'
+  'binlog_row_image' => 'full',
 }

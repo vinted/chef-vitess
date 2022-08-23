@@ -9,13 +9,13 @@ init_keyspace = 'commerce'
 # Assuming MySQL and etcd is available
 
 vtctl_artifact 'AddCellInfo' do
-  command %W[
+  command %W(
     -alsologtostderr=1
     -topo_implementation #{topo_implementation}
     -topo_global_server_address #{topo_global_server_address}
     -topo_global_root #{topo_global_root}
     AddCellInfo -root #{topo_cell_root} -server_address #{topo_cell_server_address} #{cell}
-  ].join(' ')
+  ).join(' ')
 end
 
 vtctld = node['vitess']['vtctld'].dup
@@ -49,11 +49,11 @@ uids.each_with_index do |uid, index|
 end
 
 # Let mysqlctld initialize
-sleep 80
+chef_sleep '80'
 
 # dirty way to create database on MySQL master directly
 execute 'create commerce database' do
-  command "sleep 20; echo 'CREATE DATABASE IF NOT EXISTS vt_#{init_keyspace};' | mysql -S /var/lib/vtdataroot/vt_#{sprintf("%010d", uids.last)}/mysql.sock"
+  command "echo 'CREATE DATABASE IF NOT EXISTS vt_#{init_keyspace};' | mysql -S /var/lib/vtdataroot/vt_#{format('%010d', uids.last)}/mysql.sock"
   action :run
 end
 
@@ -62,7 +62,7 @@ uids.each_with_index do |uid, index|
 
   # Tablet 1
   vttablet = node['vitess']['vttablet'].dup
-  vttablet['tablet-path'] = sprintf("#{cell}-%010d", uid)
+  vttablet['tablet-path'] = format("#{cell}-%010d", uid)
   vttablet['init_keyspace'] = init_keyspace
   vttablet['init_shard'] = '0'
   vttablet['init_tablet_type'] = 'replica'
@@ -85,7 +85,7 @@ uids.each_with_index do |uid, index|
 end
 
 # Let vttablet initialize
-sleep 60
+chef_sleep 60
 
 # Since this is the first time the shard has been started,
 # the tablets are not already doing any replication, and there is no
@@ -93,16 +93,16 @@ sleep 60
 # to bypass the usual sanity checks that would apply if this wasn't a
 # brand new shard.
 vtctl_artifact 'InitShardMaster' do
-  command %W[
+  command %W(
     -alsologtostderr=1
     -topo_implementation #{topo_implementation}
     -topo_global_server_address #{topo_global_server_address}
     -topo_global_root #{topo_global_root}
     InitShardMaster -force #{init_keyspace}/0 #{cell}-#{uids.last}
-  ].join(' ')
+  ).join(' ')
 end
 
-%w[create_commerce_schema.sql vschema_commerce_initial.json].each do |file|
+%w(create_commerce_schema.sql vschema_commerce_initial.json).each do |file|
   cookbook_file "/root/#{file}" do
     source file
     owner 'vitess'
@@ -114,23 +114,23 @@ end
 
 # Creating schema
 vtctl_artifact 'ApplySchema -sql-file' do
-  command %W[
+  command %W(
     -alsologtostderr=1
     -topo_implementation #{topo_implementation}
     -topo_global_server_address #{topo_global_server_address}
     -topo_global_root #{topo_global_root}
     ApplySchema -sql-file /root/create_commerce_schema.sql #{init_keyspace}
-  ].join(' ')
+  ).join(' ')
 end
 
 vtctl_artifact 'ApplyVSchema -vschema_file' do
-  command %W[
+  command %W(
     -alsologtostderr=1
     -topo_implementation #{topo_implementation}
     -topo_global_server_address #{topo_global_server_address}
     -topo_global_root #{topo_global_root}
     ApplyVSchema -vschema_file /root/vschema_commerce_initial.json #{init_keyspace}
-  ].join(' ')
+  ).join(' ')
 end
 
 # vtgate

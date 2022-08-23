@@ -1,10 +1,10 @@
 describe port(15306) do
   it { should be_listening }
-  its('protocols') { should include('tcp') }
+  its('protocols') { should include('tcp6') }
 end
 
 def session
-  mysql_session(nil, nil, nil, nil, '/tmp/vtgate.sock')
+  mysql_session('root', 'some', nil, nil, '/tmp/vtgate.sock')
 end
 
 describe session.query('show databases;') do

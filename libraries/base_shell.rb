@@ -12,7 +12,6 @@ class Chef
 
   class Provider
     class BaseShell < VitessBaseService
-
       protected
 
       def deriver_install
