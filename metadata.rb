@@ -16,4 +16,4 @@ supports 'rocky'
 
 depends 'poise', '~> 2.8.2'
 depends 'systemd', '~> 3.2.4'
-depends 'ulimit', '~> 1.1.1'
+depends 'ulimit', '~> 1.0.0'
