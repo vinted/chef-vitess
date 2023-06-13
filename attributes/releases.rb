@@ -33,3 +33,8 @@ default['vitess']['releases']['3f6945d']['url'] =
   'https://github.com/vinted/vitess-binary-files/releases/download/11.0.4-patch3-3f6945d/vitess-11.0.4-patch3-3f6945d.tar.gz'
 default['vitess']['releases']['3f6945d']['checksum'] =
   '7958c9f45efafa3b121b61905163cf06157458716934a26c2d3ce40b46fbf102'
+
+default['vitess']['releases']['862e317']['url'] =
+  'https://github.com/vinted/vitess-binary-files/releases/download/11.0.4-patch9-862e317/vitess-11.0.4-patch9-862e317.tar.gz'
+default['vitess']['releases']['862e317']['checksum'] =
+  '01e07cc0b4112de885f2cdbdeaae0d82278e7b74234956295da59983757a5df5'
