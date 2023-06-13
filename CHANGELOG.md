@@ -93,3 +93,6 @@ Initial release.
 
 # 5.3.0
 - [CHANGE] Added support for Rocky Linux
+
+# 5.4.0
+- [CHANGE] Added support for 862e317 (2023-04-19) release with 11.0.4 Vitess and fixes/backports
