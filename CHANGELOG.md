@@ -96,3 +96,6 @@ Initial release.
 
 # 5.4.0
 - [CHANGE] Added support for 862e317 (2023-04-19) release with 11.0.4 Vitess and fixes/backports
+
+# 5.5.0
+- [CHANGE] Added support for 5d8fa9a (2023-09-22) release with 11.0.4 Vitess and fixes/backports
