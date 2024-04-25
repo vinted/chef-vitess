@@ -99,3 +99,6 @@ Initial release.
 
 # 5.5.0
 - [CHANGE] Added support for 5d8fa9a (2023-09-22) release with 11.0.4 Vitess and fixes/backports
+
+# 5.6.0
+- [CHANGE] Added support for ecc245eed3 (2024-04-25) release with 11.0.4 Vitess and fixes/backports
