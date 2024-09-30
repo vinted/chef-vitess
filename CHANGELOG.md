@@ -102,3 +102,6 @@ Initial release.
 
 # 5.6.0
 - [CHANGE] Added support for ecc245eed3 (2024-04-25) release with 11.0.4 Vitess and fixes/backports
+
+# 5.7.0
+- [CHANGE] Added support for 3fac8111f3 (2024-09-25) release with 11.0.4 Vitess and fixes/backports

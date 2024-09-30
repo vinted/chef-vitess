@@ -6,7 +6,7 @@ description 'Installs/Configures Vitess database clustering system.'
 issues_url 'https://github.com/vinted/chef-vitess/issues'
 source_url 'https://github.com/vinted/chef-vitess'
 chef_version '>= 15.5'
-version '5.6.0'
+version '5.7.0'
 
 supports 'redhat'
 supports 'centos'
