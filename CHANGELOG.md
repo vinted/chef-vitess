@@ -111,3 +111,6 @@ Initial release.
 
 # 5.9.0
 - [CHANGE] Added support for f3137ea9b0 (2026-10-22) release with 11.0.4 Vitess and fixes/backports
+
+# 5.10.0
+- [CHANGE] Added support for e834560e46 (2026-11-17) release with 11.0.4 Vitess and fixes/backports
