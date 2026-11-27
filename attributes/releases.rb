@@ -66,5 +66,5 @@ default['vitess']['releases']['f3137ea9b0']['checksum'] =
 
 default['vitess']['releases']['e834560e46']['url'] =
   'https://github.com/vinted/vitess-binary-files/releases/download/11.0.4-patch17-skip-locked-e834560e46/vitess-11.0.4-patch17-skip-locked-e834560e46.tar.gz'
-default['vitess']['releases']['f3137ea9b0']['checksum'] =
+default['vitess']['releases']['e834560e46']['checksum'] =
   'a69727308971213f2684ff025640886a0e6fa498682e3b8deb7bce69622e2190'
